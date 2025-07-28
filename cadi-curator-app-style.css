@@ -1,0 +1,295 @@
+/* Survey Overlay Styles */
+#survey-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #f8f9fa;
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#survey-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.survey-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.survey-logo {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, #4facfe, #00f2fe);
+    border-radius: 8px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.survey-logo::before {
+    content: "📊";
+    font-size: 20px;
+}
+
+.survey-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 8px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.survey-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.survey-question {
+    margin-bottom: 30px;
+}
+
+.survey-question h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 24px;
+    line-height: 1.4;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.survey-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.survey-option {
+    position: relative;
+}
+
+.survey-option input[type="radio"] {
+    display: none;
+}
+
+.survey-option label {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background: #f8f9fa;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.survey-option:hover label {
+    border-color: #007bff;
+    background: #f0f8ff;
+}
+
+.survey-option input[type="radio"]:checked + label {
+    border-color: #007bff;
+    background: #f0f8ff;
+    color: #007bff;
+    font-weight: 600;
+}
+
+.option-letter {
+    width: 32px;
+    height: 32px;
+    background: #e9ecef;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 16px;
+    color: #666;
+    transition: all 0.2s ease;
+}
+
+.survey-option input[type="radio"]:checked + label .option-letter {
+    background: #007bff;
+    color: white;
+}
+
+.option-text {
+    font-size: 16px;
+    color: #333;
+}
+
+.email-section {
+    margin: 30px 0;
+}
+
+.email-section label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.email-section input[type="email"] {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    font-size: 16px;
+    color: #333;
+    background: #f8f9fa;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.email-section input[type="email"]:focus {
+    outline: none;
+    border-color: #007bff;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 16px 24px;
+    background: #d6d6d6;
+    color: #666;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: not-allowed;
+    transition: all 0.2s ease;
+    margin-top: 20px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.submit-button.enabled {
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+.submit-button.enabled:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* General page styling */
+* { 
+    box-sizing: border-box; 
+} 
+
+body {
+    margin: 0;
+    background-color: white;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+.main-content {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.demo-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+}
+
+.demo-card h1 {
+    color: #333;
+    margin-bottom: 16px;
+    font-size: 28px;
+}
+
+.demo-card p {
+    color: #666;
+    margin-bottom: 24px;
+    line-height: 1.6;
+}
+
+.demo-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.demo-button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+    #survey-container {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    .survey-title {
+        font-size: 28px;
+    }
+    
+    .survey-question h2 {
+        font-size: 16px;
+    }
+    
+    .survey-option label {
+        padding: 14px 16px;
+    }
+    
+    .option-letter {
+        width: 28px;
+        height: 28px;
+        margin-right: 12px;
+        font-size: 12px;
+    }
+    
+    .option-text {
+        font-size: 14px;
+    }
+    
+    .demo-card {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    .demo-card h1 {
+        font-size: 24px;
+    }
+}
