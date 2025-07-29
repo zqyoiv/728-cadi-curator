@@ -548,7 +548,6 @@ const surveyTracking = {
              min-width: 50px !important;
              min-height: 50px !important;
              border-radius: 50% !important;
-             display: flex !important;
              align-items: center !important;
              justify-content: center !important;
              transition: all 0.2s ease !important;
