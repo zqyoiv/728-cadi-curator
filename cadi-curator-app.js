@@ -145,6 +145,15 @@ const surveyTracking = {
            font-display: swap;
          }
          
+         @font-face {
+           font-family: 'CadillacGothicWide';
+           src: url('https://cdn.jsdelivr.net/gh/zqyoiv/728-cadi-curator@main/asset/CadillacGothic-WideRegular.otf')
+                format('opentype');
+           font-weight: 400;
+           font-style: normal;
+           font-display: swap;
+         }
+         
          /* Survey Overlay Styles */
          #survey-overlay {
              position: fixed;
@@ -189,9 +198,9 @@ const surveyTracking = {
          }
          
          #survey-overlay .survey-title {
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: 28px !important;
-             font-weight: normal !important;
+             font-family: "CadillacGothicWide", "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             font-size: 24px !important;
+             font-weight: 400 !important;
              color: white !important;
              margin: 0 0 20px 0 !important;
              letter-spacing: 2px !important;
@@ -262,7 +271,7 @@ const surveyTracking = {
              display: flex !important;
              flex-direction: column !important;
              gap: 8px !important;
-             max-width: 500px !important;
+             max-width: 400px !important;
              margin: 0 auto !important;
          }
          
@@ -288,6 +297,10 @@ const surveyTracking = {
              letter-spacing: 1px !important;
              text-transform: uppercase !important;
              text-align: center !important;
+             width: 100% !important;
+             max-width: 350px !important;
+             margin: 0 auto !important;
+             box-sizing: border-box !important;
          }
          
          #survey-overlay .survey-option:hover label {
@@ -310,36 +323,79 @@ const surveyTracking = {
          }
          
          #survey-overlay .submit-button {
-             width: 100% !important;
-             max-width: 400px !important;
-             padding: 16px 24px !important;
-             background: transparent !important;
-             color: rgba(255, 255, 255, 0.5) !important;
-             border: 2px solid rgba(255, 255, 255, 0.5) !important;
-             border-radius: 0 !important;
-             font-size: 16px !important;
-             font-weight: normal !important;
-             cursor: not-allowed !important;
-             transition: all 0.2s ease !important;
-             margin: 20px auto 0 !important;
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             letter-spacing: 2px !important;
-             text-transform: uppercase !important;
-             display: block !important;
-         }
-         
-         #survey-overlay .submit-button.enabled {
-             background: transparent !important;
-             color: white !important;
-             border-color: white !important;
-             cursor: pointer !important;
-         }
-         
-         #survey-overlay .submit-button.enabled:hover {
-             background: white !important;
-             color: black !important;
-             transform: none !important;
-         }
+            position: relative !important;
+            width: 100% !important;
+            max-width: 500px !important;
+            padding: 18px 32px !important;
+            background: transparent !important;
+            color: rgba(255, 255, 255, 0.5) !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+            border-radius: 0 !important;
+            font-size: 16px !important;
+            font-weight: normal !important;
+            cursor: not-allowed !important;
+            transition: all 0.2s ease !important;
+            margin: 20px auto 0 !important;
+            font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+            letter-spacing: 2px !important;
+            text-transform: uppercase !important;
+            display: block !important;
+            z-index: 2 !important;
+        }
+        
+        #survey-overlay .submit-button::before {
+            content: '' !important;
+            position: absolute !important;
+            top: -8px !important;
+            left: -8px !important;
+            right: -8px !important;
+            bottom: -8px !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 0 !important;
+            z-index: -1 !important;
+            transition: all 0.2s ease !important;
+            background: transparent !important;
+        }
+        
+        #survey-overlay .submit-button.enabled {
+            background: transparent !important;
+            color: white !important;
+            border-color: white !important;
+            cursor: pointer !important;
+        }
+        
+        #survey-overlay .submit-button.enabled::before {
+            border-color: white !important;
+        }
+        
+        #survey-overlay .submit-button.enabled:hover {
+            background: white !important;
+            color: black !important;
+            transform: none !important;
+        }
+        
+        #survey-overlay .submit-button.enabled:hover::before {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: white !important;
+        }
+        
+        #survey-overlay .survey-disclaimer {
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            width: 100% !important;
+            font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+            font-size: 10px !important;
+            color: rgba(255, 255, 255, 0.7) !important;
+            background: rgba(0, 0, 0, 0.8) !important;
+            padding: 15px 20px !important;
+            line-height: 1.3 !important;
+            text-align: center !important;
+            margin: 0 !important;
+            z-index: 1001 !important;
+            box-sizing: border-box !important;
+        }
          
          #survey-overlay .hidden {
              display: none !important;
@@ -391,7 +447,7 @@ const surveyTracking = {
          
          body#i1xr #title {
              color: white !important;
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             font-family: "CadillacGothicWide", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
              font-size: 28px !important;
              font-weight: normal !important;
              letter-spacing: 3px !important;
@@ -645,8 +701,15 @@ const surveyTracking = {
              
              #survey-overlay .submit-button {
                  font-size: 14px !important;
-                 padding: 14px 20px !important;
+                 padding: 16px 24px !important;
                  letter-spacing: 1px !important;
+                 max-width: 450px !important;
+             }
+             
+             #survey-overlay .survey-disclaimer {
+                 font-size: 9px !important;
+                 padding: 12px 15px !important;
+                 line-height: 1.2 !important;
              }
          }
          
@@ -745,6 +808,18 @@ const surveyTracking = {
              #survey-overlay .survey-options {
                  gap: 6px !important;
              }
+             #survey-overlay .submit-button {
+                 font-size: 13px !important;
+                 padding: 15px 20px !important;
+                 letter-spacing: 1px !important;
+                 max-width: 400px !important;
+             }
+             
+             #survey-overlay .survey-disclaimer {
+                 font-size: 8px !important;
+                 padding: 10px 12px !important;
+                 line-height: 1.2 !important;
+             }
          }
          `;
          
@@ -788,8 +863,12 @@ function initializeSurvey() {
          <div id="survey-container">
              <div class="survey-header">
                  <div class="survey-logo"></div>
-                 <h1 class="survey-title">Quick Survey</h1>
-                 <p class="survey-subtitle">We'd love to hear your opinion!</p>
+                 <h1 class="survey-title">Your US Open<br>Theme Art Is Ready</h1>
+                 <p class="survey-subtitle">Please enter your email</p>
+             </div>
+
+             <div class="email-section">
+                 <input type="email" id="email-input" placeholder="example@info.com">
              </div>
 
              <div class="survey-question">
@@ -797,48 +876,32 @@ function initializeSurvey() {
                  <div class="survey-options">
                      <div class="survey-option">
                          <input type="radio" id="strongly-agree" name="brand-rating" value="strongly-agree">
-                         <label for="strongly-agree">
-                             <div class="option-letter">A</div>
-                             <div class="option-text">Strongly agree</div>
-                         </label>
+                         <label for="strongly-agree">Strongly Agree</label>
                      </div>
                      <div class="survey-option">
                          <input type="radio" id="agree" name="brand-rating" value="agree">
-                         <label for="agree">
-                             <div class="option-letter">B</div>
-                             <div class="option-text">Agree</div>
-                         </label>
+                         <label for="agree">Agree</label>
                      </div>
                      <div class="survey-option">
                          <input type="radio" id="neutral" name="brand-rating" value="neutral">
-                         <label for="neutral">
-                             <div class="option-letter">C</div>
-                             <div class="option-text">Neither Agree or Disagree</div>
-                         </label>
+                         <label for="neutral">Neither Agree or Disagree</label>
                      </div>
                      <div class="survey-option">
                          <input type="radio" id="disagree" name="brand-rating" value="disagree">
-                         <label for="disagree">
-                             <div class="option-letter">D</div>
-                             <div class="option-text">Disagree</div>
-                         </label>
+                         <label for="disagree">Disagree</label>
                      </div>
                      <div class="survey-option">
                          <input type="radio" id="strongly-disagree" name="brand-rating" value="strongly-disagree">
-                         <label for="strongly-disagree">
-                             <div class="option-letter">E</div>
-                             <div class="option-text">Strongly Disagree</div>
-                         </label>
+                         <label for="strongly-disagree">Strongly Disagree</label>
                      </div>
                  </div>
              </div>
 
-             <div class="email-section">
-                 <label for="email-input">Your Email Address:</label>
-                 <input type="email" id="email-input" placeholder="example@email.com">
+             <button type="button" class="submit-button" id="submit-survey">Submit and View Theme Art</button>
+             
+             <div class="survey-disclaimer">
+                 Your email will not be shared with third parties or used for marketing or promotional purposes. Your US Open theme artwork will not be used for marketing or promotional purposes, and will only be available until December 31, 2025.
              </div>
-
-             <button type="button" class="submit-button" id="submit-survey">Submit Survey →</button>
          </div>
      `;
 
