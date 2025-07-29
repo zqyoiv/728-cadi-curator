@@ -175,11 +175,11 @@ const surveyTracking = {
              margin-top: 15vh;
          }
          
-         .survey-header {
+         #survey-overlay .survey-header {
              margin-bottom: 40px;
          }
          
-         .survey-logo {
+         #survey-overlay .survey-logo {
              width: 60px;
              height: 60px;
              margin: 0 auto 30px;
@@ -188,160 +188,160 @@ const surveyTracking = {
              display: none;
          }
          
-         .survey-title {
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-             font-size: 28px;
-             font-weight: normal;
-             color: white;
-             margin: 0 0 20px 0;
-             letter-spacing: 2px;
-             text-transform: uppercase;
-             line-height: 1.2;
+         #survey-overlay .survey-title {
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             font-size: 28px !important;
+             font-weight: normal !important;
+             color: white !important;
+             margin: 0 0 20px 0 !important;
+             letter-spacing: 2px !important;
+             text-transform: uppercase !important;
+             line-height: 1.2 !important;
          }
          
-         .survey-subtitle {
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-             font-size: 16px;
-             color: white;
-             margin: 0 0 40px 0;
-             letter-spacing: 1px;
-             text-transform: uppercase;
+         #survey-overlay .survey-subtitle {
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             font-size: 16px !important;
+             color: white !important;
+             margin: 0 0 40px 0 !important;
+             letter-spacing: 1px !important;
+             text-transform: uppercase !important;
          }
          
-         .email-section {
-             margin: 0 0 40px 0;
+         #survey-overlay .email-section {
+             margin: 0 0 40px 0 !important;
          }
          
-         .email-section label {
-             display: none;
+         #survey-overlay .email-section label {
+             display: none !important;
          }
          
-         .email-section input[type="email"] {
-             width: 100%;
-             max-width: 400px;
-             padding: 16px 20px;
-             border: 2px solid white;
-             border-radius: 0;
-             font-size: 16px;
-             color: white;
-             background: transparent;
-             transition: all 0.2s ease;
-             box-sizing: border-box;
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-             text-align: center;
-             letter-spacing: 1px;
+         #survey-overlay .email-section input[type="email"] {
+             width: 100% !important;
+             max-width: 400px !important;
+             padding: 16px 20px !important;
+             border: 2px solid white !important;
+             border-radius: 0 !important;
+             font-size: 16px !important;
+             color: white !important;
+             background: transparent !important;
+             transition: all 0.2s ease !important;
+             box-sizing: border-box !important;
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             text-align: center !important;
+             letter-spacing: 1px !important;
          }
          
-         .email-section input[type="email"]::placeholder {
-             color: rgba(255, 255, 255, 0.7);
-             text-transform: lowercase;
+         #survey-overlay .email-section input[type="email"]::placeholder {
+             color: rgba(255, 255, 255, 0.7) !important;
+             text-transform: lowercase !important;
          }
          
-         .email-section input[type="email"]:focus {
-             outline: none;
-             border-color: white;
-             background: rgba(255, 255, 255, 0.1);
+         #survey-overlay .email-section input[type="email"]:focus {
+             outline: none !important;
+             border-color: white !important;
+             background: rgba(255, 255, 255, 0.1) !important;
          }
          
-         .survey-question {
-             margin-bottom: 40px;
+         #survey-overlay .survey-question {
+             margin-bottom: 40px !important;
          }
          
-         .survey-question h2 {
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-             font-size: 16px;
-             font-weight: normal;
-             color: white;
-             margin-bottom: 30px;
-             line-height: 1.4;
-             text-align: center;
-             letter-spacing: 1px;
+         #survey-overlay .survey-question h2 {
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             font-size: 16px !important;
+             font-weight: normal !important;
+             color: white !important;
+             margin-bottom: 30px !important;
+             line-height: 1.4 !important;
+             text-align: center !important;
+             letter-spacing: 1px !important;
          }
          
-         .survey-options {
-             display: flex;
-             flex-direction: column;
-             gap: 8px;
-             max-width: 500px;
-             margin: 0 auto;
+         #survey-overlay .survey-options {
+             display: flex !important;
+             flex-direction: column !important;
+             gap: 8px !important;
+             max-width: 500px !important;
+             margin: 0 auto !important;
          }
          
-         .survey-option {
-             position: relative;
+         #survey-overlay .survey-option {
+             position: relative !important;
          }
          
-         .survey-option input[type="radio"] {
-             display: none;
+         #survey-overlay .survey-option input[type="radio"] {
+             display: none !important;
          }
          
-         .survey-option label {
-             display: block;
-             padding: 16px 20px;
-             background: transparent;
-             border: 2px solid white;
-             border-radius: 0;
-             cursor: pointer;
-             transition: all 0.2s ease;
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-             color: white;
-             font-size: 14px;
-             letter-spacing: 1px;
-             text-transform: uppercase;
-             text-align: center;
+         #survey-overlay .survey-option label {
+             display: block !important;
+             padding: 16px 20px !important;
+             background: transparent !important;
+             border: 2px solid white !important;
+             border-radius: 0 !important;
+             cursor: pointer !important;
+             transition: all 0.2s ease !important;
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             color: white !important;
+             font-size: 14px !important;
+             letter-spacing: 1px !important;
+             text-transform: uppercase !important;
+             text-align: center !important;
          }
          
-         .survey-option:hover label {
-             background: rgba(255, 255, 255, 0.1);
+         #survey-overlay .survey-option:hover label {
+             background: rgba(255, 255, 255, 0.1) !important;
          }
          
-         .survey-option input[type="radio"]:checked + label {
-             background: white;
-             color: black;
-             font-weight: normal;
+         #survey-overlay .survey-option input[type="radio"]:checked + label {
+             background: white !important;
+             color: black !important;
+             font-weight: normal !important;
          }
          
-         .option-letter {
-             display: none;
+         #survey-overlay .option-letter {
+             display: none !important;
          }
          
-         .option-text {
-             font-size: 14px;
-             color: inherit;
+         #survey-overlay .option-text {
+             font-size: 14px !important;
+             color: inherit !important;
          }
          
-         .submit-button {
-             width: 100%;
-             max-width: 400px;
-             padding: 16px 24px;
-             background: transparent;
-             color: rgba(255, 255, 255, 0.5);
-             border: 2px solid rgba(255, 255, 255, 0.5);
-             border-radius: 0;
-             font-size: 16px;
-             font-weight: normal;
-             cursor: not-allowed;
-             transition: all 0.2s ease;
-             margin: 20px auto 0;
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-             letter-spacing: 2px;
-             text-transform: uppercase;
-             display: block;
+         #survey-overlay .submit-button {
+             width: 100% !important;
+             max-width: 400px !important;
+             padding: 16px 24px !important;
+             background: transparent !important;
+             color: rgba(255, 255, 255, 0.5) !important;
+             border: 2px solid rgba(255, 255, 255, 0.5) !important;
+             border-radius: 0 !important;
+             font-size: 16px !important;
+             font-weight: normal !important;
+             cursor: not-allowed !important;
+             transition: all 0.2s ease !important;
+             margin: 20px auto 0 !important;
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             letter-spacing: 2px !important;
+             text-transform: uppercase !important;
+             display: block !important;
          }
          
-         .submit-button.enabled {
-             background: transparent;
-             color: white;
-             border-color: white;
-             cursor: pointer;
+         #survey-overlay .submit-button.enabled {
+             background: transparent !important;
+             color: white !important;
+             border-color: white !important;
+             cursor: pointer !important;
          }
          
-         .submit-button.enabled:hover {
-             background: white;
-             color: black;
-             transform: none;
+         #survey-overlay .submit-button.enabled:hover {
+             background: white !important;
+             color: black !important;
+             transform: none !important;
          }
          
-         .hidden {
+         #survey-overlay .hidden {
              display: none !important;
          }
          
@@ -350,33 +350,33 @@ const surveyTracking = {
                  padding: 30px 20px;
              }
              
-             .survey-title {
-                 font-size: 24px;
-                 letter-spacing: 1px;
+             #survey-overlay .survey-title {
+                 font-size: 24px !important;
+                 letter-spacing: 1px !important;
              }
              
-             .survey-subtitle {
-                 font-size: 14px;
+             #survey-overlay .survey-subtitle {
+                 font-size: 14px !important;
              }
              
-             .survey-question h2 {
-                 font-size: 14px;
+             #survey-overlay .survey-question h2 {
+                 font-size: 14px !important;
              }
              
-             .survey-option label {
-                 padding: 14px 16px;
-                 font-size: 12px;
+             #survey-overlay .survey-option label {
+                 padding: 14px 16px !important;
+                 font-size: 12px !important;
              }
              
-             .email-section input[type="email"] {
-                 font-size: 14px;
-                 padding: 14px 16px;
+             #survey-overlay .email-section input[type="email"] {
+                 font-size: 14px !important;
+                 padding: 14px 16px !important;
              }
              
-             .submit-button {
-                 font-size: 14px;
-                 padding: 14px 20px;
-                 letter-spacing: 1px;
+             #survey-overlay .submit-button {
+                 font-size: 14px !important;
+                 padding: 14px 20px !important;
+                 letter-spacing: 1px !important;
              }
          }
          
@@ -389,12 +389,12 @@ const surveyTracking = {
                  padding: 20px 15px;
              }
              
-             .survey-title {
-                 font-size: 20px;
+             #survey-overlay .survey-title {
+                 font-size: 20px !important;
              }
              
-             .survey-options {
-                 gap: 6px;
+             #survey-overlay .survey-options {
+                 gap: 6px !important;
              }
          }
          
