@@ -353,6 +353,8 @@ const surveyTracking = {
              background-position: top center !important;
              background-size: contain !important;
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             margin: 0 !important;
+             padding: 0 !important;
          }
          
          body#i1xr .event-banner {
@@ -363,6 +365,9 @@ const surveyTracking = {
              background-color: transparent !important;
              padding-top: 25vh !important;
              text-align: center !important;
+             width: 100% !important;
+             margin: 0 auto !important;
+             display: block !important;
          }
          
          body#i1xr #photo-container {
@@ -370,6 +375,9 @@ const surveyTracking = {
              max-width: 600px !important;
              margin: 0 auto !important;
              padding: 0 20px !important;
+             text-align: center !important;
+             width: 100% !important;
+             box-sizing: border-box !important;
          }
          
          body#i1xr #header-container {
@@ -377,6 +385,8 @@ const surveyTracking = {
              padding: 0 0 30px 0 !important;
              text-align: center !important;
              margin-bottom: 20px !important;
+             width: 100% !important;
+             display: block !important;
          }
          
          body#i1xr #title {
@@ -386,20 +396,27 @@ const surveyTracking = {
              font-weight: normal !important;
              letter-spacing: 3px !important;
              text-transform: uppercase !important;
-             margin: 0 0 10px 0 !important;
+             margin: 0 auto 10px auto !important;
              line-height: 1.2 !important;
+             text-align: center !important;
+             width: 100% !important;
+             display: block !important;
          }
          
          body#i1xr #title::before {
              content: "THANKS FOR JOINING" !important;
              display: block !important;
              margin-bottom: 10px !important;
+             text-align: center !important;
+             width: 100% !important;
          }
          
          body#i1xr #title::after {
              content: "AT THE US OPEN" !important;
              display: block !important;
              margin-top: 5px !important;
+             text-align: center !important;
+             width: 100% !important;
          }
          
          body#i1xr #time {
@@ -408,11 +425,17 @@ const surveyTracking = {
              font-size: 16px !important;
              font-weight: normal !important;
              letter-spacing: 1px !important;
-             margin: 20px 0 !important;
+             margin: 20px auto !important;
+             text-align: center !important;
+             width: 100% !important;
+             display: block !important;
          }
          
          body#i1xr #time::before {
              content: "Click below to download and share your Theme Art." !important;
+             text-align: center !important;
+             display: block !important;
+             width: 100% !important;
          }
          
          body#i1xr .clv-photo {
@@ -437,10 +460,15 @@ const surveyTracking = {
              flex-wrap: wrap !important;
              margin-top: 40px !important;
              display: flex !important;
+             width: 100% !important;
+             text-align: center !important;
+             align-items: center !important;
          }
          
-         body#i1xr .clv-button.circle {
+         body#i1xr .clv-button.circle,
+         body#i1xr a.clv-button.circle {
              background-color: white !important;
+             background: white !important;
              border: none !important;
              width: 70px !important;
              height: 70px !important;
@@ -451,28 +479,46 @@ const surveyTracking = {
              transition: all 0.2s ease !important;
              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
              position: relative !important;
+             text-decoration: none !important;
          }
          
-         body#i1xr .clv-button.circle:hover {
+         body#i1xr .clv-button.circle:hover,
+         body#i1xr a.clv-button.circle:hover {
              background-color: rgba(255, 255, 255, 0.9) !important;
+             background: rgba(255, 255, 255, 0.9) !important;
              transform: scale(1.1) !important;
              box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
          }
          
-         body#i1xr .clv-button.circle div {
+         body#i1xr .clv-button.circle div,
+         body#i1xr a.clv-button.circle div {
              display: flex !important;
              align-items: center !important;
              justify-content: center !important;
              width: 100% !important;
              height: 100% !important;
+             background: transparent !important;
          }
          
-         body#i1xr .clv-button.circle svg {
+         body#i1xr .clv-button.circle svg,
+         body#i1xr a.clv-button.circle svg,
+         body#i1xr .clv-button.circle div svg,
+         body#i1xr a.clv-button.circle div svg {
              width: 35px !important;
              height: 35px !important;
              fill: black !important;
+             color: black !important;
              display: block !important;
              margin: 0 auto !important;
+             background: transparent !important;
+         }
+         
+         body#i1xr .clv-button.circle svg path,
+         body#i1xr a.clv-button.circle svg path,
+         body#i1xr .clv-button.circle div svg path,
+         body#i1xr a.clv-button.circle div svg path {
+             fill: black !important;
+             color: black !important;
          }
          
          body#i1xr #iqeeok {
@@ -481,6 +527,8 @@ const surveyTracking = {
              text-align: center !important;
              padding: 20px !important;
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             width: 100% !important;
+             margin: 0 auto !important;
          }
          
          @media (max-width: 768px) {
@@ -490,31 +538,81 @@ const surveyTracking = {
              
              body#i1xr #container {
                  padding-top: 20vh !important;
+                 text-align: center !important;
+                 width: 100% !important;
+                 margin: 0 auto !important;
+             }
+             
+             body#i1xr #photo-container {
+                 text-align: center !important;
+                 width: 100% !important;
+                 margin: 0 auto !important;
+             }
+             
+             body#i1xr #header-container {
+                 text-align: center !important;
+                 width: 100% !important;
              }
              
              body#i1xr #title {
                  font-size: 22px !important;
                  letter-spacing: 2px !important;
+                 text-align: center !important;
+                 width: 100% !important;
+                 margin: 0 auto 10px auto !important;
+             }
+             
+             body#i1xr #title::before,
+             body#i1xr #title::after {
+                 text-align: center !important;
+                 width: 100% !important;
              }
              
              body#i1xr #time {
                  font-size: 14px !important;
+                 text-align: center !important;
+                 width: 100% !important;
+                 margin: 20px auto !important;
              }
              
-             body#i1xr .clv-button.circle {
+             body#i1xr #time::before {
+                 text-align: center !important;
+                 width: 100% !important;
+             }
+             
+             body#i1xr .clv-button.circle,
+             body#i1xr a.clv-button.circle {
                  width: 60px !important;
                  height: 60px !important;
+                 background-color: white !important;
+                 background: white !important;
              }
              
-             body#i1xr .clv-button.circle svg {
+             body#i1xr .clv-button.circle svg,
+             body#i1xr a.clv-button.circle svg,
+             body#i1xr .clv-button.circle div svg,
+             body#i1xr a.clv-button.circle div svg {
                  width: 30px !important;
                  height: 30px !important;
+                 fill: black !important;
+                 color: black !important;
+             }
+             
+             body#i1xr .clv-button.circle svg path,
+             body#i1xr a.clv-button.circle svg path,
+             body#i1xr .clv-button.circle div svg path,
+             body#i1xr a.clv-button.circle div svg path {
+                 fill: black !important;
+                 color: black !important;
              }
              
              body#i1xr #social-container {
                  gap: 20px !important;
                  padding: 20px !important;
                  margin-top: 30px !important;
+                 text-align: center !important;
+                 width: 100% !important;
+                 justify-content: center !important;
              }
              
              body#i1xr .clv-photo {
@@ -563,19 +661,81 @@ const surveyTracking = {
              
              body#i1xr #container {
                  padding-top: 15vh !important;
+                 text-align: center !important;
+                 width: 100% !important;
+                 margin: 0 auto !important;
+             }
+             
+             body#i1xr #photo-container {
+                 text-align: center !important;
+                 width: 100% !important;
+                 margin: 0 auto !important;
+                 padding: 0 15px !important;
              }
              
              body#i1xr #title {
                  font-size: 18px !important;
                  letter-spacing: 1px !important;
+                 text-align: center !important;
+                 width: 100% !important;
+                 margin: 0 auto 10px auto !important;
+             }
+             
+             body#i1xr #title::before,
+             body#i1xr #title::after {
+                 text-align: center !important;
+                 width: 100% !important;
              }
              
              body#i1xr #time {
                  font-size: 12px !important;
+                 text-align: center !important;
+                 width: 100% !important;
+                 margin: 15px auto !important;
+             }
+             
+             body#i1xr #time::before {
+                 text-align: center !important;
+                 width: 100% !important;
              }
              
              body#i1xr .clv-photo {
                  max-width: 250px !important;
+                 margin: 15px auto !important;
+             }
+             
+             body#i1xr #social-container {
+                 text-align: center !important;
+                 width: 100% !important;
+                 justify-content: center !important;
+                 gap: 15px !important;
+                 padding: 15px !important;
+             }
+             
+             body#i1xr .clv-button.circle,
+             body#i1xr a.clv-button.circle {
+                 width: 55px !important;
+                 height: 55px !important;
+                 background-color: white !important;
+                 background: white !important;
+             }
+             
+             body#i1xr .clv-button.circle svg,
+             body#i1xr a.clv-button.circle svg,
+             body#i1xr .clv-button.circle div svg,
+             body#i1xr a.clv-button.circle div svg {
+                 width: 25px !important;
+                 height: 25px !important;
+                 fill: black !important;
+                 color: black !important;
+             }
+             
+             body#i1xr .clv-button.circle svg path,
+             body#i1xr a.clv-button.circle svg path,
+             body#i1xr .clv-button.circle div svg path,
+             body#i1xr a.clv-button.circle div svg path {
+                 fill: black !important;
+                 color: black !important;
              }
              
              #survey-overlay .survey-title {
