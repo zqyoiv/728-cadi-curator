@@ -142,16 +142,13 @@ function initializeMixpanel() {
         mixpanelInitialized = true;
         console.log('Mixpanel initialized successfully');
         
-        // Track initial page load with minimal, safe data - delay to ensure Mixpanel is fully ready
+        // Track initial page load with comprehensive data - delay to ensure Mixpanel is fully ready
         setTimeout(() => {
           try {
-            mixpanel.track('Page Load', {
-              page_type: 'survey',
-              survey_type: 'cadillac_brand_perception'
-            });
-            console.log('Initial page load tracked');
+            surveyTracking.trackPageView('survey');
+            console.log('Initial survey page view tracked');
           } catch (error) {
-            console.error('Error tracking initial page load:', error);
+            console.error('Error tracking initial page view:', error);
           }
         }, 1000); // Increased delay to 1000ms
         
@@ -236,18 +233,11 @@ const surveyTracking = {
                     return;
                 }
                 
-                // Clean email domain
-                const emailDomain = email.split('@')[1];
-                if (!emailDomain || emailDomain.length === 0) {
-                    console.error('Invalid email domain');
-                    return;
-                }
-                
                 // Track the survey submission event with cleaned data
                 const eventProperties = {
                     answer: this.sanitizeValue(selectedRating),
                     answer_text: this.sanitizeValue(this.getAnswerText(selectedRating)),
-                    email_domain: this.sanitizeValue(emailDomain),
+                    email_domain: this.sanitizeValue(email),
                     question: 'Cadillac is a Brand for Me',
                     survey_type: 'cadillac_brand_perception',
                     scale_position: this.getScalePosition(selectedRating)
@@ -277,6 +267,67 @@ const surveyTracking = {
                 }
             }
         }
+    },
+
+    /**
+     * Track page view events
+     */
+    trackPageView(pageType, userEmail = null) {
+        if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
+            try {
+                const pageViewData = {
+                    page: this.sanitizeValue(pageType),
+                    survey_type: 'cadillac_brand_perception',
+                    page_type: this.sanitizeValue(pageType),
+                    user_agent: this.sanitizeValue(navigator.userAgent),
+                    screen_width: window.screen.width,
+                    screen_height: window.screen.height,
+                    viewport_width: window.innerWidth,
+                    viewport_height: window.innerHeight,
+                    has_email: userEmail ? 'yes' : 'no'
+                };
+
+                // Add email if available
+                if (userEmail && userEmail.includes('@')) {
+                    pageViewData.email_domain = this.sanitizeValue(userEmail);
+                }
+
+                mixpanel.track('Page View', pageViewData);
+
+                // Update user profile if email available
+                if (userEmail && userEmail.includes('@')) {
+                    mixpanel.identify(userEmail);
+                    mixpanel.people.set({
+                        '$email': userEmail
+                    });
+                    mixpanel.people.increment(`${pageType}_page_views`, 1);
+                    mixpanel.people.increment('total_page_views', 1);
+                }
+
+                console.log(`${pageType} page view tracked in Mixpanel`);
+            } catch (error) {
+                console.error('Error tracking page view:', error);
+                if (error && error.status === 0) {
+                    console.warn('Network error - check ad blockers, proxy setup, or connectivity');
+                } else if (error && error.status === 1) {
+                    console.warn('Data format error in page view - check property names, values, and data types');
+                }
+            }
+        }
+    },
+
+    /**
+     * Track photo gallery page view 
+     */
+    trackPhotoPageView(userEmail) {
+        this.trackPageView('photo_gallery', userEmail);
+    },
+
+    /**
+     * Track survey page view
+     */
+    trackSurveyPageView() {
+        this.trackPageView('survey');
     }
 };
 
@@ -302,38 +353,52 @@ const surveyTracking = {
            font-display: swap;
          }
          
-         /* Survey Overlay Styles */
-         #survey-overlay {
-             position: fixed;
-             top: 0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             background-color: #000000;
-             background-image: url("https://cdn.jsdelivr.net/gh/zqyoiv/728-cadi-curator@main/asset/Cadillac-Logo_white.png");
-             background-repeat: no-repeat;
-             background-position: top center;
-             background-size: min(80vw, 400px);
-             z-index: 1000;
-             overflow: hidden;
-             padding: 2vh 2vw;
-             box-sizing: border-box;
-             display: flex;
-             align-items: center;
-             justify-content: center;
-         }
+                 /* Survey Overlay Styles */
+        #survey-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000000;
+            z-index: 1000;
+            overflow: hidden;
+            padding: 2vh 2vw;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
          
-         #survey-container {
-             max-width: min(90vw, 600px);
-             width: 100%;
-             text-align: center;
-             color: white;
-             padding: 2vh 2vw;
-             margin-top: min(15vh, 120px);
-             max-height: 85vh;
-             overflow-y: auto;
-             box-sizing: border-box;
-         }
+                 #survey-container {
+            max-width: min(90vw, 600px);
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 2vh 2vw;
+            margin-top: min(5vh, 40px);
+            max-height: 85vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        
+        /* Logo Div Styles */
+        .cadillac-logo {
+            width: 100%;
+            text-align: center;
+            margin-bottom: min(5vh, 40px);
+            padding: min(10vh, 30px) 0;
+        }
+        
+        .cadillac-logo img {
+            max-width: min(20vw, 400px);
+            max-height: min(20vh, 150px);
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
          
          #survey-overlay .survey-header {
              margin-bottom: min(5vh, 40px);
@@ -555,12 +620,9 @@ const surveyTracking = {
         }
          
          /* Main Gallery Page Styles */
-         body#i1xr {
+         html, body, body#i1xr {
              background-color: #000000 !important;
-             background-image: url("https://cdn.jsdelivr.net/gh/zqyoiv/728-cadi-curator@main/asset/Cadillac-Logo_white.png") !important;
-             background-repeat: no-repeat !important;
-             background-position: top center !important;
-             background-size: min(60vw, 300px) !important;
+             background: #000000 !important;
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
              margin: 0 !important;
              padding: 0 !important;
@@ -572,9 +634,62 @@ const surveyTracking = {
              display: none !important;
          }
          
+         /* Logo Div for Photo Page */
+         body#i1xr .cadillac-logo {
+             position: fixed !important;
+             top: 0 !important;
+             left: 0 !important;
+             width: 100% !important;
+             text-align: center !important;
+             padding: min(10vh, 50px) 0 !important;
+             z-index: 999 !important;
+             background: #000000 !important;
+         }
+         
+         body#i1xr .cadillac-logo img {
+             max-width: min(20vw, 300px) !important;
+             max-height: min(15vh, 120px) !important;
+             width: auto !important;
+             height: auto !important;
+             object-fit: contain !important;
+             display: block !important;
+             margin: 0 auto min(5vh, 40px) auto !important;
+         }
+         
+         body#i1xr .photo-page-title {
+             text-align: center !important;
+             width: 100% !important;
+             color: white !important;
+         }
+         
+         body#i1xr .photo-page-title h1 {
+             color: white !important;
+             font-family: "CadillacGothicWide", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             font-size: clamp(20px, 4vw, 28px) !important;
+             font-weight: normal !important;
+             letter-spacing: clamp(1px, 0.3vw, 3px) !important;
+             text-transform: uppercase !important;
+             margin: 0 0 min(1.5vh, 10px) 0 !important;
+             line-height: 1.2 !important;
+             text-align: center !important;
+         }
+         
+         body#i1xr .photo-page-title h2 {
+             color: white !important;
+             font-family: "CadillacGothicWide", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             font-size: clamp(20px, 4vw, 28px) !important;
+             font-weight: normal !important;
+             letter-spacing: clamp(1px, 0.3vw, 3px) !important;
+             text-transform: uppercase !important;
+             margin: 0 0 min(3vh, 20px) 0 !important;
+             line-height: 1.2 !important;
+             text-align: center !important;
+         }
+
          body#i1xr #container {
-             background-color: transparent !important;
-             padding-top: min(20vh, 150px) !important;
+             background-color: #000000 !important;
+             background: #000000 !important;
+             padding-top: min(35vh, 250px) !important;
              text-align: center !important;
              width: 100% !important;
              margin: 0 auto !important;
@@ -588,7 +703,8 @@ const surveyTracking = {
          }
          
          body#i1xr #photo-container {
-             background-color: transparent !important;
+             background-color: #000000 !important;
+             background: #000000 !important;
              max-width: min(90vw, 600px) !important;
              margin: 0 auto !important;
              padding: 0 min(3vw, 20px) !important;
@@ -599,7 +715,8 @@ const surveyTracking = {
          }
          
          body#i1xr #header-container {
-             background-color: transparent !important;
+             background-color: #000000 !important;
+             background: #000000 !important;
              padding: 0 0 min(4vh, 30px) 0 !important;
              text-align: center !important;
              margin-bottom: min(3vh, 20px) !important;
@@ -621,21 +738,7 @@ const surveyTracking = {
              display: block !important;
          }
          
-         body#i1xr #title::before {
-             content: "THANKS FOR JOINING" !important;
-             display: block !important;
-             margin-bottom: min(1.5vh, 10px) !important;
-             text-align: center !important;
-             width: 100% !important;
-         }
-         
-         body#i1xr #title::after {
-             content: "AT THE US OPEN" !important;
-             display: block !important;
-             margin-top: min(1vh, 5px) !important;
-             text-align: center !important;
-             width: 100% !important;
-         }
+
          
          body#i1xr #time {
              color: white !important;
@@ -928,7 +1031,7 @@ const surveyTracking = {
             #survey-container {
                 padding: 1vh 1vw;
                 margin-top: min(10vh, 60px);
-                max-height: 90vh;
+                max-height: 80vh;
             }
             
             #survey-overlay .survey-title {
@@ -1084,19 +1187,46 @@ const surveyTracking = {
          document.head.appendChild(styleElement);
          }
 
+// Function to add logo to photo page
+function addLogoToPhotoPage() {
+    // Check if logo already exists
+    if (document.querySelector('.cadillac-logo')) {
+        return;
+    }
+    
+    // Create logo and title container
+    const logoDiv = document.createElement('div');
+    logoDiv.className = 'cadillac-logo';
+    logoDiv.innerHTML = `
+        <img src="https://cdn.jsdelivr.net/gh/zqyoiv/728-cadi-curator@main/asset/Cadillac-Logo_white_small.png" alt="Cadillac Logo">
+        <div class="photo-page-title">
+            <h1>THANKS FOR JOINING CADILLAC TEST</h1>
+            <h2>AT THE US OPEN</h2>
+        </div>
+    `;
+    
+    // Insert at the beginning of body
+    document.body.insertBefore(logoDiv, document.body.firstChild);
+    
+    console.log('Logo and title added to photo page');
+}
+
 // Survey functionality
 function initializeSurvey() {
      // Create survey overlay
      const surveyOverlay = document.createElement('div');
      surveyOverlay.id = 'survey-overlay';
      
-     surveyOverlay.innerHTML = `
-         <div id="survey-container">
-             <div class="survey-header">
-                 <div class="survey-logo"></div>
-                 <h1 class="survey-title">Your US Open<br>Theme Art Is Ready</h1>
-                 <p class="survey-subtitle">Please enter your email</p>
-             </div>
+         surveyOverlay.innerHTML = `
+        <div class="cadillac-logo">
+            <img src="https://cdn.jsdelivr.net/gh/zqyoiv/728-cadi-curator@main/asset/Cadillac-Logo_white_small.png" alt="Cadillac Logo">
+        </div>
+        <div id="survey-container">
+            <div class="survey-header">
+                <div class="survey-logo"></div>
+                <h1 class="survey-title">Your US Open<br>Theme Art Is Ready</h1>
+                <p class="survey-subtitle">Please enter your email</p>
+            </div>
 
              <div class="email-section">
                  <input type="email" id="email-input" placeholder="example@info.com">
@@ -1189,9 +1319,13 @@ function initializeSurvey() {
              surveyOverlay.style.transition = 'opacity 0.3s ease';
              surveyOverlay.style.opacity = '0';
 
-             setTimeout(() => {
-                 surveyOverlay.remove();
-             }, 300);
+                         setTimeout(() => {
+                surveyOverlay.remove();
+                // Add logo to photo page after survey is removed
+                addLogoToPhotoPage();
+                // Track photo page view
+                surveyTracking.trackPhotoPageView(email);
+            }, 300);
          }
      });
 
