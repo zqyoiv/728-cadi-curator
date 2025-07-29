@@ -1,27 +1,177 @@
 let mixpanelInitialized = false;
 
+// Function to inject Mixpanel script into document head
+function injectMixpanelScript() {
+    // Check if script is already loaded
+    if (typeof mixpanel !== 'undefined' && mixpanel.__SV) {
+        console.log('Mixpanel already properly loaded');
+        return Promise.resolve();
+    }
+
+    return new Promise((resolve, reject) => {
+        try {
+            // Create the exact Mixpanel stub that matches the official snippet
+            if (!window.mixpanel || !window.mixpanel.__SV) {
+                window.mixpanel = window.mixpanel || [];
+                window.mixpanel._i = window.mixpanel._i || [];
+                
+                // Initialize function that creates instances
+                window.mixpanel.init = function(token, config, name) {
+                    var target = window.mixpanel;
+                    if (typeof name !== 'undefined') {
+                        target = window.mixpanel[name] = [];
+                    } else {
+                        name = 'mixpanel';
+                    }
+                    
+                    target.people = target.people || [];
+                    target.toString = function(no_stub) {
+                        var str = 'mixpanel';
+                        if (name !== 'mixpanel') {
+                            str += '.' + name;
+                        }
+                        if (!no_stub) {
+                            str += ' (stub)';
+                        }
+                        return str;
+                    };
+                    
+                    target.people.toString = function() {
+                        return target.toString(1) + '.people (stub)';
+                    };
+                    
+                    // List of methods to stub (exact from official snippet)
+                    var methods = 'disable time_event track track_pageview track_links track_forms track_with_groups add_group set_group remove_group register register_once alias unregister identify name_tag set_config reset opt_in_tracking opt_out_tracking has_opted_in_tracking has_opted_out_tracking clear_opt_in_out_tracking start_batch_senders people.set people.set_once people.unset people.increment people.append people.union people.track_charge people.clear_charges people.delete_user people.remove'.split(' ');
+                    
+                    function stub_method(method_name) {
+                        var method_parts = method_name.split('.');
+                        if (method_parts.length === 2) {
+                            var obj = target[method_parts[0]];
+                            obj[method_parts[1]] = function() {
+                                obj.push([method_parts[1]].concat(Array.prototype.slice.call(arguments, 0)));
+                            };
+                        } else {
+                            target[method_name] = function() {
+                                target.push([method_name].concat(Array.prototype.slice.call(arguments, 0)));
+                            };
+                        }
+                    }
+                    
+                    for (var i = 0; i < methods.length; i++) {
+                        stub_method(methods[i]);
+                    }
+                    
+                    // Create get_group method
+                    var group_methods = 'set set_once union unset remove delete'.split(' ');
+                    target.get_group = function() {
+                        function group_stub(method) {
+                            group_obj[method] = function() {
+                                var call2_args = arguments;
+                                var call2 = [method].concat(Array.prototype.slice.call(call2_args, 0));
+                                target.push([group_key, call2]);
+                            };
+                        }
+                        var group_obj = {};
+                        var group_key = ['get_group'].concat(Array.prototype.slice.call(arguments, 0));
+                        for (var j = 0; j < group_methods.length; j++) {
+                            group_stub(group_methods[j]);
+                        }
+                        return group_obj;
+                    };
+                    
+                    window.mixpanel._i.push([token, config, name]);
+                };
+                
+                // Version marker (crucial for avoiding version mismatch)
+                window.mixpanel.__SV = 1.2;
+                
+                console.log('Official Mixpanel stub created with version 1.2');
+            }
+            
+            // Load the real Mixpanel library
+            const script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.async = true;
+            script.src = 'https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js';
+            
+            script.onload = function() {
+                console.log('Real Mixpanel library loaded from CDN');
+                
+                setTimeout(() => {
+                    if (typeof window.mixpanel.init === 'function' && window.mixpanel.__SV) {
+                        console.log('Mixpanel is ready with version:', window.mixpanel.__SV);
+                        resolve();
+                    } else {
+                        reject(new Error('Mixpanel library loaded but not properly initialized'));
+                    }
+                }, 300);
+            };
+            
+            script.onerror = function(error) {
+                console.error('Failed to load Mixpanel library:', error);
+                reject(error);
+            };
+            
+            document.head.appendChild(script);
+            console.log('Loading official Mixpanel library...');
+            
+        } catch (error) {
+            console.error('Error setting up Mixpanel:', error);
+            reject(error);
+        }
+    });
+}
+
 // Initialize Mixpanel
 function initializeMixpanel() {
     try {
       if (typeof mixpanel !== 'undefined') {
         // Use a demo/test token - replace with your actual Mixpanel project token
-        mixpanel.init('demo_token', {
+        mixpanel.init('8f1255a44f049242c9e18330c539d156', {
           debug: true,
-          track_pageview: true,
-          persistence: 'localStorage'
+          track_pageview: false, // Disable automatic pageview tracking
+          persistence: 'localStorage',
+          // Disable geolocation to avoid data format issues
+          ip: false,
+          // Additional config for reliability
+          ignore_dnt: false,
+          // Remove property_blacklist as it can cause issues
+          batch_requests: false, // Send requests one by one, not batched
+          cross_subdomain_cookie: false
         });
         mixpanelInitialized = true;
         console.log('Mixpanel initialized successfully');
         
-        // Track initial page load
-        mixpanel.track('Page Load', {
-          page_type: 'survey',
-          survey_type: 'cadillac_brand_perception',
-          timestamp: new Date().toISOString()
+        // Track initial page load with minimal, safe data - delay to ensure Mixpanel is fully ready
+        setTimeout(() => {
+          try {
+            mixpanel.track('Page Load', {
+              page_type: 'survey',
+              survey_type: 'cadillac_brand_perception'
+            });
+            console.log('Initial page load tracked');
+          } catch (error) {
+            console.error('Error tracking initial page load:', error);
+          }
+        }, 1000); // Increased delay to 1000ms
+        
+        // Add error callback for better debugging
+        mixpanel.set_config({
+          error: function(msg) {
+            console.error('Mixpanel configuration error:', msg);
+          }
         });
       }
     } catch (error) {
       console.error('Error initializing Mixpanel:', error);
+      // Check if it's a network connectivity issue
+      if (error && error.status === 0) {
+        console.warn('Network error detected. This might be due to:');
+        console.warn('1. Ad blocker blocking Mixpanel requests');
+        console.warn('2. Network connectivity issues');
+        console.warn('3. CORS or firewall blocking');
+        console.warn('Consider setting up a proxy server as per Mixpanel docs');
+      }
     }
   }
     
@@ -57,77 +207,75 @@ const surveyTracking = {
     },
 
     /**
+     * Sanitize property values for Mixpanel
+     */
+    sanitizeValue(value) {
+        if (value === null || value === undefined) {
+            return null;
+        }
+        
+        // Convert to string and limit length
+        const stringValue = String(value);
+        if (stringValue.length > 255) {
+            return stringValue.substring(0, 255);
+        }
+        
+        // Remove any problematic characters
+        return stringValue.replace(/[\u0000-\u001F\u007F-\u009F]/g, '');
+    },
+
+    /**
      * Track survey submission - core event
      */
     trackSurveySubmission(selectedRating, email) {
         if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
-            // Track the survey submission event
-            mixpanel.track('Survey Submitted', {
-                answer: selectedRating,
-                answer_text: this.getAnswerText(selectedRating),
-                email_domain: email.split('@')[1],
-                question: 'Cadillac is a Brand for Me',
-                survey_type: 'cadillac_brand_perception',
-                scale_position: this.getScalePosition(selectedRating),
-                timestamp: new Date().toISOString()
-            });
-            
-            // Set user properties
-            mixpanel.identify(email);
-            mixpanel.people.set({
-                $email: email,
-                $last_seen: new Date(),
-                latest_survey_answer: selectedRating,
-                latest_survey_answer_text: this.getAnswerText(selectedRating),
-                survey_completion_count: 1
-            });
-            
-            console.log('Survey submission tracked in Mixpanel');
-        }
-    },
-
-    /**
-     * Track button clicks
-     */
-    trackButtonClick(buttonType, email = null) {
-        if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
-            mixpanel.track('Button Clicked', {
-                button_type: buttonType,
-                page: 'survey',
-                survey_type: 'cadillac_brand_perception',
-                has_email: email ? 'yes' : 'no',
-                email_domain: email ? email.split('@')[1] : null,
-                timestamp: new Date().toISOString()
-            });
-            
-            if (email) {
+            try {
+                // Validate input data
+                if (!selectedRating || !email || !email.includes('@')) {
+                    console.error('Invalid data for survey submission:', { selectedRating, email });
+                    return;
+                }
+                
+                // Clean email domain
+                const emailDomain = email.split('@')[1];
+                if (!emailDomain || emailDomain.length === 0) {
+                    console.error('Invalid email domain');
+                    return;
+                }
+                
+                // Track the survey submission event with cleaned data
+                const eventProperties = {
+                    answer: this.sanitizeValue(selectedRating),
+                    answer_text: this.sanitizeValue(this.getAnswerText(selectedRating)),
+                    email_domain: this.sanitizeValue(emailDomain),
+                    question: 'Cadillac is a Brand for Me',
+                    survey_type: 'cadillac_brand_perception',
+                    scale_position: this.getScalePosition(selectedRating)
+                };
+                
+                mixpanel.track('Survey Submitted', eventProperties);
+                
+                // Set user properties with minimal, safe data
                 mixpanel.identify(email);
                 mixpanel.people.set({
-                    $email: email,
-                    $last_seen: new Date()
+                    '$email': email,
+                    'latest_survey_answer': this.sanitizeValue(selectedRating),
+                    'latest_survey_answer_text': this.sanitizeValue(this.getAnswerText(selectedRating))
                 });
-                mixpanel.people.increment(`${buttonType}_clicks`, 1);
+                
+                // Increment survey completion count
+                mixpanel.people.increment('survey_completion_count', 1);
+                
+                console.log('Survey submission tracked in Mixpanel');
+            } catch (error) {
+                console.error('Error tracking survey submission:', error);
+                if (error && error.status === 0) {
+                    console.warn('Network error - check ad blockers, proxy setup, or connectivity');
+                } else if (error && error.status === 1) {
+                    console.warn('Data format error - check property names, values, and data types');
+                    console.warn('Common causes: invalid dates, reserved property names, oversized data');
+                }
             }
-            
-            console.log(`${buttonType} button click tracked in Mixpanel`);
-        }
-    },
-
-    /**
-     * Track form field interactions
-     */
-    trackFormInteraction(field, action, value = null) {
-        if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
-            mixpanel.track('Form Interaction', {
-                field: field,
-                action: action,
-                value: value,
-                page: 'survey',
-                survey_type: 'cadillac_brand_perception',
-                timestamp: new Date().toISOString()
-            });
-            
-            console.log(`Form interaction tracked: ${field} ${action}`);
         }
     }
 };
@@ -934,20 +1082,7 @@ const surveyTracking = {
          
          // Append to head
          document.head.appendChild(styleElement);
-     }
-     
-// Initialize everything when DOM is ready
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function() {
-        injectSurveyStyles();
-        initializeMixpanel();
-        initializeSurvey();
-    });
-} else {
-    injectSurveyStyles();
-    initializeMixpanel();
-    initializeSurvey();
-}
+         }
 
 // Survey functionality
 function initializeSurvey() {
@@ -1027,25 +1162,15 @@ function initializeSurvey() {
      radioButtons.forEach(radio => {
          radio.addEventListener('change', function() {
              checkFormComplete();
-             // Track radio button selection
-             surveyTracking.trackOptionSelection(radio.value);
          });
      });
 
      emailInput.addEventListener('input', function() {
          checkFormComplete();
-         // Track email input (but don't log the actual email content)
-         if (emailInput.value.length > 0) {
-             surveyTracking.trackEmailInteraction('input');
-         }
      });
 
      emailInput.addEventListener('blur', function() {
          checkFormComplete();
-         // Track email field completion
-         if (emailInput.value.trim() !== '' && emailInput.validity.valid) {
-             surveyTracking.trackEmailInteraction('completed', emailInput.value.trim());
-         }
      });
 
      // Handle survey submission
@@ -1055,10 +1180,7 @@ function initializeSurvey() {
              const selectedRating = Array.from(radioButtons).find(radio => radio.checked)?.value;
              const email = emailInput.value.trim();
 
-             // Track submit button click
-             surveyTracking.trackButtonClick('submit', email);
-
-             // Track survey submission to mixpanel
+             // Track only the completed survey submission to mixpanel
              surveyTracking.trackSurveySubmission(selectedRating, email);
 
              console.log('Survey submitted:', { rating: selectedRating, email: email });
@@ -1073,6 +1195,32 @@ function initializeSurvey() {
          }
      });
 
-     // Initial check
-     checkFormComplete();
+         // Initial check
+    checkFormComplete();
+}
+
+// Startup code - inject Mixpanel script and initialize everything
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+        injectSurveyStyles();
+        injectMixpanelScript().then(() => {
+            initializeMixpanel();
+            initializeSurvey();
+        }).catch(error => {
+            console.error('Failed to inject Mixpanel script:', error);
+            // Still initialize survey even if Mixpanel fails
+            initializeSurvey();
+        });
+    });
+} else {
+    // DOM is already loaded
+    injectSurveyStyles();
+    injectMixpanelScript().then(() => {
+        initializeMixpanel();
+        initializeSurvey();
+    }).catch(error => {
+        console.error('Failed to inject Mixpanel script:', error);
+        // Still initialize survey even if Mixpanel fails
+        initializeSurvey();
+    });
 }
