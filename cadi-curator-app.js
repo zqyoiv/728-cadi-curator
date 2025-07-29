@@ -345,9 +345,181 @@ const surveyTracking = {
              display: none !important;
          }
          
+         /* Main Gallery Page Styles */
+         body#i1xr {
+             background-color: #000000 !important;
+             background-image: url("https://cdn.jsdelivr.net/gh/zqyoiv/728-cadi-curator@main/asset/Cadillac-Logo_white.png") !important;
+             background-repeat: no-repeat !important;
+             background-position: top center !important;
+             background-size: contain !important;
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+         }
+         
+         body#i1xr .event-banner {
+             display: none !important;
+         }
+         
+         body#i1xr #container {
+             background-color: transparent !important;
+             padding-top: 25vh !important;
+             text-align: center !important;
+         }
+         
+         body#i1xr #photo-container {
+             background-color: transparent !important;
+             max-width: 600px !important;
+             margin: 0 auto !important;
+             padding: 0 20px !important;
+         }
+         
+         body#i1xr #header-container {
+             background-color: transparent !important;
+             padding: 0 0 30px 0 !important;
+             text-align: center !important;
+             margin-bottom: 20px !important;
+         }
+         
+         body#i1xr #title {
+             color: white !important;
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             font-size: 28px !important;
+             font-weight: normal !important;
+             letter-spacing: 3px !important;
+             text-transform: uppercase !important;
+             margin: 0 0 10px 0 !important;
+             line-height: 1.2 !important;
+         }
+         
+         body#i1xr #title::before {
+             content: "THANKS FOR JOINING" !important;
+             display: block !important;
+             margin-bottom: 10px !important;
+         }
+         
+         body#i1xr #title::after {
+             content: "AT THE US OPEN" !important;
+             display: block !important;
+             margin-top: 5px !important;
+         }
+         
+         body#i1xr #time {
+             color: white !important;
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+             font-size: 16px !important;
+             font-weight: normal !important;
+             letter-spacing: 1px !important;
+             margin: 20px 0 !important;
+         }
+         
+         body#i1xr #time::before {
+             content: "Click below to download and share your Theme Art." !important;
+         }
+         
+         body#i1xr .clv-photo {
+             width: 100% !important;
+             height: auto !important;
+             max-width: 400px !important;
+             margin: 30px auto !important;
+             display: block !important;
+             border-radius: 8px !important;
+             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
+         }
+         
+         body#i1xr #igm34 {
+             display: none !important;
+         }
+         
+         body#i1xr #social-container {
+             background-color: transparent !important;
+             padding: 30px 20px !important;
+             justify-content: center !important;
+             gap: 30px !important;
+             flex-wrap: wrap !important;
+             margin-top: 40px !important;
+             display: flex !important;
+         }
+         
+         body#i1xr .clv-button.circle {
+             background-color: white !important;
+             border: none !important;
+             width: 70px !important;
+             height: 70px !important;
+             border-radius: 50% !important;
+             display: flex !important;
+             align-items: center !important;
+             justify-content: center !important;
+             transition: all 0.2s ease !important;
+             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+             position: relative !important;
+         }
+         
+         body#i1xr .clv-button.circle:hover {
+             background-color: rgba(255, 255, 255, 0.9) !important;
+             transform: scale(1.1) !important;
+             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+         }
+         
+         body#i1xr .clv-button.circle div {
+             display: flex !important;
+             align-items: center !important;
+             justify-content: center !important;
+             width: 100% !important;
+             height: 100% !important;
+         }
+         
+         body#i1xr .clv-button.circle svg {
+             width: 35px !important;
+             height: 35px !important;
+             fill: black !important;
+             display: block !important;
+             margin: 0 auto !important;
+         }
+         
+         body#i1xr #iqeeok {
+             background-color: transparent !important;
+             color: white !important;
+             text-align: center !important;
+             padding: 20px !important;
+             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+         }
+         
          @media (max-width: 768px) {
              #survey-container {
                  padding: 30px 20px;
+             }
+             
+             body#i1xr #container {
+                 padding-top: 20vh !important;
+             }
+             
+             body#i1xr #title {
+                 font-size: 22px !important;
+                 letter-spacing: 2px !important;
+             }
+             
+             body#i1xr #time {
+                 font-size: 14px !important;
+             }
+             
+             body#i1xr .clv-button.circle {
+                 width: 60px !important;
+                 height: 60px !important;
+             }
+             
+             body#i1xr .clv-button.circle svg {
+                 width: 30px !important;
+                 height: 30px !important;
+             }
+             
+             body#i1xr #social-container {
+                 gap: 20px !important;
+                 padding: 20px !important;
+                 margin-top: 30px !important;
+             }
+             
+             body#i1xr .clv-photo {
+                 max-width: 300px !important;
+                 margin: 20px auto !important;
              }
              
              #survey-overlay .survey-title {
@@ -389,204 +561,29 @@ const surveyTracking = {
                  padding: 20px 15px;
              }
              
+             body#i1xr #container {
+                 padding-top: 15vh !important;
+             }
+             
+             body#i1xr #title {
+                 font-size: 18px !important;
+                 letter-spacing: 1px !important;
+             }
+             
+             body#i1xr #time {
+                 font-size: 12px !important;
+             }
+             
+             body#i1xr .clv-photo {
+                 max-width: 250px !important;
+             }
+             
              #survey-overlay .survey-title {
                  font-size: 20px !important;
              }
              
              #survey-overlay .survey-options {
                  gap: 6px !important;
-             }
-         }
-         
-         /* Main Gallery Page Styles */
-         body {
-             background-color: #000000 !important;
-             background-image: url("https://cdn.jsdelivr.net/gh/zqyoiv/728-cadi-curator@main/asset/Cadillac-Logo_white.png") !important;
-             background-repeat: no-repeat !important;
-             background-position: top center !important;
-             background-size: contain !important;
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-         }
-         
-         .event-banner {
-             display: none !important;
-         }
-         
-         #container {
-             background-color: transparent !important;
-             padding-top: 25vh !important;
-             text-align: center !important;
-         }
-         
-         #photo-container {
-             background-color: transparent !important;
-             max-width: 600px !important;
-             margin: 0 auto !important;
-             padding: 0 20px !important;
-         }
-         
-         #header-container {
-             background-color: transparent !important;
-             padding: 0 0 30px 0 !important;
-             text-align: center !important;
-             margin-bottom: 20px !important;
-         }
-         
-         #title {
-             color: white !important;
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: 28px !important;
-             font-weight: normal !important;
-             letter-spacing: 3px !important;
-             text-transform: uppercase !important;
-             margin: 0 0 10px 0 !important;
-             line-height: 1.2 !important;
-         }
-         
-         #title::before {
-             content: "THANKS FOR JOINING" !important;
-             display: block !important;
-             margin-bottom: 10px !important;
-         }
-         
-         #title::after {
-             content: "AT THE US OPEN" !important;
-             display: block !important;
-             margin-top: 5px !important;
-         }
-         
-         #time {
-             color: white !important;
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: 16px !important;
-             font-weight: normal !important;
-             letter-spacing: 1px !important;
-             margin: 20px 0 !important;
-         }
-         
-         #time::before {
-             content: "Click below to download and share your Theme Art." !important;
-         }
-         
-         .clv-photo {
-             width: 100% !important;
-             height: auto !important;
-             max-width: 400px !important;
-             margin: 30px auto !important;
-             display: block !important;
-             border-radius: 8px !important;
-             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3) !important;
-         }
-         
-         #igm34 {
-             display: none !important;
-         }
-         
-         #social-container {
-             background-color: transparent !important;
-             padding: 30px 20px !important;
-             justify-content: center !important;
-             gap: 30px !important;
-             flex-wrap: wrap !important;
-             margin-top: 40px !important;
-         }
-         
-         .clv-button.circle {
-             background-color: white !important;
-             border: none !important;
-             width: 70px !important;
-             height: 70px !important;
-             border-radius: 50% !important;
-             display: flex !important;
-             align-items: center !important;
-             justify-content: center !important;
-             transition: all 0.2s ease !important;
-             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
-             position: relative !important;
-         }
-         
-         .clv-button.circle:hover {
-             background-color: rgba(255, 255, 255, 0.9) !important;
-             transform: scale(1.1) !important;
-             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
-         }
-         
-         .clv-button.circle div {
-             display: flex !important;
-             align-items: center !important;
-             justify-content: center !important;
-             width: 100% !important;
-             height: 100% !important;
-         }
-         
-         .clv-button.circle svg {
-             width: 35px !important;
-             height: 35px !important;
-             fill: black !important;
-             display: block !important;
-             margin: 0 auto !important;
-         }
-         
-         #iqeeok {
-             background-color: transparent !important;
-             color: white !important;
-             text-align: center !important;
-             padding: 20px !important;
-             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-         }
-         
-         @media (max-width: 768px) {
-             #container {
-                 padding-top: 20vh !important;
-             }
-             
-             #title {
-                 font-size: 22px !important;
-                 letter-spacing: 2px !important;
-             }
-             
-             #time {
-                 font-size: 14px !important;
-             }
-             
-             .clv-button.circle {
-                 width: 60px !important;
-                 height: 60px !important;
-             }
-             
-             .clv-button.circle svg {
-                 width: 30px !important;
-                 height: 30px !important;
-             }
-             
-             #social-container {
-                 gap: 20px !important;
-                 padding: 20px !important;
-                 margin-top: 30px !important;
-             }
-             
-             .clv-photo {
-                 max-width: 300px !important;
-                 margin: 20px auto !important;
-             }
-         }
-         
-         @media (max-width: 480px) {
-             #container {
-                 padding-top: 15vh !important;
-             }
-             
-             #title {
-                 font-size: 18px !important;
-                 letter-spacing: 1px !important;
-             }
-             
-             #time {
-                 font-size: 12px !important;
-             }
-             
-             .clv-photo {
-                 max-width: 250px !important;
              }
          }
          `;
