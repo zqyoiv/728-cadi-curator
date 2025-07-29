@@ -414,7 +414,7 @@ const surveyTracking = {
          
          #container {
              background-color: transparent !important;
-             padding-top: 15vh !important;
+             padding-top: 25vh !important;
              text-align: center !important;
          }
          
@@ -502,6 +502,7 @@ const surveyTracking = {
              justify-content: center !important;
              transition: all 0.2s ease !important;
              box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+             position: relative !important;
          }
          
          .clv-button.circle:hover {
@@ -510,10 +511,20 @@ const surveyTracking = {
              box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
          }
          
+         .clv-button.circle div {
+             display: flex !important;
+             align-items: center !important;
+             justify-content: center !important;
+             width: 100% !important;
+             height: 100% !important;
+         }
+         
          .clv-button.circle svg {
              width: 35px !important;
              height: 35px !important;
              fill: black !important;
+             display: block !important;
+             margin: 0 auto !important;
          }
          
          #iqeeok {
@@ -526,7 +537,7 @@ const surveyTracking = {
          
          @media (max-width: 768px) {
              #container {
-                 padding-top: 12vh !important;
+                 padding-top: 20vh !important;
              }
              
              #title {
@@ -562,7 +573,7 @@ const surveyTracking = {
          
          @media (max-width: 480px) {
              #container {
-                 padding-top: 10vh !important;
+                 padding-top: 15vh !important;
              }
              
              #title {
