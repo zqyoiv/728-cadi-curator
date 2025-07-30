@@ -651,7 +651,7 @@ const surveyTracking = {
              font-weight: normal !important;
              letter-spacing: 3px !important;
              text-transform: uppercase !important;
-             margin: 0 0 min(1.5vh, 10px) 0 !important;
+             margin: 0 0 min(1vh, 10px) 0 !important;
              line-height: 1.2 !important;
              text-align: center !important;
          }
@@ -1017,13 +1017,13 @@ const surveyTracking = {
             body#i1xr .clv-photo {
                 max-width: 85vw !important;
                 max-height: 45Svh !important;
-                margin: 3vh !important;
+                margin: 0 !important;
             }
             
             body#i1xr #social-container {
-                gap: min(6vw, 20px) !important;
+                gap: 0 !important;
                 padding: 0 !important;
-                margin-top: 0 !important;
+                margin-top: 2vh !important;
             }
             
             body#i1xr .clv-button.circle,
@@ -1038,8 +1038,8 @@ const surveyTracking = {
             body#i1xr a.clv-button.circle svg,
             body#i1xr .clv-button.circle div svg,
             body#i1xr a.clv-button.circle div svg {
-                width: min(10vw, 25px) !important;
-                height: min(10vw, 25px) !important;
+                width: min(10vw, 30px) !important;
+                height: min(10vw, 30px) !important;
                 min-width: 15px !important;
                 min-height: 15px !important;
             }
@@ -1373,6 +1373,9 @@ if (document.readyState === 'loading') {
             // Still initialize survey even if Mixpanel fails
             initializeSurvey();
         });
+
+        // Replace social media icons with black background, white fill versions
+        replaceSocialIcons();
     });
 } else {
     // DOM is already loaded
@@ -1385,4 +1388,58 @@ if (document.readyState === 'loading') {
         // Still initialize survey even if Mixpanel fails
         initializeSurvey();
     });
+
+    // Replace social media icons with black background, white fill versions
+    replaceSocialIcons();
+}
+
+// Function to replace Instagram, X, and Facebook icons with black background, white fill versions
+function replaceSocialIcons() {
+    // Replace Instagram icon
+    const instagramButton = document.getElementById('iok7r');
+    if (instagramButton) {
+        const instagramDiv = instagramButton.querySelector('div');
+        if (instagramDiv) {
+            instagramDiv.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="50px" height="50px" viewBox="0 0 32 32">
+                    <rect width="32" height="32" fill="black" rx="6"/>
+                    <path d="M20.445 5h-8.891A6.559 6.559 0 0 0 5 11.554v8.891A6.559 6.559 0 0 0 11.554 27h8.891a6.56 6.56 0 0 0 6.554-6.555v-8.891A6.557 6.557 0 0 0 20.445 5zm4.342 15.445a4.343 4.343 0 0 1-4.342 4.342h-8.891a4.341 4.341 0 0 1-4.341-4.342v-8.891a4.34 4.34 0 0 1 4.341-4.341h8.891a4.342 4.342 0 0 1 4.341 4.341l.001 8.891z"/>
+                    <path d="M16 10.312c-3.138 0-5.688 2.551-5.688 5.688s2.551 5.688 5.688 5.688 5.688-2.551 5.688-5.688-2.55-5.688-5.688-5.688zm0 9.163a3.475 3.475 0 1 1-.001-6.95 3.475 3.475 0 0 1 .001 6.95zM21.7 8.991a1.363 1.363 0 1 1-1.364 1.364c0-.752.51-1.364 1.364-1.364z"/>
+                </svg>
+            `;
+        }
+    }
+
+    // Replace X icon
+    const xButton = document.getElementById('i5jm2');
+    if (xButton) {
+        const xDiv = xButton.querySelector('div');
+        if (xDiv) {
+            xDiv.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 90 90" xml:space="preserve">
+                    <circle cx="45" cy="45" r="45" fill="black"/>
+                    <g fill="white">
+                        <polygon points="24.89,23.01 57.79,66.99 65.24,66.99 32.34,23.01"/>
+                        <path d="M 56.032 70.504 L 41.054 50.477 L 22.516 70.504 h -4.765 L 38.925 47.63 L 17.884 19.496 h 16.217 L 47.895 37.94 l 17.072 -18.444 h 4.765 L 50.024 40.788 l 22.225 29.716 H 56.032 z"/>
+                    </g>
+                </svg>
+            `;
+        }
+    }
+
+    // Replace Facebook icon
+    const facebookButton = document.getElementById('ii21r');
+    if (facebookButton) {
+        const facebookDiv = facebookButton.querySelector('div');
+        if (facebookDiv) {
+            facebookDiv.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 96 96" fill="none">
+                    <rect width="96" height="96" rx="21" fill="black"/>
+                    <path d="M73.31 25.7456C72.785 25.4743 72.274 25.1769 71.7788 24.8545C70.3389 23.9025 69.0186 22.7808 67.8465 21.5135C64.9139 18.158 63.8186 14.7538 63.4151 12.3705H63.4313C63.0943 10.3921 63.2337 9.11214 63.2547 9.11214H49.8974V60.7624C49.8974 61.4558 49.8974 62.1412 49.8682 62.8185C49.8682 62.9027 49.8601 62.9805 49.8553 63.0712C49.8553 63.1085 49.8553 63.1474 49.8472 63.1863C49.8472 63.196 49.8472 63.2057 49.8472 63.2154C49.7064 65.0686 49.1123 66.8588 48.1173 68.4286C47.1222 69.9983 45.7566 71.2994 44.1407 72.2175C42.4565 73.1757 40.5517 73.6782 38.614 73.6757C32.3906 73.6757 27.3468 68.6011 27.3468 62.334C27.3468 56.0669 32.3906 50.9923 38.614 50.9923C39.7921 50.9912 40.9629 51.1766 42.083 51.5415L42.0992 37.9412C38.6989 37.502 35.2444 37.7722 31.9538 38.7348C28.6631 39.6975 25.6077 41.3317 22.9802 43.5343C20.678 45.5346 18.7425 47.9214 17.2608 50.5872C16.6969 51.5594 14.5695 55.4658 14.3119 61.8058C14.1499 65.4044 15.2306 69.1326 15.7458 70.6734V70.7058C16.0699 71.6132 17.3256 74.7094 19.372 77.3197C21.0221 79.4135 22.9716 81.2527 25.1579 82.7783V82.7459L25.1903 82.7783C31.6567 87.1724 38.8263 86.884 38.8263 86.884C40.0674 86.8338 44.2249 86.884 48.9463 84.6464C54.183 82.1658 57.1642 78.47 57.1642 78.47C59.0688 76.2618 60.5832 73.7452 61.6426 71.0282C62.8513 67.8509 63.2547 64.0401 63.2547 62.5171V35.1155C63.4168 35.2127 65.5749 36.6401 65.5749 36.6401C65.5749 36.6401 68.6842 38.633 73.5352 39.9309C77.0155 40.8544 81.7045 41.0488 81.7045 41.0488V27.7887C80.0615 27.9669 76.7255 27.4485 73.31 25.7456Z" fill="white"/>
+                </svg>
+            `;
+        }
+    }
+
+    console.log('Social media icons replaced with black background, white fill versions');
 }
