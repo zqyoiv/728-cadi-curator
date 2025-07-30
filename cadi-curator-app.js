@@ -408,7 +408,7 @@ const surveyTracking = {
              width: min(8vw, 60px);
              height: min(8vw, 60px);
              margin: 0 auto min(4vh, 30px);
-             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="white"/><text x="50" y="50" text-anchor="middle" dy=".3em" font-family="serif" font-size="20" fill="black">CADILLAC</text></svg>') no-repeat center;
+             background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="white"/><text x="50" y="50" text-anchor="middle" dy=".3em" font-family="serif" font-size="20" fill="white">CADILLAC</text></svg>') no-repeat center;
              background-size: contain;
              display: none;
          }
@@ -645,11 +645,11 @@ const surveyTracking = {
          }
          
          body#i1xr .photo-page-title h1 {
-             color: white !important;
+             color: #eeeeee !important;
              font-family: "CadillacGothicWide", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: clamp(20px, 4vw, 28px) !important;
+             font-size: 12px !important;
              font-weight: normal !important;
-             letter-spacing: clamp(1px, 0.3vw, 3px) !important;
+             letter-spacing: 3px !important;
              text-transform: uppercase !important;
              margin: 0 0 min(1.5vh, 10px) 0 !important;
              line-height: 1.2 !important;
@@ -657,11 +657,11 @@ const surveyTracking = {
          }
          
          body#i1xr .photo-page-title h2 {
-             color: white !important;
+             color: #eeeeee !important;
              font-family: "CadillacGothicWide", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: clamp(20px, 4vw, 28px) !important;
+             font-size: 12px !important;
              font-weight: normal !important;
-             letter-spacing: clamp(1px, 0.3vw, 3px) !important;
+             letter-spacing: 3px !important;
              text-transform: uppercase !important;
              margin: 0 0 min(3vh, 20px) 0 !important;
              line-height: 1.2 !important;
@@ -749,7 +749,7 @@ const surveyTracking = {
              margin: min(4vh, 30px) auto !important;
              display: block !important;
              border-radius: clamp(4px, 1vw, 8px) !important;
-             box-shadow: 0 min(1vh, 8px) min(3vh, 25px) rgba(0, 0, 0, 0.3) !important;
+ 
              object-fit: contain !important;
          }
          
@@ -773,8 +773,8 @@ const surveyTracking = {
          
          body#i1xr .clv-button.circle,
          body#i1xr a.clv-button.circle {
-             background-color: white !important;
-             background: white !important;
+             background-color: black !important;
+             background: black !important;
              border: none !important;
              width: min(12vw, 70px) !important;
              height: min(12vw, 70px) !important;
@@ -784,17 +784,17 @@ const surveyTracking = {
              align-items: center !important;
              justify-content: center !important;
              transition: all 0.2s ease !important;
-             box-shadow: 0 min(0.5vh, 4px) min(2vh, 15px) rgba(0, 0, 0, 0.2) !important;
+ 
              position: relative !important;
              text-decoration: none !important;
          }
          
          body#i1xr .clv-button.circle:hover,
          body#i1xr a.clv-button.circle:hover {
-             background-color: rgba(255, 255, 255, 0.9) !important;
-             background: rgba(255, 255, 255, 0.9) !important;
+             background-color: rgba(0, 0, 0, 0.8) !important;
+             background: rgba(0, 0, 0, 0.8) !important;
              transform: scale(1.1) !important;
-             box-shadow: 0 min(1vh, 6px) min(3vh, 20px) rgba(0, 0, 0, 0.3) !important;
+ 
          }
          
          body#i1xr .clv-button.circle div,
@@ -815,20 +815,20 @@ const surveyTracking = {
              height: min(6vw, 35px) !important;
              min-width: 20px !important;
              min-height: 20px !important;
-             fill: black !important;
-             color: black !important;
+             fill: white !important;
+             color: white !important;
              display: block !important;
              margin: 0 auto !important;
              background: transparent !important;
          }
          
-         body#i1xr .clv-button.circle svg path,
-         body#i1xr a.clv-button.circle svg path,
-         body#i1xr .clv-button.circle div svg path,
-         body#i1xr a.clv-button.circle div svg path {
-             fill: black !important;
-             color: black !important;
-         }
+                 body#i1xr .clv-button.circle svg path,
+        body#i1xr a.clv-button.circle svg path,
+        body#i1xr .clv-button.circle div svg path,
+        body#i1xr a.clv-button.circle div svg path {
+            fill: white !important;
+            color: white !important;
+        }
          
          body#i1xr #iqeeok {
              background-color: transparent !important;
@@ -977,9 +977,21 @@ const surveyTracking = {
             }
             
             body#i1xr #container {
-                padding-top: min(12vh, 80px) !important;
+                padding-top: min(25vh, 200px) !important;
             }
             
+            body#i1xr #header-container {
+                background-color: #000000 !important;
+                background: #000000 !important;
+                padding: 0 !important;
+                text-align: center !important;
+                width: 100% !important;
+                display: block !important;
+            }
+            body#i1xr #header-container.clv-row {
+               min-height: 40px !important;
+            }
+
             body#i1xr #photo-container {
                 padding: 0 min(2vw, 15px) !important;
             }
@@ -992,6 +1004,10 @@ const surveyTracking = {
                 font-size: 14px !important;
                 letter-spacing: clamp(0.5px, 0.1vw, 1px) !important;
             }
+
+            body#i1xr .photo-page-title {
+                margin-top: 5vh !important;
+            }
             
             body#i1xr #time {
                 font-size:9px !important;
@@ -1000,14 +1016,14 @@ const surveyTracking = {
             
             body#i1xr .clv-photo {
                 max-width: 85vw !important;
-                max-height: 50vh !important;
-                margin: min(2vh, 15px) auto !important;
+                max-height: 45Svh !important;
+                margin: 3vh !important;
             }
             
             body#i1xr #social-container {
                 gap: min(6vw, 20px) !important;
-                padding: min(2vh, 15px) min(1.5vw, 12px) !important;
-                margin-top: min(3vh, 20px) !important;
+                padding: 0 !important;
+                margin-top: 0 !important;
             }
             
             body#i1xr .clv-button.circle,
@@ -1098,51 +1114,6 @@ const surveyTracking = {
                 padding: min(1vh, 10px) min(1.5vw, 12px) !important;
                 max-height: 10vh !important;
                 line-height: 1.2 !important;
-            }
-        }
-        
-        @media (max-height: 600px) {
-            body#i1xr #container {
-                padding-top: min(8vh, 50px) !important;
-            }
-            
-            body#i1xr #header-container {
-                padding-bottom: min(2vh, 15px) !important;
-                margin-bottom: min(1vh, 10px) !important;
-            }
-            
-            body#i1xr .clv-photo {
-                max-width: 85vw !important;
-                max-height: 50vh !important;
-                margin: min(2vh, 12px) auto !important;
-            }
-            
-            body#i1xr #social-container {
-                margin-top: min(2vh, 15px) !important;
-                padding: min(2vh, 15px) min(2vw, 15px) !important;
-            }
-            
-            #survey-container {
-                margin-top: 5vh;
-                max-height: 80vh;
-            }
-            
-            #survey-overlay .survey-header {
-                margin-bottom: 2vh;
-            }
-            
-            #survey-overlay .email-section,
-            #survey-overlay .survey-question {
-                margin-bottom: 2vh !important;
-            }
-            
-            #survey-overlay .survey-options {
-                gap: 0.5vh !important;
-            }
-            
-            #survey-overlay .survey-disclaimer {
-                max-height: 8vh !important;
-                font-size: clamp(6px, 1.2vw, 8px) !important;
             }
         }
         
@@ -1257,8 +1228,8 @@ function addLogoToPhotoPage() {
     logoDiv.innerHTML = `
         <img src="https://cdn.jsdelivr.net/gh/zqyoiv/728-cadi-curator@main/asset/Cadillac-Logo_white_small.png" alt="Cadillac Logo">
         <div class="photo-page-title">
-            <h1>THANKS FOR JOINING CADILLAC TEST</h1>
-            <h2>AT THE US OPEN</h2>
+            <h1>THANKS FOR JOINING</h1>
+            <h2>CADILLAC AT THE US OPEN</h2>
         </div>
     `;
     
