@@ -762,8 +762,8 @@ const surveyTracking = {
          body#i1xr .clv-photo {
              width: 100% !important;
              height: auto !important;
-             max-width: min(70vw, 400px) !important;
-             max-height: min(40vh, 300px) !important;
+             max-width: 70vw !important;
+                max-height: 50vh !important;
              margin: min(4vh, 30px) auto !important;
              display: block !important;
              border-radius: clamp(4px, 1vw, 8px) !important;
@@ -884,8 +884,8 @@ const surveyTracking = {
             }
             
             body#i1xr .clv-photo {
-                max-width: min(80vw, 350px) !important;
-                max-height: min(35vh, 250px) !important;
+                max-width: 85vw !important;
+                max-height: 50vh !important;
                 margin: min(3vh, 20px) auto !important;
             }
             
@@ -994,8 +994,8 @@ const surveyTracking = {
             }
             
             body#i1xr .clv-photo {
-                max-width: min(85vw, 300px) !important;
-                max-height: min(30vh, 200px) !important;
+                max-width: 85vw !important;
+                max-height: 50vh !important;
                 margin: min(2vh, 15px) auto !important;
             }
             
@@ -1098,7 +1098,8 @@ const surveyTracking = {
             }
             
             body#i1xr .clv-photo {
-                max-height: min(25vh, 150px) !important;
+                max-width: 85vw !important;
+                max-height: 50vh !important;
                 margin: min(2vh, 12px) auto !important;
             }
             
@@ -1141,7 +1142,8 @@ const surveyTracking = {
             }
             
             body#i1xr .clv-photo {
-                max-height: min(20vh, 100px) !important;
+                max-width: 85vw !important;
+                max-height: 50vh !important;
                 margin: min(1vh, 8px) auto !important;
             }
             
