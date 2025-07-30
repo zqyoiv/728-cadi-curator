@@ -476,7 +476,7 @@ const surveyTracking = {
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
              font-size: 12px !important;
              font-weight: normal !important;
-             color: white !important;
+             color: #cccccc !important;
              line-height: 1.4 !important;
              width: 60vw !important;
              text-align: center !important;
@@ -546,7 +546,7 @@ const surveyTracking = {
             padding: min(2vh, 15px) min(4vw, 25px) !important;
             background: transparent !important;
             color: rgba(255, 255, 255, 0.5) !important;
-            border: 2px solid rgba(255, 255, 255, 0.5) !important;
+            border: 1px solid rgba(255, 255, 255, 0.5) !important;
             border-radius: 0 !important;
             font-size: 11px !important;
             font-weight: normal !important;
@@ -956,13 +956,13 @@ const surveyTracking = {
             }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 400px) {
             body#i1xr .cadillac-logo {
                 padding: 0 !important;
             }
 
             body#i1xr .cadillac-logo img {
-                max-width: max(15vw, 80px) !important;
+                max-width: max(15vw, 70px) !important;
                 max-height: min(15vh, 40px) !important;
                 padding: 0 !important;
             }
@@ -1040,52 +1040,58 @@ const surveyTracking = {
             }
             
             #survey-overlay .survey-title {
-                font-size: 14px !important;
+                font-size: 12px !important;
                 letter-spacing: 5px !important;
                 font-weight: 100 !important;
-                color: #cccccc !important;
+                color: #eeeeee !important;
             }
             
             #survey-overlay .survey-subtitle {
-                font-size: 9px !important;
+                font-size: 7px !important;
                 letter-spacing: 4px !important;
-                color: #cccccc !important;
+                color: #eeeeee !important;
             }
             
             #survey-overlay .survey-question h2 {
-                font-size: 10px !important;
-                width: 60vw !important;
+                font-size: 9px !important;
+                width: 48vw !important;
                 text-align: center !important;
-                margin-left: 15vw !important;
+                margin-left: 20vw !important;
                 margin-bottom: 2vh !important;
             }
             
             #survey-overlay .survey-options {
                 gap: min(0.8vh, 6px) !important;
-                max-width: min(90vw, 300px) !important;
+                max-width: min(60vw, 300px) !important;
             }
             
             #survey-overlay .survey-option label {
-                font-size: 12px !important;
-                padding: 6px !important;
-                max-width: min(85vw, 280px) !important;
-                margin-bottom: 15px !important;
+                font-size: 8px !important;
+                padding: 4px !important;
+                max-width: min(50vw, 280px) !important;
+                margin-bottom: 10px !important;
             }
             
             #survey-overlay .email-section input[type="email"] {
-                font-size: 12px !important;
-                padding: 6px !important;
-                max-width: min(85vw, 280px) !important;
+                font-size: 9px !important;
+                padding: 3px !important;
+                max-width: min(50vw, 300px) !important;
             }
             
             #survey-overlay .submit-button {
-                font-size: 11px !important;
+                font-size: 8px !important;
                 padding: min(1.5vh, 15px) min(3vw, 20px) !important;
-                letter-spacing: 2px !important;
-                max-width: min(95vw, 400px) !important;
+                letter-spacing: 3px !important;
+                max-width: min(60vw, 400px) !important;
+                margin-top: 4vh !important;
             }
             
-
+            #survey-overlay .survey-disclaimer {
+                /* max-height: 8vh !important; */
+                font-size: 6px !important;
+                padding-bottom: 2vh !important;
+                color: white !important;
+            }
             
             #survey-overlay .survey-disclaimer {
                 font-size: clamp(6px, 2.5vw, 8px) !important;
