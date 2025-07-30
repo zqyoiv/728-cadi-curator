@@ -415,26 +415,26 @@ const surveyTracking = {
          
          #survey-overlay .survey-title {
              font-family: "CadillacGothicWide", "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: clamp(18px, 4vw, 24px) !important;
-             font-weight: 400 !important;
-             color: white !important;
+             font-size: 16px !important;
+             letter-spacing: 5px !important;
+             font-weight: 100 !important;
+             color: #cccccc !important;
              margin: 0 0 min(3vh, 20px) 0 !important;
-             letter-spacing: clamp(1px, 0.3vw, 2px) !important;
              text-transform: uppercase !important;
              line-height: 1.2 !important;
          }
          
          #survey-overlay .survey-subtitle {
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: clamp(14px, 2.5vw, 16px) !important;
-             color: white !important;
+             font-size: 11px !important;
+             letter-spacing: 4px !important;
+             color: #cccccc !important;
              margin: 0 0 min(5vh, 40px) 0 !important;
-             letter-spacing: clamp(0.5px, 0.2vw, 1px) !important;
              text-transform: uppercase !important;
          }
          
          #survey-overlay .email-section {
-             margin: 0 0 min(5vh, 40px) 0 !important;
+             margin: 0 0 min(3vh, 40px) 0 !important;
          }
          
          #survey-overlay .email-section label {
@@ -443,11 +443,11 @@ const surveyTracking = {
          
          #survey-overlay .email-section input[type="email"] {
              width: 100% !important;
-             max-width: min(80vw, 400px) !important;
-             padding: min(2vh, 16px) min(3vw, 20px) !important;
-             border: 2px solid white !important;
+             max-width: min(65vw, 350px) !important;
+             font-size: 12px !important;
+             padding: 6px !important;
+             border: 1px solid white !important;
              border-radius: 0 !important;
-             font-size: clamp(14px, 2.5vw, 16px) !important;
              color: white !important;
              background: transparent !important;
              transition: all 0.2s ease !important;
@@ -474,12 +474,14 @@ const surveyTracking = {
          
          #survey-overlay .survey-question h2 {
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: clamp(13px, 2.2vw, 16px) !important;
+             font-size: 12px !important;
              font-weight: normal !important;
              color: white !important;
-             margin-bottom: min(4vh, 30px) !important;
              line-height: 1.4 !important;
+             width: 60vw !important;
              text-align: center !important;
+             margin-left: 15vw !important;
+             margin-bottom: 2vh !important;
              letter-spacing: clamp(0.5px, 0.2vw, 1px) !important;
          }
          
@@ -501,21 +503,21 @@ const surveyTracking = {
          
          #survey-overlay .survey-option label {
              display: block !important;
-             padding: min(2vh, 16px) min(3vw, 20px) !important;
+             font-size: 12px !important;
+             padding: 6px !important;
              background: transparent !important;
-             border: 2px solid white !important;
+             border: 1px solid white !important;
              border-radius: 0 !important;
              cursor: pointer !important;
              transition: all 0.2s ease !important;
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
              color: white !important;
-             font-size: clamp(12px, 2vw, 14px) !important;
              letter-spacing: clamp(0.5px, 0.2vw, 1px) !important;
-             text-transform: uppercase !important;
              text-align: center !important;
              width: 100% !important;
              max-width: min(65vw, 350px) !important;
              margin: 0 auto !important;
+             margin-bottom: 15px !important;
              box-sizing: border-box !important;
          }
          
@@ -539,7 +541,6 @@ const surveyTracking = {
          }
          
          #survey-overlay .submit-button {
-            position: relative !important;
             width: 100% !important;
             max-width: min(85vw, 500px) !important;
             padding: min(2.5vh, 18px) min(5vw, 32px) !important;
@@ -547,31 +548,18 @@ const surveyTracking = {
             color: rgba(255, 255, 255, 0.5) !important;
             border: 2px solid rgba(255, 255, 255, 0.5) !important;
             border-radius: 0 !important;
-            font-size: clamp(14px, 2.5vw, 16px) !important;
+            font-size: 11px !important;
             font-weight: normal !important;
             cursor: not-allowed !important;
             transition: all 0.2s ease !important;
             margin: min(3vh, 20px) auto 0 !important;
             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-            letter-spacing: clamp(1px, 0.3vw, 2px) !important;
+            letter-spacing: 2px !important;
             text-transform: uppercase !important;
             display: block !important;
-            z-index: 2 !important;
         }
         
-        #survey-overlay .submit-button::before {
-            content: '' !important;
-            position: absolute !important;
-            top: min(-1vh, -8px) !important;
-            left: min(-1vh, -8px) !important;
-            right: min(-1vh, -8px) !important;
-            bottom: min(-1vh, -8px) !important;
-            border: 2px solid rgba(255, 255, 255, 0.3) !important;
-            border-radius: 0 !important;
-            z-index: -1 !important;
-            transition: all 0.2s ease !important;
-            background: transparent !important;
-        }
+
         
         #survey-overlay .submit-button.enabled {
             background: transparent !important;
@@ -580,9 +568,7 @@ const surveyTracking = {
             cursor: pointer !important;
         }
         
-        #survey-overlay .submit-button.enabled::before {
-            border-color: white !important;
-        }
+
         
         #survey-overlay .submit-button.enabled:hover {
             background: white !important;
@@ -590,10 +576,7 @@ const surveyTracking = {
             transform: none !important;
         }
         
-        #survey-overlay .submit-button.enabled:hover::before {
-            background: rgba(255, 255, 255, 0.1) !important;
-            border-color: white !important;
-        }
+
         
         #survey-overlay .survey-disclaimer {
             position: fixed !important;
@@ -643,17 +626,16 @@ const surveyTracking = {
              text-align: center !important;
              padding: min(10vh, 50px) 0 !important;
              z-index: 999 !important;
-             background: #000000 !important;
          }
          
          body#i1xr .cadillac-logo img {
-             max-width: min(20vw, 300px) !important;
-             max-height: min(15vh, 120px) !important;
+             max-width: max(15vw, 100px) !important;
+             max-height: min(15vh, 100px) !important;
              width: auto !important;
              height: auto !important;
              object-fit: contain !important;
              display: block !important;
-             margin: 0 auto min(5vh, 40px) auto !important;
+             margin: 7vh auto 0 auto !important;
          }
          
          body#i1xr .photo-page-title {
@@ -920,18 +902,26 @@ const surveyTracking = {
             }
             
             #survey-overlay .survey-title {
-                font-size: clamp(16px, 5vw, 22px) !important;
+                font-size: 16px !important;
+                letter-spacing: 5px !important;
+                font-weight: 100 !important;
+                color: #cccccc !important;
                 margin-bottom: min(2vh, 15px) !important;
             }
             
             #survey-overlay .survey-subtitle {
-                font-size: clamp(12px, 3vw, 14px) !important;
+                font-size: 11px !important;
+                letter-spacing: 4px !important;
+                color: #cccccc !important;
                 margin-bottom: min(4vh, 30px) !important;
             }
             
             #survey-overlay .survey-question h2 {
-                font-size: clamp(11px, 3vw, 14px) !important;
-                margin-bottom: min(3vh, 20px) !important;
+                font-size: 12px !important;
+                width: 60vw !important;
+                text-align: center !important;
+                margin-left: 15vw !important;
+                margin-bottom: 2vh !important;
             }
             
             #survey-overlay .survey-options {
@@ -940,21 +930,22 @@ const surveyTracking = {
             }
             
             #survey-overlay .survey-option label {
-                padding: min(1.5vh, 14px) min(2vw, 16px) !important;
-                font-size: clamp(10px, 2.5vw, 12px) !important;
+                font-size: 12px !important;
+                padding: 6px !important;
                 max-width: min(75vw, 300px) !important;
+                margin-bottom: 15px !important;
             }
             
             #survey-overlay .email-section input[type="email"] {
-                font-size: clamp(12px, 3vw, 14px) !important;
-                padding: min(1.5vh, 14px) min(2vw, 16px) !important;
-                max-width: min(85vw, 350px) !important;
+                font-size: 12px !important;
+                padding: 6px !important;
+                max-width: min(75vw, 300px) !important;
             }
             
             #survey-overlay .submit-button {
-                font-size: clamp(12px, 3vw, 14px) !important;
+                font-size: 11px !important;
                 padding: min(2vh, 16px) min(4vw, 24px) !important;
-                letter-spacing: clamp(0.5px, 0.2vw, 1px) !important;
+                letter-spacing: 2px !important;
                 max-width: min(90vw, 450px) !important;
             }
             
@@ -1035,17 +1026,24 @@ const surveyTracking = {
             }
             
             #survey-overlay .survey-title {
-                font-size: clamp(14px, 6vw, 20px) !important;
-                letter-spacing: clamp(0.5px, 0.2vw, 1px) !important;
+                font-size: 16px !important;
+                letter-spacing: 5px !important;
+                font-weight: 100 !important;
+                color: #cccccc !important;
             }
             
             #survey-overlay .survey-subtitle {
-                font-size: clamp(10px, 3.5vw, 13px) !important;
+                font-size: 11px !important;
+                letter-spacing: 4px !important;
+                color: #cccccc !important;
             }
             
             #survey-overlay .survey-question h2 {
-                font-size: clamp(10px, 3.5vw, 13px) !important;
-                margin-bottom: min(2vh, 15px) !important;
+                font-size: 12px !important;
+                width: 60vw !important;
+                text-align: center !important;
+                margin-left: 15vw !important;
+                margin-bottom: 2vh !important;
             }
             
             #survey-overlay .survey-options {
@@ -1054,30 +1052,26 @@ const surveyTracking = {
             }
             
             #survey-overlay .survey-option label {
-                padding: min(1vh, 12px) min(1.5vw, 12px) !important;
-                font-size: clamp(9px, 3vw, 11px) !important;
+                font-size: 12px !important;
+                padding: 6px !important;
                 max-width: min(85vw, 280px) !important;
+                margin-bottom: 15px !important;
             }
             
             #survey-overlay .email-section input[type="email"] {
-                font-size: clamp(11px, 3.5vw, 13px) !important;
-                padding: min(1vh, 12px) min(1.5vw, 12px) !important;
-                max-width: min(90vw, 320px) !important;
+                font-size: 12px !important;
+                padding: 6px !important;
+                max-width: min(85vw, 280px) !important;
             }
             
             #survey-overlay .submit-button {
-                font-size: clamp(11px, 3.5vw, 13px) !important;
+                font-size: 11px !important;
                 padding: min(1.5vh, 15px) min(3vw, 20px) !important;
-                letter-spacing: clamp(0.5px, 0.1vw, 1px) !important;
+                letter-spacing: 2px !important;
                 max-width: min(95vw, 400px) !important;
             }
             
-            #survey-overlay .submit-button::before {
-                top: min(-0.5vh, -6px) !important;
-                left: min(-0.5vh, -6px) !important;
-                right: min(-0.5vh, -6px) !important;
-                bottom: min(-0.5vh, -6px) !important;
-            }
+
             
             #survey-overlay .survey-disclaimer {
                 font-size: clamp(6px, 2.5vw, 8px) !important;
@@ -1235,7 +1229,7 @@ function initializeSurvey() {
              </div>
 
              <div class="survey-question">
-                 <h2>Please rate the extent to which you agree with the following: 'Cadillac is a Brand for Me':</h2>
+                 <h2>Please rate the extent to which you agree with the following: <br><b>'Cadillac is a brand for Me'</b></h2>
                  <div class="survey-options">
                      <div class="survey-option">
                          <input type="radio" id="strongly-agree" name="brand-rating" value="strongly-agree">
@@ -1263,7 +1257,7 @@ function initializeSurvey() {
              <button type="button" class="submit-button" id="submit-survey">Submit and View Theme Art</button>
              
              <div class="survey-disclaimer">
-                 Your email will not be shared with third parties or used for marketing or promotional purposes. Your US Open theme artwork will not be used for marketing or promotional purposes, and will only be available until December 31, 2025.
+                 Your email will not be shared with third parties or used for marketing or promotional purposes. Your US Open theme artwork will not be used for marketing or promotional purposes, and will be available until September 14, 2025.
              </div>
          </div>
      `;
