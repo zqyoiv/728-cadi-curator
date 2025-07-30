@@ -375,10 +375,10 @@ const surveyTracking = {
             width: 100%;
             text-align: center;
             color: white;
-            padding: 2vh 2vw;
-            margin-top: min(5vh, 40px);
-            max-height: 85vh;
-            overflow-y: auto;
+            padding: 1vh 2vw;
+            margin-top: 0;
+            max-height: 100vh;
+            overflow: hidden;
             box-sizing: border-box;
         }
         
@@ -386,8 +386,8 @@ const surveyTracking = {
         .cadillac-logo {
             width: 100%;
             text-align: center;
-            margin-bottom: min(5vh, 40px);
-            padding: min(10vh, 30px) 0;
+            margin-bottom: min(2vh, 20px);
+            padding: min(3vh, 20px) 0;
         }
         
         .cadillac-logo img {
@@ -429,12 +429,12 @@ const surveyTracking = {
              font-size: 11px !important;
              letter-spacing: 4px !important;
              color: #cccccc !important;
-             margin: 0 0 min(5vh, 40px) 0 !important;
+             margin: 0 0 min(2vh, 20px) 0 !important;
              text-transform: uppercase !important;
          }
          
          #survey-overlay .email-section {
-             margin: 0 0 min(3vh, 40px) 0 !important;
+             margin: 0 0 min(2vh, 20px) 0 !important;
          }
          
          #survey-overlay .email-section label {
@@ -469,7 +469,7 @@ const surveyTracking = {
          }
          
          #survey-overlay .survey-question {
-             margin-bottom: min(5vh, 40px) !important;
+             margin-bottom: min(2vh, 20px) !important;
          }
          
          #survey-overlay .survey-question h2 {
@@ -543,7 +543,7 @@ const surveyTracking = {
          #survey-overlay .submit-button {
             width: 100% !important;
             max-width: min(85vw, 500px) !important;
-            padding: min(2.5vh, 18px) min(5vw, 32px) !important;
+            padding: min(2vh, 15px) min(4vw, 25px) !important;
             background: transparent !important;
             color: rgba(255, 255, 255, 0.5) !important;
             border: 2px solid rgba(255, 255, 255, 0.5) !important;
@@ -552,7 +552,7 @@ const surveyTracking = {
             font-weight: normal !important;
             cursor: not-allowed !important;
             transition: all 0.2s ease !important;
-            margin: min(3vh, 20px) auto 0 !important;
+            margin: min(2vh, 15px) auto 0 !important;
             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
             letter-spacing: 2px !important;
             text-transform: uppercase !important;
@@ -957,6 +957,16 @@ const surveyTracking = {
         }
         
         @media (max-width: 480px) {
+            body#i1xr .cadillac-logo {
+                padding: 0 !important;
+            }
+
+            body#i1xr .cadillac-logo img {
+                max-width: max(15vw, 80px) !important;
+                max-height: min(15vh, 40px) !important;
+                padding: 0 !important;
+            }
+            
             #survey-overlay {
                 background-size: min(95vw, 250px);
                 padding: 1vh 1vw;
@@ -974,13 +984,17 @@ const surveyTracking = {
                 padding: 0 min(2vw, 15px) !important;
             }
             
+            body#i1xr #survey-overlay .survey-header {
+                margin-bottom: min(3vh, 40px) !important;
+            }
+            
             body#i1xr #title {
-                font-size: clamp(16px, 6vw, 20px) !important;
+                font-size: 14px !important;
                 letter-spacing: clamp(0.5px, 0.1vw, 1px) !important;
             }
             
             body#i1xr #time {
-                font-size: clamp(9px, 3.5vw, 12px) !important;
+                font-size:9px !important;
                 margin: min(1.5vh, 12px) auto !important;
             }
             
@@ -1026,20 +1040,20 @@ const surveyTracking = {
             }
             
             #survey-overlay .survey-title {
-                font-size: 16px !important;
+                font-size: 14px !important;
                 letter-spacing: 5px !important;
                 font-weight: 100 !important;
                 color: #cccccc !important;
             }
             
             #survey-overlay .survey-subtitle {
-                font-size: 11px !important;
+                font-size: 9px !important;
                 letter-spacing: 4px !important;
                 color: #cccccc !important;
             }
             
             #survey-overlay .survey-question h2 {
-                font-size: 12px !important;
+                font-size: 10px !important;
                 width: 60vw !important;
                 text-align: center !important;
                 margin-left: 15vw !important;
@@ -1162,6 +1176,47 @@ const surveyTracking = {
                 height: min(5vw, 20px) !important;
                 min-width: 12px !important;
                 min-height: 12px !important;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            #survey-container {
+                max-width: 500px !important;
+                padding: 0.5vh 2vw !important;
+            }
+            
+            .cadillac-logo {
+                margin-bottom: 1vh !important;
+                padding: 2vh 0 !important;
+            }
+            
+            .cadillac-logo img {
+                max-height: min(12vh, 80px) !important;
+            }
+            
+            #survey-overlay .survey-title {
+                margin-bottom: 1vh !important;
+            }
+            
+            #survey-overlay .survey-subtitle {
+                margin-bottom: 1.5vh !important;
+            }
+            
+            #survey-overlay .email-section {
+                margin-bottom: 1.5vh !important;
+            }
+            
+            #survey-overlay .survey-question {
+                margin-bottom: 1.5vh !important;
+            }
+            
+            #survey-overlay .submit-button {
+                margin-top: 1.5vh !important;
+                padding: 1vh 3vw !important;
+            }
+            
+            #survey-overlay .survey-option label {
+                margin-bottom: 8px !important;
             }
         }
          `;
