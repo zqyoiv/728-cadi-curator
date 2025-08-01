@@ -1212,6 +1212,28 @@ const surveyTracking = {
                 margin-bottom: 8px !important;
             }
         }
+        
+        /* Force Download Button to Display */
+        #ip0zp,
+        .social-download {
+            display: flex !important;
+            visibility: visible !important;
+        }
+        
+        #ip0zp:hover,
+        .social-download:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            transform: scale(1.1) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        #ip0zp svg,
+        .social-download svg {
+            fill: white !important;
+            width: 30px !important;
+            height: 30px !important;
+        }
          `;
          
          // Create style element
