@@ -482,9 +482,10 @@ const surveyTracking = {
              font-weight: normal !important;
              color: #cccccc !important;
              line-height: 1.4 !important;
-             width: 60vw !important;
+             width: 20vw !important;
              text-align: center !important;
              margin-left: 15vw !important;
+             margin-right: 15vw !important;
              margin-bottom: 2vh !important;
              letter-spacing: clamp(0.5px, 0.2vw, 1px) !important;
          }
@@ -642,13 +643,13 @@ const surveyTracking = {
          }
          
          body#i1xr .cadillac-logo img {
-             max-width: max(15vw, 100px) !important;
-             max-height: min(15vh, 100px) !important;
+             max-width: max(15vw, 40px) !important;
+             max-height: min(15vh, 30px) !important;
              width: auto !important;
              height: auto !important;
              object-fit: contain !important;
              display: block !important;
-             margin: 7vh auto 0 auto !important;
+             margin: 2vh auto 0 auto !important;
          }
          
          body#i1xr .photo-page-title {
@@ -855,122 +856,123 @@ const surveyTracking = {
              flex-shrink: 0 !important;
          }
          
-         @media (max-width: 768px) {
-            #survey-overlay {
-                background-size: min(90vw, 300px);
-                pointer-events: none; /* Allow clicks to pass through */
+        //  @media (max-width: 768px) {
+        //     #survey-overlay {
+        //         background-size: min(90vw, 300px);
+        //         pointer-events: none; /* Allow clicks to pass through */
                 
-            }
+        //     }
             
-            body#i1xr {
-                background-size: min(70vw, 250px) !important;
-            }
+        //     body#i1xr {
+        //         background-size: min(70vw, 250px) !important;
+        //     }
             
-            body#i1xr #container {
-                padding-top: min(15vh, 100px) !important;
-            }
+        //     body#i1xr #container {
+        //         padding-top: min(15vh, 100px) !important;
+        //     }
             
-            body#i1xr #title {
-                font-size: clamp(18px, 5vw, 24px) !important;
-                letter-spacing: clamp(0.5px, 0.2vw, 2px) !important;
-            }
+        //     body#i1xr #title {
+        //         font-size: clamp(18px, 5vw, 24px) !important;
+        //         letter-spacing: clamp(0.5px, 0.2vw, 2px) !important;
+        //     }
             
-            body#i1xr #time {
-                font-size: clamp(10px, 3vw, 14px) !important;
-                margin: min(2vh, 15px) auto !important;
-            }
+        //     body#i1xr #time {
+        //         font-size: clamp(10px, 3vw, 14px) !important;
+        //         margin: min(2vh, 15px) auto !important;
+        //     }
             
-            body#i1xr .clv-photo {
-                max-width: 85vw !important;
-                max-height: 50vh !important;
-                margin: min(3vh, 20px) auto !important;
-            }
+        //     body#i1xr .clv-photo {
+        //         max-width: 85vw !important;
+        //         max-height: 50vh !important;
+        //         margin: min(3vh, 20px) auto !important;
+        //     }
             
-            body#i1xr #social-container {
-                gap: min(5vw, 25px) !important;
-                padding: min(3vh, 20px) min(2vw, 15px) !important;
-                margin-top: min(4vh, 30px) !important;
-            }
+        //     body#i1xr #social-container {
+        //         gap: min(5vw, 25px) !important;
+        //         padding: min(3vh, 20px) min(2vw, 15px) !important;
+        //         margin-top: min(4vh, 30px) !important;
+        //     }
             
-            body#i1xr .clv-button.circle,
-            body#i1xr a.clv-button.circle {
-                width: min(15vw, 60px) !important;
-                height: min(15vw, 60px) !important;
-                min-width: 45px !important;
-                min-height: 45px !important;
-            }
+        //     body#i1xr .clv-button.circle,
+        //     body#i1xr a.clv-button.circle {
+        //         width: min(15vw, 60px) !important;
+        //         height: min(15vw, 60px) !important;
+        //         min-width: 45px !important;
+        //         min-height: 45px !important;
+        //     }
             
-            body#i1xr .clv-button.circle svg,
-            body#i1xr a.clv-button.circle svg,
-            body#i1xr .clv-button.circle div svg,
-            body#i1xr a.clv-button.circle div svg {
-                width: min(8vw, 30px) !important;
-                height: min(8vw, 30px) !important;
-                min-width: 18px !important;
-                min-height: 18px !important;
-            }
+        //     body#i1xr .clv-button.circle svg,
+        //     body#i1xr a.clv-button.circle svg,
+        //     body#i1xr .clv-button.circle div svg,
+        //     body#i1xr a.clv-button.circle div svg {
+        //         width: min(8vw, 30px) !important;
+        //         height: min(8vw, 30px) !important;
+        //         min-width: 18px !important;
+        //         min-height: 18px !important;
+        //     }
             
-            #survey-container {
-                padding: 1.5vh 1.5vw;
-                margin-top: min(12vh, 80px);
-                max-height: 88vh;
-                pointer-events: auto; /* Re-enable clicks only on the survey */
-            }
+        //     #survey-container {
+        //         padding: 1.5vh 1.5vw;
+        //         margin-top: min(12vh, 80px);
+        //         max-height: 88vh;
+        //         pointer-events: auto; /* Re-enable clicks only on the survey */
+        //     }
             
-            #survey-overlay .survey-title {
-                font-size: 16px !important;
-                letter-spacing: 5px !important;
-                font-weight: 100 !important;
-                color: #cccccc !important;
-                margin-bottom: min(2vh, 15px) !important;
-            }
+        //     #survey-overlay .survey-title {
+        //         font-size: 16px !important;
+        //         letter-spacing: 5px !important;
+        //         font-weight: 100 !important;
+        //         color: #cccccc !important;
+        //         margin-bottom: min(2vh, 15px) !important;
+        //     }
             
-            #survey-overlay .survey-subtitle {
-                font-size: 11px !important;
-                letter-spacing: 4px !important;
-                color: #cccccc !important;
-                margin-bottom: min(4vh, 30px) !important;
-            }
+        //     #survey-overlay .survey-subtitle {
+        //         font-size: 11px !important;
+        //         letter-spacing: 4px !important;
+        //         color: #cccccc !important;
+        //         margin-bottom: min(4vh, 30px) !important;
+        //     }
             
-            #survey-overlay .survey-question h2 {
-                font-size: 12px !important;
-                width: 60vw !important;
-                text-align: center !important;
-                margin-left: 15vw !important;
-                margin-bottom: 2vh !important;
-            }
+        //     #survey-overlay .survey-question h2 {
+        //         font-size: 12px !important;
+        //         width: 60vw !important;
+        //         text-align: center !important;
+        //         margin-left: 15vw !important;
+        //         margin-right: 15vw !important;
+        //         margin-bottom: 2vh !important;
+        //     }
             
-            #survey-overlay .survey-options {
-                gap: min(1vh, 6px) !important;
-                max-width: min(80vw, 350px) !important;
-            }
+        //     #survey-overlay .survey-options {
+        //         gap: min(1vh, 6px) !important;
+        //         max-width: min(80vw, 350px) !important;
+        //     }
             
-            #survey-overlay .survey-option label {
-                font-size: 12px !important;
-                padding: 6px !important;
-                max-width: min(75vw, 300px) !important;
-                margin-bottom: 15px !important;
-            }
+        //     #survey-overlay .survey-option label {
+        //         font-size: 12px !important;
+        //         padding: 6px !important;
+        //         max-width: min(75vw, 300px) !important;
+        //         margin-bottom: 15px !important;
+        //     }
             
-            #survey-overlay .email-section input[type="email"] {
-                font-size: 12px !important;
-                padding: 6px !important;
-                max-width: min(75vw, 300px) !important;
-            }
+        //     #survey-overlay .email-section input[type="email"] {
+        //         font-size: 12px !important;
+        //         padding: 6px !important;
+        //         max-width: min(75vw, 300px) !important;
+        //     }
             
-            #survey-overlay .submit-button {
-                font-size: 11px !important;
-                padding: min(2vh, 16px) min(4vw, 24px) !important;
-                letter-spacing: 2px !important;
-                max-width: min(90vw, 450px) !important;
-            }
+        //     #survey-overlay .submit-button {
+        //         font-size: 11px !important;
+        //         padding: min(2vh, 16px) min(4vw, 24px) !important;
+        //         letter-spacing: 2px !important;
+        //         max-width: min(90vw, 450px) !important;
+        //     }
             
-            #survey-overlay .survey-disclaimer {
-                font-size: clamp(7px, 2vw, 9px) !important;
-                padding: min(1.5vh, 12px) min(2vw, 15px) !important;
-                max-height: 12vh !important;
-            }
-        }
+        //     #survey-overlay .survey-disclaimer {
+        //         font-size: clamp(7px, 2vw, 9px) !important;
+        //         padding: min(1.5vh, 12px) min(2vw, 15px) !important;
+        //         max-height: 12vh !important;
+        //     }
+        // }
         
         @media (max-width: 450px) {
             body#i1xr .cadillac-logo {
@@ -978,9 +980,10 @@ const surveyTracking = {
             }
 
             body#i1xr .cadillac-logo img {
-                max-width: max(15vw, 70px) !important;
-                max-height: min(15vh, 40px) !important;
+                max-width: max(15vw, 40px) !important;
+                max-height: min(15vh, 30px) !important;
                 padding: 0 !important;
+                margin: 7vh auto 0 auto !important;
             }
             
             #survey-overlay {
@@ -1089,6 +1092,7 @@ const surveyTracking = {
                 width: 48vw !important;
                 text-align: center !important;
                 margin-left: 20vw !important;
+                margin-right: 20vw !important;
                 margin-bottom: 2vh !important;
             }
             
@@ -1132,86 +1136,19 @@ const surveyTracking = {
                 line-height: 1.2 !important;
             }
         }
-        
-        @media (max-height: 500px) {
-            body#i1xr #container {
-                padding-top: min(5vh, 30px) !important;
+
+        @media (max-aspect-ratio: 9/16) {
+            body#i1xr .cadillac-logo img {
+                margin: 16vh auto 0 auto !important;
             }
-            
-            body#i1xr #title {
-                font-size: clamp(14px, 4vw, 18px) !important;
-            }
-            
-            body#i1xr .clv-photo {
-                max-width: 85vw !important;
-                max-height: 50vh !important;
-                margin: min(1vh, 8px) auto !important;
-            }
-            
-            body#i1xr #social-container {
-                gap: min(3vw, 15px) !important;
-                margin-top: min(1vh, 8px) !important;
-            }
-            
-            body#i1xr .clv-button.circle,
-            body#i1xr a.clv-button.circle {
-                width: min(10vw, 40px) !important;
-                height: min(10vw, 40px) !important;
-                min-width: 30px !important;
-                min-height: 30px !important;
-            }
-            
-            body#i1xr .clv-button.circle svg,
-            body#i1xr a.clv-button.circle svg,
-            body#i1xr .clv-button.circle div svg,
-            body#i1xr a.clv-button.circle div svg {
-                width: min(5vw, 20px) !important;
-                height: min(5vw, 20px) !important;
-                min-width: 12px !important;
-                min-height: 12px !important;
+        }
+
+        @media (max-width: 400px) and (max-aspect-ratio: 3/4) {
+            body#i1xr .cadillac-logo img {
+                margin: 7vh auto 0 auto !important;
             }
         }
         
-        @media (min-width: 1200px) {
-            #survey-container {
-                max-width: 500px !important;
-                padding: 0.5vh 2vw !important;
-            }
-            
-            .cadillac-logo {
-                margin-bottom: 1vh !important;
-                padding: 2vh 0 !important;
-            }
-            
-            .cadillac-logo img {
-                max-height: min(12vh, 80px) !important;
-            }
-            
-            #survey-overlay .survey-title {
-                margin-bottom: 1vh !important;
-            }
-            
-            #survey-overlay .survey-subtitle {
-                margin-bottom: 1.5vh !important;
-            }
-            
-            #survey-overlay .email-section {
-                margin-bottom: 1.5vh !important;
-            }
-            
-            #survey-overlay .survey-question {
-                margin-bottom: 1.5vh !important;
-            }
-            
-            #survey-overlay .submit-button {
-                margin-top: 1.5vh !important;
-                padding: 1vh 3vw !important;
-            }
-            
-            #survey-overlay .survey-option label {
-                margin-bottom: 8px !important;
-            }
-        }
         
         /* Force Download Button to Display */
         #ip0zp,
