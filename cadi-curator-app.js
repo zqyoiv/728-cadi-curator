@@ -737,10 +737,10 @@ const surveyTracking = {
 
          
          body#i1xr #time {
-             color: white !important;
+             color: transparent !important; /* Hide original content */
+             font-size: 0 !important; /* Hide original content */
+             overflow: hidden !important; /* Hide original content */
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: clamp(12px, 2.5vw, 16px) !important;
-             font-weight: normal !important;
              letter-spacing: clamp(0.5px, 0.2vw, 1px) !important;
              margin: min(3vh, 20px) auto !important;
              text-align: center !important;
@@ -750,6 +750,9 @@ const surveyTracking = {
          
          body#i1xr #time::before {
              content: "Click below to download and share your Theme Art." !important;
+             color: white !important;
+             font-size: clamp(12px, 2.5vw, 16px) !important;
+             font-weight: normal !important;
              text-align: center !important;
              display: block !important;
              width: 100% !important;
@@ -855,124 +858,6 @@ const surveyTracking = {
              font-size: clamp(12px, 2.5vw, 16px) !important;
              flex-shrink: 0 !important;
          }
-         
-        //  @media (max-width: 768px) {
-        //     #survey-overlay {
-        //         background-size: min(90vw, 300px);
-        //         pointer-events: none; /* Allow clicks to pass through */
-                
-        //     }
-            
-        //     body#i1xr {
-        //         background-size: min(70vw, 250px) !important;
-        //     }
-            
-        //     body#i1xr #container {
-        //         padding-top: min(15vh, 100px) !important;
-        //     }
-            
-        //     body#i1xr #title {
-        //         font-size: clamp(18px, 5vw, 24px) !important;
-        //         letter-spacing: clamp(0.5px, 0.2vw, 2px) !important;
-        //     }
-            
-        //     body#i1xr #time {
-        //         font-size: clamp(10px, 3vw, 14px) !important;
-        //         margin: min(2vh, 15px) auto !important;
-        //     }
-            
-        //     body#i1xr .clv-photo {
-        //         max-width: 85vw !important;
-        //         max-height: 50vh !important;
-        //         margin: min(3vh, 20px) auto !important;
-        //     }
-            
-        //     body#i1xr #social-container {
-        //         gap: min(5vw, 25px) !important;
-        //         padding: min(3vh, 20px) min(2vw, 15px) !important;
-        //         margin-top: min(4vh, 30px) !important;
-        //     }
-            
-        //     body#i1xr .clv-button.circle,
-        //     body#i1xr a.clv-button.circle {
-        //         width: min(15vw, 60px) !important;
-        //         height: min(15vw, 60px) !important;
-        //         min-width: 45px !important;
-        //         min-height: 45px !important;
-        //     }
-            
-        //     body#i1xr .clv-button.circle svg,
-        //     body#i1xr a.clv-button.circle svg,
-        //     body#i1xr .clv-button.circle div svg,
-        //     body#i1xr a.clv-button.circle div svg {
-        //         width: min(8vw, 30px) !important;
-        //         height: min(8vw, 30px) !important;
-        //         min-width: 18px !important;
-        //         min-height: 18px !important;
-        //     }
-            
-        //     #survey-container {
-        //         padding: 1.5vh 1.5vw;
-        //         margin-top: min(12vh, 80px);
-        //         max-height: 88vh;
-        //         pointer-events: auto; /* Re-enable clicks only on the survey */
-        //     }
-            
-        //     #survey-overlay .survey-title {
-        //         font-size: 16px !important;
-        //         letter-spacing: 5px !important;
-        //         font-weight: 100 !important;
-        //         color: #cccccc !important;
-        //         margin-bottom: min(2vh, 15px) !important;
-        //     }
-            
-        //     #survey-overlay .survey-subtitle {
-        //         font-size: 11px !important;
-        //         letter-spacing: 4px !important;
-        //         color: #cccccc !important;
-        //         margin-bottom: min(4vh, 30px) !important;
-        //     }
-            
-        //     #survey-overlay .survey-question h2 {
-        //         font-size: 12px !important;
-        //         width: 60vw !important;
-        //         text-align: center !important;
-        //         margin-left: 15vw !important;
-        //         margin-right: 15vw !important;
-        //         margin-bottom: 2vh !important;
-        //     }
-            
-        //     #survey-overlay .survey-options {
-        //         gap: min(1vh, 6px) !important;
-        //         max-width: min(80vw, 350px) !important;
-        //     }
-            
-        //     #survey-overlay .survey-option label {
-        //         font-size: 12px !important;
-        //         padding: 6px !important;
-        //         max-width: min(75vw, 300px) !important;
-        //         margin-bottom: 15px !important;
-        //     }
-            
-        //     #survey-overlay .email-section input[type="email"] {
-        //         font-size: 12px !important;
-        //         padding: 6px !important;
-        //         max-width: min(75vw, 300px) !important;
-        //     }
-            
-        //     #survey-overlay .submit-button {
-        //         font-size: 11px !important;
-        //         padding: min(2vh, 16px) min(4vw, 24px) !important;
-        //         letter-spacing: 2px !important;
-        //         max-width: min(90vw, 450px) !important;
-        //     }
-            
-        //     #survey-overlay .survey-disclaimer {
-        //         font-size: clamp(7px, 2vw, 9px) !important;
-        //         padding: min(1.5vh, 12px) min(2vw, 15px) !important;
-        //         max-height: 12vh !important;
-        //     }
-        // }
         
         @media (max-width: 450px) {
             body#i1xr .cadillac-logo {
@@ -1149,6 +1034,23 @@ const surveyTracking = {
             }
         }
         
+        
+        /* Force Hide Title Element */
+        #title,
+        .event-name,
+        div#title.event-name {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            height: 0 !important;
+            width: 0 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            overflow: hidden !important;
+            position: absolute !important;
+            left: -9999px !important;
+            z-index: -1 !important;
+        }
         
         /* Force Download Button to Display */
         #ip0zp,
