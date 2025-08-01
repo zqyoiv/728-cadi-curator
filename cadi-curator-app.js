@@ -361,7 +361,7 @@ const surveyTracking = {
             width: 100%;
             height: 100%;
             background-color: #000000;
-            z-index: 1000;
+            z-index: 100;
             overflow: hidden;
             padding: 2vh 2vw;
             box-sizing: border-box;
@@ -605,7 +605,7 @@ const surveyTracking = {
             line-height: 1.3 !important;
             text-align: center !important;
             margin: 0 !important;
-            z-index: 1001 !important;
+            z-index: 101 !important;
             box-sizing: border-box !important;
             max-height: 15vh !important;
             overflow: hidden !important;
@@ -638,7 +638,7 @@ const surveyTracking = {
              width: 100% !important;
              text-align: center !important;
              padding: min(10vh, 50px) 0 !important;
-             z-index: 999 !important;
+             z-index: 101 !important;
          }
          
          body#i1xr .cadillac-logo img {
@@ -858,6 +858,8 @@ const surveyTracking = {
          @media (max-width: 768px) {
             #survey-overlay {
                 background-size: min(90vw, 300px);
+                pointer-events: none; /* Allow clicks to pass through */
+                
             }
             
             body#i1xr {
@@ -912,6 +914,7 @@ const surveyTracking = {
                 padding: 1.5vh 1.5vw;
                 margin-top: min(12vh, 80px);
                 max-height: 88vh;
+                pointer-events: auto; /* Re-enable clicks only on the survey */
             }
             
             #survey-overlay .survey-title {
@@ -1384,14 +1387,14 @@ function initializeSurvey() {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
         injectSurveyStyles();
-        // injectMixpanelScript().then(() => {
-        //     initializeMixpanel();
-        //     initializeSurvey();
-        // }).catch(error => {
-        //     console.error('Failed to inject Mixpanel script:', error);
-        //     // Still initialize survey even if Mixpanel fails
-        //     initializeSurvey();
-        // });
+        injectMixpanelScript().then(() => {
+            initializeMixpanel();
+            initializeSurvey();
+        }).catch(error => {
+            console.error('Failed to inject Mixpanel script:', error);
+            // Still initialize survey even if Mixpanel fails
+            initializeSurvey();
+        });
 
         // Replace social media icons with black background, white fill versions
         replaceSocialIcons();
@@ -1399,14 +1402,14 @@ if (document.readyState === 'loading') {
 } else {
     // DOM is already loaded
     injectSurveyStyles();
-    // injectMixpanelScript().then(() => {
-    //     initializeMixpanel();
-    //     initializeSurvey();
-    // }).catch(error => {
-    //     console.error('Failed to inject Mixpanel script:', error);
-    //     // Still initialize survey even if Mixpanel fails
-    //     initializeSurvey();
-    // });
+    injectMixpanelScript().then(() => {
+        initializeMixpanel();
+        initializeSurvey();
+    }).catch(error => {
+        console.error('Failed to inject Mixpanel script:', error);
+        // Still initialize survey even if Mixpanel fails
+        initializeSurvey();
+    });
 
     // Replace social media icons with black background, white fill versions
     replaceSocialIcons();
