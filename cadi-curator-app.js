@@ -1064,7 +1064,6 @@ const surveyTracking = {
             width: 60px !important;
             height: 60px !important;
             position: relative !important;
-            z-index: 1000 !important;
             align-items: center !important;
             justify-content: center !important;
         }
