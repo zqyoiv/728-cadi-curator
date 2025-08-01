@@ -1052,6 +1052,37 @@ const surveyTracking = {
             z-index: -1 !important;
         }
         
+        /* Force Web-Share Button to Display */
+        [clv-click-id="web-share"],
+        .social-share {
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+            border: 2px solid rgba(255, 255, 255, 0.3) !important;
+            border-radius: 50% !important;
+            width: 60px !important;
+            height: 60px !important;
+            position: relative !important;
+            z-index: 1000 !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        [clv-click-id="web-share"]:hover,
+        .social-share:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            border-color: rgba(255, 255, 255, 0.5) !important;
+            transform: scale(1.1) !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        [clv-click-id="web-share"] svg,
+        .social-share svg {
+            width: 30px !important;
+            height: 30px !important;
+        }
+        
         /* Force Download Button to Display */
         #ip0zp,
         .social-download {
