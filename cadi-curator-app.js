@@ -462,11 +462,15 @@ const surveyTracking = {
              text-transform: lowercase !important;
          }
          
-         #survey-overlay .email-section input[type="email"]:focus {
-             outline: none !important;
-             border-color: white !important;
-             background: rgba(255, 255, 255, 0.1) !important;
-         }
+                 #survey-overlay .email-section input[type="email"]:focus {
+            outline: none !important;
+            border-color: white !important;
+            background: rgba(255, 255, 255, 0.1) !important;
+        }
+        
+        #survey-overlay .email-section input[type="email"].has-content {
+            background: rgba(255, 255, 255, 0.2) !important;
+        }
          
          #survey-overlay .survey-question {
              margin-bottom: min(2vh, 20px) !important;
@@ -521,15 +525,20 @@ const surveyTracking = {
              box-sizing: border-box !important;
          }
          
-         #survey-overlay .survey-option:hover label {
-             background: rgba(255, 255, 255, 0.1) !important;
-         }
+                 #survey-overlay .survey-option:hover label {
+            background: rgba(255, 255, 255, 0.1) !important;
+            opacity: 0.8 !important;
+        }
+        
+        #survey-overlay .survey-option:active label {
+            opacity: 0.8 !important;
+        }
          
-         #survey-overlay .survey-option input[type="radio"]:checked + label {
-             background: white !important;
-             color: black !important;
-             font-weight: normal !important;
-         }
+        #survey-overlay .survey-option input[type="radio"]:checked + label {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: white !important;
+            font-weight: normal !important;
+        }
          
          #survey-overlay .option-letter {
              display: none !important;
@@ -571,9 +580,13 @@ const surveyTracking = {
 
         
         #survey-overlay .submit-button.enabled:hover {
-            background: white !important;
-            color: black !important;
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: white !important;
             transform: none !important;
+        }
+        
+        #survey-overlay .submit-button.enabled:active {
+            opacity: 0.8 !important;
         }
         
 
@@ -956,7 +969,7 @@ const surveyTracking = {
             }
         }
         
-        @media (max-width: 400px) {
+        @media (max-width: 450px) {
             body#i1xr .cadillac-logo {
                 padding: 0 !important;
             }
@@ -1261,7 +1274,7 @@ function initializeSurvey() {
              </div>
 
              <div class="survey-question">
-                 <h2>Please rate the extent to which you agree with the following: <br><b>'Cadillac is a brand for Me'</b></h2>
+                 <h2>Please rate the extent to which you agree with the following: <br><b>'Cadillac is a brand for me'</b></h2>
                  <div class="survey-options">
                      <div class="survey-option">
                          <input type="radio" id="strongly-agree" name="brand-rating" value="strongly-agree">
@@ -1323,9 +1336,15 @@ function initializeSurvey() {
          });
      });
 
-     emailInput.addEventListener('input', function() {
-         checkFormComplete();
-     });
+         emailInput.addEventListener('input', function() {
+        // Toggle background based on whether there's content
+        if (emailInput.value.trim() !== '') {
+            emailInput.classList.add('has-content');
+        } else {
+            emailInput.classList.remove('has-content');
+        }
+        checkFormComplete();
+    });
 
      emailInput.addEventListener('blur', function() {
          checkFormComplete();
@@ -1365,14 +1384,14 @@ function initializeSurvey() {
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
         injectSurveyStyles();
-        injectMixpanelScript().then(() => {
-            initializeMixpanel();
-            initializeSurvey();
-        }).catch(error => {
-            console.error('Failed to inject Mixpanel script:', error);
-            // Still initialize survey even if Mixpanel fails
-            initializeSurvey();
-        });
+        // injectMixpanelScript().then(() => {
+        //     initializeMixpanel();
+        //     initializeSurvey();
+        // }).catch(error => {
+        //     console.error('Failed to inject Mixpanel script:', error);
+        //     // Still initialize survey even if Mixpanel fails
+        //     initializeSurvey();
+        // });
 
         // Replace social media icons with black background, white fill versions
         replaceSocialIcons();
@@ -1380,14 +1399,14 @@ if (document.readyState === 'loading') {
 } else {
     // DOM is already loaded
     injectSurveyStyles();
-    injectMixpanelScript().then(() => {
-        initializeMixpanel();
-        initializeSurvey();
-    }).catch(error => {
-        console.error('Failed to inject Mixpanel script:', error);
-        // Still initialize survey even if Mixpanel fails
-        initializeSurvey();
-    });
+    // injectMixpanelScript().then(() => {
+    //     initializeMixpanel();
+    //     initializeSurvey();
+    // }).catch(error => {
+    //     console.error('Failed to inject Mixpanel script:', error);
+    //     // Still initialize survey even if Mixpanel fails
+    //     initializeSurvey();
+    // });
 
     // Replace social media icons with black background, white fill versions
     replaceSocialIcons();
@@ -1401,10 +1420,15 @@ function replaceSocialIcons() {
         const instagramDiv = instagramButton.querySelector('div');
         if (instagramDiv) {
             instagramDiv.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" fill="#ffffff" width="50px" height="50px" viewBox="0 0 32 32">
-                    <rect width="32" height="32" fill="black" rx="6"/>
-                    <path d="M20.445 5h-8.891A6.559 6.559 0 0 0 5 11.554v8.891A6.559 6.559 0 0 0 11.554 27h8.891a6.56 6.56 0 0 0 6.554-6.555v-8.891A6.557 6.557 0 0 0 20.445 5zm4.342 15.445a4.343 4.343 0 0 1-4.342 4.342h-8.891a4.341 4.341 0 0 1-4.341-4.342v-8.891a4.34 4.34 0 0 1 4.341-4.341h8.891a4.342 4.342 0 0 1 4.341 4.341l.001 8.891z"/>
-                    <path d="M16 10.312c-3.138 0-5.688 2.551-5.688 5.688s2.551 5.688 5.688 5.688 5.688-2.551 5.688-5.688-2.55-5.688-5.688-5.688zm0 9.163a3.475 3.475 0 1 1-.001-6.95 3.475 3.475 0 0 1 .001 6.95zM21.7 8.991a1.363 1.363 0 1 1-1.364 1.364c0-.752.51-1.364 1.364-1.364z"/>
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" viewBox="0 0 72 72" width="50px" height="50px">
+                    <defs>
+                        <style>
+                            .st0 {
+                                fill: #fff;
+                            }
+                        </style>
+                    </defs>
+                    <path class="st0" d="M36,1.83c-9.29,0-10.45.04-14.1.21-3.64.17-6.13.74-8.3,1.59-2.25.87-4.16,2.04-6.06,3.94-1.9,1.9-3.07,3.81-3.95,6.05-.85,2.17-1.43,4.66-1.59,8.29-.16,3.65-.21,4.81-.21,14.09s.04,10.44.21,14.09c.17,3.64.74,6.12,1.59,8.29.87,2.25,2.04,4.15,3.94,6.05,1.9,1.9,3.81,3.07,6.06,3.94,2.18.85,4.66,1.42,8.3,1.59,3.65.17,4.81.21,14.1.21s10.45-.04,14.1-.21c3.64-.17,6.13-.74,8.3-1.59,2.25-.87,4.15-2.04,6.05-3.94,1.9-1.9,3.07-3.81,3.95-6.05.84-2.17,1.42-4.66,1.59-8.29.16-3.65.21-4.81.21-14.09s-.04-10.45-.21-14.09c-.17-3.64-.75-6.12-1.59-8.29-.88-2.25-2.04-4.15-3.95-6.05-1.9-1.9-3.8-3.07-6.06-3.94-2.18-.85-4.67-1.42-8.31-1.59-3.65-.17-4.81-.21-14.1-.21h.01ZM32.94,7.98c.91,0,1.93,0,3.07,0,9.13,0,10.21.03,13.82.2,3.33.15,5.14.71,6.35,1.18,1.6.62,2.73,1.36,3.93,2.56,1.2,1.2,1.94,2.34,2.56,3.93.47,1.2,1.03,3.01,1.18,6.34.16,3.6.2,4.68.2,13.81s-.04,10.2-.2,13.81c-.15,3.33-.71,5.14-1.18,6.34-.62,1.59-1.36,2.73-2.56,3.93-1.2,1.2-2.33,1.94-3.93,2.56-1.2.47-3.02,1.03-6.35,1.18-3.61.16-4.69.2-13.82.2s-10.21-.04-13.82-.2c-3.33-.15-5.14-.71-6.35-1.18-1.6-.62-2.74-1.36-3.93-2.56-1.2-1.2-1.94-2.33-2.56-3.93-.47-1.2-1.03-3.01-1.18-6.34-.16-3.6-.2-4.68-.2-13.81s.03-10.2.2-13.81c.15-3.33.71-5.14,1.18-6.35.62-1.59,1.36-2.73,2.56-3.93,1.2-1.2,2.34-1.94,3.93-2.56,1.21-.47,3.02-1.03,6.35-1.18,3.15-.14,4.38-.19,10.75-.19h0ZM54.26,13.66c-2.27,0-4.1,1.83-4.1,4.1s1.84,4.1,4.1,4.1,4.1-1.84,4.1-4.1-1.84-4.1-4.1-4.1h0ZM36,18.45c-9.7,0-17.56,7.86-17.56,17.55s7.86,17.55,17.56,17.55,17.56-7.85,17.56-17.55-7.86-17.55-17.56-17.55h0ZM36,24.61c6.3,0,11.4,5.1,11.4,11.39s-5.1,11.39-11.4,11.39-11.4-5.1-11.4-11.39,5.1-11.39,11.4-11.39h0Z"/>
                 </svg>
             `;
         }
@@ -1416,12 +1440,15 @@ function replaceSocialIcons() {
         const xDiv = xButton.querySelector('div');
         if (xDiv) {
             xDiv.innerHTML = `
-                <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 90 90" xml:space="preserve">
-                    <circle cx="45" cy="45" r="45" fill="black"/>
-                    <g fill="white">
-                        <polygon points="24.89,23.01 57.79,66.99 65.24,66.99 32.34,23.01"/>
-                        <path d="M 56.032 70.504 L 41.054 50.477 L 22.516 70.504 h -4.765 L 38.925 47.63 L 17.884 19.496 h 16.217 L 47.895 37.94 l 17.072 -18.444 h 4.765 L 50.024 40.788 l 22.225 29.716 H 56.032 z"/>
-                    </g>
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" viewBox="0 0 72 72" width="50px" height="50px">
+                    <defs>
+                        <style>
+                            .st0 {
+                                fill: #fff;
+                            }
+                        </style>
+                    </defs>
+                    <path class="st0" d="M55.84,5.12h10.48l-23.02,26.21,26.9,35.56h-21.11l-16.52-21.61-18.92,21.61H3.17l24.39-28.03L1.8,5.12h21.63l14.93,19.74L55.84,5.12ZM52.17,60.73h5.81L20.38,11.04h-6.25l38.04,49.69Z"/>
                 </svg>
             `;
         }
@@ -1436,6 +1463,48 @@ function replaceSocialIcons() {
                 <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 96 96" fill="none">
                     <rect width="96" height="96" rx="21" fill="black"/>
                     <path d="M73.31 25.7456C72.785 25.4743 72.274 25.1769 71.7788 24.8545C70.3389 23.9025 69.0186 22.7808 67.8465 21.5135C64.9139 18.158 63.8186 14.7538 63.4151 12.3705H63.4313C63.0943 10.3921 63.2337 9.11214 63.2547 9.11214H49.8974V60.7624C49.8974 61.4558 49.8974 62.1412 49.8682 62.8185C49.8682 62.9027 49.8601 62.9805 49.8553 63.0712C49.8553 63.1085 49.8553 63.1474 49.8472 63.1863C49.8472 63.196 49.8472 63.2057 49.8472 63.2154C49.7064 65.0686 49.1123 66.8588 48.1173 68.4286C47.1222 69.9983 45.7566 71.2994 44.1407 72.2175C42.4565 73.1757 40.5517 73.6782 38.614 73.6757C32.3906 73.6757 27.3468 68.6011 27.3468 62.334C27.3468 56.0669 32.3906 50.9923 38.614 50.9923C39.7921 50.9912 40.9629 51.1766 42.083 51.5415L42.0992 37.9412C38.6989 37.502 35.2444 37.7722 31.9538 38.7348C28.6631 39.6975 25.6077 41.3317 22.9802 43.5343C20.678 45.5346 18.7425 47.9214 17.2608 50.5872C16.6969 51.5594 14.5695 55.4658 14.3119 61.8058C14.1499 65.4044 15.2306 69.1326 15.7458 70.6734V70.7058C16.0699 71.6132 17.3256 74.7094 19.372 77.3197C21.0221 79.4135 22.9716 81.2527 25.1579 82.7783V82.7459L25.1903 82.7783C31.6567 87.1724 38.8263 86.884 38.8263 86.884C40.0674 86.8338 44.2249 86.884 48.9463 84.6464C54.183 82.1658 57.1642 78.47 57.1642 78.47C59.0688 76.2618 60.5832 73.7452 61.6426 71.0282C62.8513 67.8509 63.2547 64.0401 63.2547 62.5171V35.1155C63.4168 35.2127 65.5749 36.6401 65.5749 36.6401C65.5749 36.6401 68.6842 38.633 73.5352 39.9309C77.0155 40.8544 81.7045 41.0488 81.7045 41.0488V27.7887C80.0615 27.9669 76.7255 27.4485 73.31 25.7456Z" fill="white"/>
+                </svg>
+            `;
+        }
+    }
+
+    // Replace Download icon
+    const downloadButton = document.getElementById('ip0zp');
+    if (downloadButton) {
+        const downloadDiv = downloadButton.querySelector('div');
+        if (downloadDiv) {
+            downloadDiv.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" viewBox="0 0 72 72" width="50px" height="50px">
+                    <defs>
+                        <style>
+                            .st0 {
+                                fill: #fff;
+                            }
+                        </style>
+                    </defs>
+                    <path class="st0" d="M39.39,1.8c.56.18,1.6,1.06,1.6,1.67v28.25h9.02s.77.38.88.46c.85.66,1.05,2.06.37,2.92l-14.74,16.92c-1.13,1.42-2.75,1.42-3.88,0l-14.74-16.92c-.65-.84-.51-2.18.31-2.85.1-.08.88-.53.94-.53h9.02V3.47c0-.61,1.04-1.49,1.6-1.67h9.62Z"/>
+                    <path class="st0" d="M11.07,48.82v12.82h47.02v-12.82h8.55v17.7c0,1.73-2.44,3.81-4.2,3.68H6.47c-1.66,0-3.94-2.03-3.94-3.68v-17.7h8.55Z"/>
+                </svg>
+            `;
+        }
+    }
+
+    // Replace Email icon with TikTok icon
+    const emailButton = document.getElementById('i2cwn');
+    if (emailButton) {
+        const emailDiv = emailButton.querySelector('div');
+        if (emailDiv) {
+            emailDiv.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" version="1.1" viewBox="0 0 72 72" width="50px" height="50px">
+                    <defs>
+                        <style>
+                            .st0 {
+                                fill: #fff;
+                                fill-rule: evenodd;
+                            }
+                        </style>
+                    </defs>
+                    <path class="st0" d="M49.65,20.13v1.89h0v25.41c0,6.06-2.39,11.82-6.67,16.1-4.28,4.28-10.04,6.67-16.1,6.67s-11.82-2.38-16.1-6.67c-4.28-4.28-6.67-10.04-6.67-16.1s2.39-11.82,6.67-16.1c4.28-4.28,10.04-6.67,16.1-6.67h4.23v11.97h-4.23c-2.88,0-5.6,1.13-7.64,3.16-2.03,2.03-3.16,4.76-3.16,7.64s1.13,5.6,3.16,7.64c2.03,2.03,4.76,3.16,7.64,3.16s5.6-1.13,7.64-3.16c2.03-2.03,3.16-4.76,3.16-7.61V1.8h11.92l.6,1.11c1.86,3.44,4.36,6.7,7.46,9.11,2.4,1.86,5.12,3.17,8.12,3.7l2.12.37-2.28,11.54-2.04-.36c-2.43-.43-4.81-1.17-7.05-2.22-2.56-1.21-4.94-2.84-6.89-4.9h0Z"/>
                 </svg>
             `;
         }
