@@ -562,16 +562,12 @@ const surveyTracking = {
             display: block !important;
         }
         
-
-        
         #survey-overlay .submit-button.enabled {
             background: transparent !important;
             color: white !important;
             border-color: white !important;
             cursor: pointer !important;
         }
-        
-
         
         #survey-overlay .submit-button.enabled:hover {
             background: rgba(255, 255, 255, 0.2) !important;
@@ -582,8 +578,6 @@ const surveyTracking = {
         #survey-overlay .submit-button.enabled:active {
             opacity: 0.8 !important;
         }
-        
-
         
         #survey-overlay .survey-disclaimer {
             position: fixed !important;
@@ -611,7 +605,6 @@ const surveyTracking = {
          
          /* Main Gallery Page Styles */
          html, body, body#i1xr {
-             background-color: #000000 !important;
              background: #000000 !important;
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
              margin: 0 !important;
@@ -651,7 +644,7 @@ const surveyTracking = {
          body#i1xr .photo-page-title h1 {
              color: #eeeeee !important;
              font-family: "CadillacGothicWide", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: 12px !important;
+             font-size: 14px !important;
              font-weight: normal !important;
              letter-spacing: 3px !important;
              text-transform: uppercase !important;
@@ -663,7 +656,7 @@ const surveyTracking = {
          body#i1xr .photo-page-title h2 {
              color: #eeeeee !important;
              font-family: "CadillacGothicWide", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: 12px !important;
+             font-size: 14px !important;
              font-weight: normal !important;
              letter-spacing: 3px !important;
              text-transform: uppercase !important;
@@ -673,9 +666,8 @@ const surveyTracking = {
          }
 
          body#i1xr #container {
-             background-color: #000000 !important;
              background: #000000 !important;
-             padding-top: min(35vh, 250px) !important;
+             padding-top: min(30vh, 250px) !important;
              text-align: center !important;
              width: 100% !important;
              margin: 0 auto !important;
@@ -684,12 +676,11 @@ const surveyTracking = {
              align-items: center !important;
              justify-content: flex-start !important;
              height: 100vh !important;
-             overflow-y: auto !important;
+             overflow-y: hidden !important;
              box-sizing: border-box !important;
          }
          
          body#i1xr #photo-container {
-             background-color: #000000 !important;
              background: #000000 !important;
              max-width: min(90vw, 600px) !important;
              margin: 0 auto !important;
@@ -701,7 +692,6 @@ const surveyTracking = {
          }
          
          body#i1xr #header-container {
-             background-color: #000000 !important;
              background: #000000 !important;
              padding: 0 0 min(4vh, 30px) 0 !important;
              text-align: center !important;
@@ -715,7 +705,7 @@ const surveyTracking = {
              font-family: "CadillacGothicWide", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
              font-size: clamp(20px, 4vw, 28px) !important;
              font-weight: normal !important;
-             letter-spacing: clamp(1px, 0.3vw, 3px) !important;
+             letter-spacing: 0 !important;
              text-transform: uppercase !important;
              margin: 0 auto min(2vh, 10px) auto !important;
              line-height: 1.2 !important;
@@ -724,14 +714,11 @@ const surveyTracking = {
              display: block !important;
          }
          
-
-         
          body#i1xr #time {
              color: transparent !important; /* Hide original content */
              font-size: 0 !important; /* Hide original content */
              overflow: hidden !important; /* Hide original content */
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             letter-spacing: clamp(0.5px, 0.2vw, 1px) !important;
              margin: min(3vh, 20px) auto !important;
              text-align: center !important;
              width: 100% !important;
@@ -739,13 +726,21 @@ const surveyTracking = {
          }
          
          body#i1xr #time::before {
-             content: "Click below to download and share your Theme Art." !important;
+             content: "Click below" !important;
              color: white !important;
-             font-size: clamp(12px, 2.5vw, 16px) !important;
+             font-size: 12px !important;
+             font-weight: bold !important;
+             text-align: center !important;
+             display: inline !important;
+         }
+         
+         body#i1xr #time::after {
+             content: " to download and share your Theme Art." !important;
+             color: white !important;
+             font-size: 12px !important;
              font-weight: normal !important;
              text-align: center !important;
-             display: block !important;
-             width: 100% !important;
+             display: inline !important;
          }
          
          body#i1xr .clv-photo {
@@ -873,7 +868,6 @@ const surveyTracking = {
             }
             
             body#i1xr #header-container {
-                background-color: #000000 !important;
                 background: #000000 !important;
                 padding: 0 !important;
                 text-align: center !important;
@@ -898,11 +892,11 @@ const surveyTracking = {
             }
 
             body#i1xr .photo-page-title {
-                margin-top: 5vh !important;
+                margin-top: 9vh !important;
             }
             
             body#i1xr #time {
-                font-size:9px !important;
+                font-size:12px !important;
                 margin: min(1.5vh, 12px) auto !important;
             }
             
@@ -993,13 +987,6 @@ const surveyTracking = {
                 max-width: min(80vw, 400px) !important;
                 margin-top: 4vh !important;
                 border: 2px solid rgba(255, 255, 255, 0.5) !important;
-            }
-            
-            #survey-overlay .survey-disclaimer {
-                /* max-height: 8vh !important; */
-                font-size: 6px !important;
-                padding-bottom: 2vh !important;
-                color: white !important;
             }
             
             #survey-overlay .survey-disclaimer {
