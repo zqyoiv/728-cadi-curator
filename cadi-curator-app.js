@@ -667,7 +667,7 @@ const surveyTracking = {
 
          body#i1xr #container {
              background: #000000 !important;
-             padding-top: min(25vh, 180px) !important;
+             padding-top: min(30vh, 250px) !important;
              text-align: center !important;
              width: 100% !important;
              margin: 0 auto !important;
@@ -676,7 +676,7 @@ const surveyTracking = {
              align-items: center !important;
              justify-content: flex-start !important;
              height: 100vh !important;
-             overflow: hidden !important;
+             overflow-y: hidden !important;
              box-sizing: border-box !important;
          }
          
@@ -688,7 +688,7 @@ const surveyTracking = {
              text-align: center !important;
              width: 100% !important;
              box-sizing: border-box !important;
-             flex-shrink: 1 !important;
+             flex-shrink: 0 !important;
          }
          
          body#i1xr #header-container {
@@ -743,14 +743,15 @@ const surveyTracking = {
              display: inline !important;
          }
          
-                  body#i1xr .clv-photo {
+         body#i1xr .clv-photo {
              width: 100% !important;
              height: auto !important;
              max-width: 70vw !important;
-             max-height: min(40vh, 400px) !important;
-             margin: min(2vh, 20px) auto !important;
+                max-height: 50vh !important;
+             margin: min(4vh, 30px) auto !important;
              display: block !important;
              border-radius: clamp(4px, 1vw, 8px) !important;
+ 
              object-fit: contain !important;
          }
          
@@ -760,16 +761,16 @@ const surveyTracking = {
          
          body#i1xr #social-container {
              background-color: transparent !important;
-             padding: min(2vh, 20px) min(3vw, 20px) !important;
+             padding: min(4vh, 30px) min(3vw, 20px) !important;
              justify-content: center !important;
              gap: min(4vw, 30px) !important;
              flex-wrap: wrap !important;
-             margin-top: min(2vh, 20px) !important;
+             margin-top: min(5vh, 40px) !important;
              display: flex !important;
              width: 100% !important;
              text-align: center !important;
              align-items: center !important;
-             flex-shrink: 1 !important;
+             flex-shrink: 0 !important;
          }
          
          body#i1xr .clv-button.circle,
@@ -835,12 +836,12 @@ const surveyTracking = {
              background-color: transparent !important;
              color: white !important;
              text-align: center !important;
-             padding: min(1vh, 10px) !important;
+             padding: min(3vh, 20px) !important;
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
              width: 100% !important;
              margin: 0 auto !important;
-             font-size: clamp(10px, 2vw, 14px) !important;
-             flex-shrink: 1 !important;
+             font-size: clamp(12px, 2.5vw, 16px) !important;
+             flex-shrink: 0 !important;
          }
         
         @media (max-width: 450px) {
@@ -863,7 +864,7 @@ const surveyTracking = {
             }
             
             body#i1xr #container {
-                padding-top: min(20vh, 150px) !important;
+                padding-top: min(25vh, 200px) !important;
             }
             
             body#i1xr #header-container {
@@ -901,8 +902,8 @@ const surveyTracking = {
             
             body#i1xr .clv-photo {
                 max-width: 85vw !important;
-                max-height: min(35vh, 300px) !important;
-                margin: min(1vh, 10px) auto !important;
+                max-height: 45Svh !important;
+                margin: 0 !important;
             }
             
             body#i1xr #social-container {
@@ -930,8 +931,8 @@ const surveyTracking = {
             }
             
             body#i1xr #iqeeok {
-                font-size: clamp(9px, 2.5vw, 12px) !important;
-                padding: min(1vh, 8px) !important;
+                font-size: clamp(10px, 3vw, 14px) !important;
+                padding: min(2vh, 15px) !important;
             }
             
             #survey-container {
