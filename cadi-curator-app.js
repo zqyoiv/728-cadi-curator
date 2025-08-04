@@ -1131,6 +1131,26 @@ function clearTimeContent() {
     }
 }
 
+// Function to add viewport meta tag
+function addViewportMetaTag() {
+    // Check if viewport meta tag already exists
+    const existingViewport = document.querySelector('meta[name="viewport"]');
+    if (existingViewport) {
+        // Update existing meta tag
+        existingViewport.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
+        console.log('Updated existing viewport meta tag');
+    } else {
+        // Create new viewport meta tag
+        const metaTag = document.createElement('meta');
+        metaTag.name = 'viewport';
+        metaTag.content = 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no';
+        
+        // Insert into document head
+        document.head.appendChild(metaTag);
+        console.log('Added new viewport meta tag');
+    }
+}
+
 // Survey functionality
 function initializeSurvey() {
      // Create survey overlay
@@ -1264,6 +1284,8 @@ function initializeSurvey() {
 // Startup code - inject Mixpanel script and initialize everything
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
+        // Add viewport meta tag first
+        addViewportMetaTag();
         injectSurveyStyles();
         injectMixpanelScript().then(() => {
             initializeMixpanel();
@@ -1282,6 +1304,8 @@ if (document.readyState === 'loading') {
     });
 } else {
     // DOM is already loaded
+    // Add viewport meta tag first
+    addViewportMetaTag();
     injectSurveyStyles();
     injectMixpanelScript().then(() => {
         initializeMixpanel();
