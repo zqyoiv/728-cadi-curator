@@ -675,7 +675,7 @@ const surveyTracking = {
              flex-direction: column !important;
              align-items: center !important;
              justify-content: flex-start !important;
-             height: 90vh !important;
+             height: 75vh !important;
              overflow-y: hidden !important;
              box-sizing: border-box !important;
          }
