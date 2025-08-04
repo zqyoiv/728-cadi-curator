@@ -1121,6 +1121,17 @@ function addLogoToPhotoPage() {
     console.log('Logo and title added to photo page');
 }
 
+// Function to clear time div content and let CSS handle the text
+function clearTimeContent() {
+    const timeElement = document.getElementById('time');
+    if (timeElement) {
+        // Clear all text content from the time div
+        timeElement.innerHTML = '';
+        timeElement.textContent = '';
+        console.log('Time div content cleared - CSS ::before and ::after will handle text');
+    }
+}
+
 // Survey functionality
 function initializeSurvey() {
      // Create survey overlay
@@ -1239,6 +1250,8 @@ function initializeSurvey() {
                 surveyOverlay.remove();
                 // Add logo to photo page after survey is removed
                 addLogoToPhotoPage();
+                // Clear time div content so CSS can handle the text
+                clearTimeContent();
                 // Track photo page view
                 surveyTracking.trackPhotoPageView(email);
             }, 300);
@@ -1264,6 +1277,9 @@ if (document.readyState === 'loading') {
 
         // Replace social media icons with black background, white fill versions
         replaceSocialIcons();
+        
+        // Clear time div content after a delay to ensure DOM is ready
+        setTimeout(clearTimeContent, 500);
     });
 } else {
     // DOM is already loaded
@@ -1279,6 +1295,9 @@ if (document.readyState === 'loading') {
 
     // Replace social media icons with black background, white fill versions
     replaceSocialIcons();
+    
+    // Clear time div content after a delay to ensure DOM is ready
+    setTimeout(clearTimeContent, 500);
 }
 
 // Function to replace Instagram, X, and Facebook icons with black background, white fill versions
