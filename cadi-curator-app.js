@@ -717,6 +717,8 @@ const surveyTracking = {
          body#i1xr #time {
              color: transparent !important; /* Hide original content */
              font-size: 0 !important; /* Hide original content */
+             line-height: 0 !important; /* Hide original content */
+             text-indent: -9999px !important; /* Hide original content */
              overflow: hidden !important; /* Hide original content */
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
              margin: min(3vh, 20px) auto !important;
