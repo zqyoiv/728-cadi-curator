@@ -370,12 +370,11 @@ const surveyTracking = {
             justify-content: center;
         }
          
-                 #survey-container {
+        #survey-container {
             max-width: min(90vw, 600px);
             width: 100%;
             text-align: center;
             color: white;
-            padding: 1vh 2vw;
             margin-top: 0;
             max-height: 100vh;
             overflow: hidden;
@@ -391,10 +390,6 @@ const surveyTracking = {
         }
         
         .cadillac-logo img {
-            max-width: min(20vw, 400px);
-            max-height: min(20vh, 150px);
-            width: auto;
-            height: auto;
             object-fit: contain;
             display: block;
             margin: 0 auto;
@@ -415,7 +410,7 @@ const surveyTracking = {
          
          #survey-overlay .survey-title {
              font-family: "CadillacGothicWide", "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: 16px !important;
+             font-size: 14px !important;
              letter-spacing: 5px !important;
              font-weight: 100 !important;
              color: #cccccc !important;
@@ -426,7 +421,7 @@ const surveyTracking = {
          
          #survey-overlay .survey-subtitle {
              font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
-             font-size: 11px !important;
+             font-size: 12px !important;
              letter-spacing: 4px !important;
              color: #cccccc !important;
              margin: 0 0 min(2vh, 20px) 0 !important;
@@ -434,7 +429,7 @@ const surveyTracking = {
          }
          
          #survey-overlay .email-section {
-             margin: 0 0 min(2vh, 20px) 0 !important;
+             margin: 0 0 30px 0 !important;
          }
          
          #survey-overlay .email-section label {
@@ -446,7 +441,7 @@ const surveyTracking = {
              max-width: min(65vw, 350px) !important;
              font-size: 12px !important;
              padding: 6px !important;
-             border: 1px solid white !important;
+             border: 2px solid white !important;
              border-radius: 0 !important;
              color: white !important;
              background: transparent !important;
@@ -462,7 +457,7 @@ const surveyTracking = {
              text-transform: lowercase !important;
          }
          
-                 #survey-overlay .email-section input[type="email"]:focus {
+        #survey-overlay .email-section input[type="email"]:focus {
             outline: none !important;
             border-color: white !important;
             background: rgba(255, 255, 255, 0.1) !important;
@@ -482,11 +477,9 @@ const surveyTracking = {
              font-weight: normal !important;
              color: #cccccc !important;
              line-height: 1.4 !important;
-             width: 20vw !important;
+             width: 30vw !important;
              text-align: center !important;
-             margin-left: 15vw !important;
-             margin-right: 15vw !important;
-             margin-bottom: 2vh !important;
+             margin: 0 auto 2vh auto !important;
              letter-spacing: clamp(0.5px, 0.2vw, 1px) !important;
          }
          
@@ -511,7 +504,7 @@ const surveyTracking = {
              font-size: 12px !important;
              padding: 6px !important;
              background: transparent !important;
-             border: 1px solid white !important;
+             border: 2px solid white !important;
              border-radius: 0 !important;
              cursor: pointer !important;
              transition: all 0.2s ease !important;
@@ -556,7 +549,7 @@ const surveyTracking = {
             padding: min(2vh, 15px) min(4vw, 25px) !important;
             background: transparent !important;
             color: rgba(255, 255, 255, 0.5) !important;
-            border: 1px solid rgba(255, 255, 255, 0.5) !important;
+            border: 2px solid rgba(255, 255, 255, 0.5) !important;
             border-radius: 0 !important;
             font-size: 11px !important;
             font-weight: normal !important;
@@ -643,10 +636,7 @@ const surveyTracking = {
          }
          
          body#i1xr .cadillac-logo img {
-             max-width: max(15vw, 40px) !important;
-             max-height: min(15vh, 30px) !important;
-             width: auto !important;
-             height: auto !important;
+             width: 100px !important;
              object-fit: contain !important;
              display: block !important;
              margin: 2vh auto 0 auto !important;
@@ -865,8 +855,6 @@ const surveyTracking = {
             }
 
             body#i1xr .cadillac-logo img {
-                max-width: max(15vw, 40px) !important;
-                max-height: min(15vh, 30px) !important;
                 padding: 0 !important;
                 margin: 7vh auto 0 auto !important;
             }
@@ -954,57 +942,57 @@ const surveyTracking = {
             }
             
             #survey-container {
-                padding: 1vh 1vw;
-                margin-top: min(10vh, 60px);
-                max-height: 80vh;
+                padding-top: 30px !important;
+                max-height: 85vh;
             }
             
             #survey-overlay .survey-title {
-                font-size: 12px !important;
+                font-size: 14px !important;
                 letter-spacing: 5px !important;
                 font-weight: 100 !important;
                 color: #eeeeee !important;
+                line-height: 1.5em !important;
             }
             
             #survey-overlay .survey-subtitle {
-                font-size: 7px !important;
+                font-size: 12px !important;
                 letter-spacing: 4px !important;
                 color: #eeeeee !important;
             }
             
             #survey-overlay .survey-question h2 {
-                font-size: 9px !important;
-                width: 48vw !important;
+                font-size: 12px !important;
+                width: 60vw !important;
                 text-align: center !important;
-                margin-left: 20vw !important;
-                margin-right: 20vw !important;
-                margin-bottom: 2vh !important;
+                margin: 0 auto 2vh auto !important;
             }
             
             #survey-overlay .survey-options {
                 gap: min(0.8vh, 6px) !important;
-                max-width: min(60vw, 300px) !important;
+                max-width: min(70vw, 300px) !important;
             }
             
             #survey-overlay .survey-option label {
-                font-size: 8px !important;
-                padding: 4px !important;
-                max-width: min(50vw, 280px) !important;
+                font-size: 12px !important;
+                padding: 5px !important;
+                max-width: min(70vw, 280px) !important;
                 margin-bottom: 10px !important;
             }
             
             #survey-overlay .email-section input[type="email"] {
-                font-size: 9px !important;
-                padding: 3px !important;
-                max-width: min(50vw, 300px) !important;
+                font-size: 12px !important;
+                padding: 5px !important;
+                max-width: min(70vw, 300px) !important;
+                border: 2px solid #ffffff !important;
             }
             
             #survey-overlay .submit-button {
-                font-size: 8px !important;
+                font-size: 12px !important;
                 padding: min(1.5vh, 15px) min(3vw, 20px) !important;
                 letter-spacing: 3px !important;
-                max-width: min(60vw, 400px) !important;
+                max-width: min(80vw, 400px) !important;
                 margin-top: 4vh !important;
+                border: 2px solid rgba(255, 255, 255, 0.5) !important;
             }
             
             #survey-overlay .survey-disclaimer {
@@ -1030,7 +1018,7 @@ const surveyTracking = {
 
         @media (max-width: 400px) and (max-aspect-ratio: 3/4) {
             body#i1xr .cadillac-logo img {
-                margin: 7vh auto 0 auto !important;
+                margin: 3vh auto 0 auto !important;
             }
         }
         
