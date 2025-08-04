@@ -353,7 +353,7 @@ const surveyTracking = {
            font-display: swap;
          }
          
-                 /* Survey Overlay Styles */
+        /* Survey Overlay Styles */
         #survey-overlay {
             position: fixed;
             top: 0;
@@ -1012,7 +1012,7 @@ const surveyTracking = {
 
         @media (max-aspect-ratio: 9/16) {
             body#i1xr .cadillac-logo img {
-                margin: 16vh auto 0 auto !important;
+                margin: 7vh auto 0 auto !important;
             }
         }
 
