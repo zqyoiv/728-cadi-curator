@@ -667,7 +667,6 @@ const surveyTracking = {
 
          body#i1xr #container {
              background: #000000 !important;
-             padding-top: min(30vh, 250px) !important;
              text-align: center !important;
              width: 100% !important;
              margin: 0 auto !important;
@@ -675,9 +674,9 @@ const surveyTracking = {
              flex-direction: column !important;
              align-items: center !important;
              justify-content: flex-start !important;
-             height: 75vh !important;
+             height: 90vh !important;
              overflow-y: hidden !important;
-             box-sizing: border-box !important;
+             box-sizing: content-box !important;
          }
          
          body#i1xr #photo-container {
