@@ -1144,7 +1144,27 @@ function clearTimeContent() {
     }
 }
 
-// Function to control video playback
+// Function to set up initial video state (paused at frame 1)
+function setupInitialVideoState() {
+    const video = document.querySelector('video.clv-photo');
+    if (video) {
+        // Override autoplay and loop attributes
+        video.autoplay = false;
+        video.loop = false;
+        video.removeAttribute('autoplay');
+        video.removeAttribute('loop');
+        
+        // Pause the video and set to first frame
+        video.pause();
+        video.currentTime = 0;
+        
+        console.log('Video set to initial state: paused at frame 1, no autoplay, no loop');
+    } else {
+        console.log('Video element with class clv-photo not found for initial setup');
+    }
+}
+
+// Function to control video playback (called when submit button is clicked)
 function setupVideoControls() {
     const video = document.querySelector('video.clv-photo');
     if (video) {
@@ -1330,6 +1350,10 @@ if (document.readyState === 'loading') {
         // Add viewport meta tag first
         addViewportMetaTag();
         injectSurveyStyles();
+        
+        // Set up initial video state (paused at frame 1)
+        setTimeout(setupInitialVideoState, 100);
+        
         injectMixpanelScript().then(() => {
             initializeMixpanel();
             initializeSurvey();
@@ -1350,6 +1374,10 @@ if (document.readyState === 'loading') {
     // Add viewport meta tag first
     addViewportMetaTag();
     injectSurveyStyles();
+    
+    // Set up initial video state (paused at frame 1)
+    setTimeout(setupInitialVideoState, 100);
+    
     injectMixpanelScript().then(() => {
         initializeMixpanel();
         initializeSurvey();
