@@ -1156,6 +1156,8 @@ function setupVideoControls() {
         video.addEventListener('ended', function() {
             video.pause();
             console.log('Video ended and paused');
+            video.currentTime = video.duration;   // keep last frame (iOS quirk-safe)
+            video.removeAttribute('controls');  // hide native UI
         });
         
         // Restart the video
