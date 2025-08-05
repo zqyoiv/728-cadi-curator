@@ -352,6 +352,19 @@ const surveyTracking = {
            font-style: normal;
            font-display: swap;
          }
+
+        /* modern browsers (iOS 15.4+, Chrome 108+, Firefox 109+) */
+        #container{
+            height: 100dvh;          /* dynamic viewport height – tracks bar show/hide */
+            /* ↓ graceful fallback for anything that doesn’t understand dvh */
+            height: 100vh;           
+            overflow: hidden;        /* prevent the stray scroll */
+        }
+
+        /* if you use vh elsewhere, switch those too */
+        #container{
+            padding-top: clamp(0px, 25dvh, 200px);
+        }
          
         /* Survey Overlay Styles */
         #survey-overlay {
@@ -1131,6 +1144,32 @@ function clearTimeContent() {
     }
 }
 
+// Function to control video playback
+function setupVideoControls() {
+    const video = document.querySelector('video.clv-photo');
+    if (video) {
+        // Remove loop attribute and set controls
+        video.loop = false;
+        video.removeAttribute('loop');
+        
+        // Add event listener for when video ends
+        video.addEventListener('ended', function() {
+            video.pause();
+            console.log('Video ended and paused');
+        });
+        
+        // Restart the video
+        video.currentTime = 0;
+        video.play().catch(error => {
+            console.log('Video play failed:', error);
+        });
+        
+        console.log('Video controls setup: no loop, will pause when ended, restarted playback');
+    } else {
+        console.log('Video element with class clv-photo not found');
+    }
+}
+
 // Function to add viewport meta tag
 function addViewportMetaTag() {
     // Check if viewport meta tag already exists
@@ -1271,6 +1310,8 @@ function initializeSurvey() {
                 addLogoToPhotoPage();
                 // Clear time div content so CSS can handle the text
                 clearTimeContent();
+                // Setup video controls (restart, no loop, pause when ended)
+                setupVideoControls();
                 // Track photo page view
                 surveyTracking.trackPhotoPageView(email);
             }, 300);
