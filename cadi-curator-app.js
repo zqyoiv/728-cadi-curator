@@ -592,6 +592,17 @@ const surveyTracking = {
             opacity: 0.8 !important;
         }
         
+        /* Animation for submit button click */
+        #survey-overlay .submit-button.submitting,
+        #survey-overlay .submit-button.submitting:hover {
+            background: white !important;
+            opacity: 1 !important;
+            color: black !important;
+            border-color: white !important;
+            transition: all 0.3s ease !important;
+            cursor: wait !important;
+        }
+        
         #survey-overlay .survey-disclaimer {
             position: fixed !important;
             bottom: 0 !important;
@@ -1310,35 +1321,41 @@ function initializeSurvey() {
          checkFormComplete();
      });
 
-     // Handle survey submission
-     submitButton.addEventListener('click', function() {
-         if (submitButton.classList.contains('enabled')) {
-             // Get selected values
-             const selectedRating = Array.from(radioButtons).find(radio => radio.checked)?.value;
-             const email = emailInput.value.trim();
+         // Handle survey submission
+    submitButton.addEventListener('click', function() {
+        if (submitButton.classList.contains('enabled')) {
+            // Get selected values
+            const selectedRating = Array.from(radioButtons).find(radio => radio.checked)?.value;
+            const email = emailInput.value.trim();
 
-             // Track only the completed survey submission to mixpanel
-             surveyTracking.trackSurveySubmission(selectedRating, email);
+            // Track only the completed survey submission to mixpanel
+            surveyTracking.trackSurveySubmission(selectedRating, email);
 
-             console.log('Survey submitted:', { rating: selectedRating, email: email });
+            console.log('Survey submitted:', { rating: selectedRating, email: email });
 
-             // Hide survey overlay with fade effect
-             surveyOverlay.style.transition = 'opacity 0.3s ease';
-             surveyOverlay.style.opacity = '0';
+            // Add submitting animation class
+            submitButton.classList.add('submitting');
+            
+            // Wait 2 seconds for animation, then proceed with redirect
+            setTimeout(() => {
+                // Hide survey overlay with fade effect
+                surveyOverlay.style.transition = 'opacity 0.3s ease';
+                surveyOverlay.style.opacity = '0';
 
-                         setTimeout(() => {
-                surveyOverlay.remove();
-                // Add logo to photo page after survey is removed
-                addLogoToPhotoPage();
-                // Clear time div content so CSS can handle the text
-                clearTimeContent();
-                // Setup video controls (restart, no loop, pause when ended)
-                setupVideoControls();
-                // Track photo page view
-                surveyTracking.trackPhotoPageView(email);
-            }, 300);
-         }
-     });
+                setTimeout(() => {
+                    surveyOverlay.remove();
+                    // Add logo to photo page after survey is removed
+                    addLogoToPhotoPage();
+                    // Clear time div content so CSS can handle the text
+                    clearTimeContent();
+                    // Setup video controls (restart, no loop, pause when ended)
+                    setupVideoControls();
+                    // Track photo page view
+                    surveyTracking.trackPhotoPageView(email);
+                }, 300);
+            }, 2000); // 2 second delay for animation
+        }
+    });
 
          // Initial check
     checkFormComplete();
