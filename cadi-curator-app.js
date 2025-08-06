@@ -1353,7 +1353,7 @@ function initializeSurvey() {
                     // Track photo page view
                     surveyTracking.trackPhotoPageView(email);
                 }, 300);
-            }, 2000); // 2 second delay for animation
+            }, 1000); // 1 second delay for animation
         }
     });
 
