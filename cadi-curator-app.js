@@ -389,6 +389,7 @@ const surveyTracking = {
     }
 };
 
+
 // Function to inject survey styles at runtime
      function injectSurveyStyles() {
          const styles = `
@@ -1373,19 +1374,24 @@ function initializeSurvey() {
          });
      });
 
-         emailInput.addEventListener('input', function() {
-        // Toggle background based on whether there's content
-        if (emailInput.value.trim() !== '') {
-            emailInput.classList.add('has-content');
-        } else {
-            emailInput.classList.remove('has-content');
-        }
+                 emailInput.addEventListener('input', function() {
+       // Toggle background based on whether there's content
+       if (emailInput.value.trim() !== '') {
+           emailInput.classList.add('has-content');
+       } else {
+           emailInput.classList.remove('has-content');
+       }
+       checkFormComplete();
+   });
+
+    emailInput.addEventListener('blur', function() {
         checkFormComplete();
     });
 
-     emailInput.addEventListener('blur', function() {
-         checkFormComplete();
-     });
+    // Add click event listener to trigger handleFileDownload callback
+    emailInput.addEventListener('click', function() {
+        handleFileDownload();
+    });
 
          // Handle survey submission
     submitButton.addEventListener('click', function() {
