@@ -363,7 +363,7 @@ const surveyTracking = {
 
         /* if you use vh elsewhere, switch those too */
         #container{
-            padding-top: clamp(0px, 25dvh, 200px);
+            margin-top: 25vh !important;
         }
          
         /* Survey Overlay Styles */
@@ -887,7 +887,7 @@ const surveyTracking = {
             }
             
             body#i1xr #container {
-                padding-top: min(25vh, 200px) !important;
+                margin-top: min(25vh, 200px) !important;
             }
             
             body#i1xr #header-container {
