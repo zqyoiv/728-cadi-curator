@@ -699,7 +699,7 @@ const surveyTracking = {
          body#i1xr {
             display: flex !important;
             flex-direction: column !important;
-            min-height: 100dvh !important;
+            height: 100dvh !important;
             overflow: hidden !important;
          }
 
