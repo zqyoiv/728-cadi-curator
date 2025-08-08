@@ -1389,8 +1389,24 @@ function initializeSurvey() {
     });
 
     // Add click event listener to trigger handleFileDownload callback
-    emailInput.addEventListener('click', function() {
-        handleFileDownload();
+    emailInput.addEventListener('click', async function() {
+        try {
+            console.log('Email input clicked - calling Curator handleFileDownload()');
+            // Call the existing Curator handleFileDownload function
+            if (typeof handleFileDownload === 'function' && typeof photo !== 'undefined' && photo.download) {
+                await handleFileDownload(photo.download, {
+                    onProgress: ({ chunkLength, receivedLength, contentLength }) => {
+                        console.log(`Download progress: ${receivedLength}/${contentLength} bytes (${Math.round(receivedLength/contentLength*100)}%)`);
+                    }
+                });
+                console.log('File download completed');
+            } else {
+                console.warn('handleFileDownload function or photo.download not available');
+            }
+            
+        } catch (error) {
+            console.error('Error in email input click handler:', error);
+        }
     });
 
          // Handle survey submission
