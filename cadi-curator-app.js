@@ -662,6 +662,32 @@ const surveyTracking = {
             cursor: wait !important;
         }
         
+        /* Loading state for submit button */
+        #survey-overlay .submit-button.loading,
+        #survey-overlay .submit-button.loading:hover {
+            background: transparent !important;
+            color: white !important;
+            border-color: white !important;
+            cursor: wait !important;
+            pointer-events: none !important;
+        }
+        
+        /* Animation for dots */
+        @keyframes loadingDots {
+            0%, 20% { opacity: 0; }
+            50% { opacity: 1; }
+            80%, 100% { opacity: 0; }
+        }
+        
+        .loading-dots span {
+            animation: loadingDots 1.4s infinite;
+            animation-fill-mode: both;
+        }
+        
+        .loading-dots span:nth-child(1) { animation-delay: 0s; }
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+        
         #survey-overlay .survey-disclaimer {
             position: fixed !important;
             bottom: 0 !important;
@@ -1289,6 +1315,13 @@ function addViewportMetaTag() {
     }
 }
 
+// Global variable to track download state
+let videoDownloadState = {
+    isDownloading: false,
+    isCompleted: false,
+    progress: 0
+};
+
 // Survey functionality
 function initializeSurvey() {
      // Create survey overlay
@@ -1391,20 +1424,40 @@ function initializeSurvey() {
     emailInput.addEventListener('click', async function() {
         try {
             console.log('Email input clicked - calling Curator handleFileDownload()');
+            
+            // Set download state to starting
+            videoDownloadState.isDownloading = true;
+            videoDownloadState.isCompleted = false;
+            videoDownloadState.progress = 0;
+            
             // Call the existing Curator handleFileDownload function
             if (typeof handleFileDownload === 'function' && typeof photo !== 'undefined' && photo.download) {
                 await handleFileDownload(photo.download, {
                     onProgress: ({ chunkLength, receivedLength, contentLength }) => {
-                        console.log(`Download progress: ${receivedLength}/${contentLength} bytes (${Math.round(receivedLength/contentLength*100)}%)`);
+                        videoDownloadState.progress = Math.round(receivedLength/contentLength*100);
+                        console.log(`Download progress: ${receivedLength}/${contentLength} bytes (${videoDownloadState.progress}%)`);
                     }
                 });
                 console.log('File download completed');
+                
+                // Mark download as completed
+                videoDownloadState.isDownloading = false;
+                videoDownloadState.isCompleted = true;
+                videoDownloadState.progress = 100;
             } else {
                 console.warn('handleFileDownload function or photo.download not available');
+                // If download function is not available, mark as completed anyway
+                videoDownloadState.isDownloading = false;
+                videoDownloadState.isCompleted = true;
+                videoDownloadState.progress = 100;
             }
             
         } catch (error) {
             console.error('Error in email input click handler:', error);
+            // Mark download as failed/completed so user can still proceed
+            videoDownloadState.isDownloading = false;
+            videoDownloadState.isCompleted = true;
+            videoDownloadState.progress = 100;
         }
     });
 
@@ -1420,29 +1473,53 @@ function initializeSurvey() {
 
             console.log('Survey submitted:', { rating: selectedRating, email: email });
 
-            // Add submitting animation class
-            submitButton.classList.add('submitting');
+            // Check if video is still downloading
+            if (videoDownloadState.isDownloading || !videoDownloadState.isCompleted) {
+                // Show loading state
+                submitButton.classList.add('loading');
+                submitButton.innerHTML = 'Please wait<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span>';
+                
+                // Check download status every 500ms
+                const checkDownloadStatus = setInterval(() => {
+                    if (videoDownloadState.isCompleted && !videoDownloadState.isDownloading) {
+                        clearInterval(checkDownloadStatus);
+                        proceedToPhotoPage();
+                    }
+                }, 500);
+                
+                console.log('Waiting for video download to complete...');
+            } else {
+                // Video is already downloaded, proceed immediately
+                proceedToPhotoPage();
+            }
             
-            // Wait 2 seconds for animation, then proceed with redirect
-            setTimeout(() => {
-                // Hide survey overlay with fade effect
-                surveyOverlay.style.transition = 'opacity 0.3s ease';
-                surveyOverlay.style.opacity = '0';
-
+            function proceedToPhotoPage() {
+                // Add submitting animation class
+                submitButton.classList.remove('loading');
+                submitButton.classList.add('submitting');
+                submitButton.innerHTML = 'Submit and View Theme Art';
+                
+                // Wait 1 second for animation, then proceed with redirect
                 setTimeout(() => {
-                    surveyOverlay.remove();
-                    // Add logo to photo page after survey is removed
-                    addLogoToPhotoPage();
-                    // Clear time div content so CSS can handle the text
-                    clearTimeContent();
-                    // Setup video controls (restart, no loop, pause when ended)
-                    setupVideoControls();
-                    // Track photo page view
-                    surveyTracking.trackPhotoPageView(email);
-                    // Setup social media button tracking
-                    setupSocialMediaTracking(email);
-                }, 300);
-            }, 1000); // 1 second delay for animation
+                    // Hide survey overlay with fade effect
+                    surveyOverlay.style.transition = 'opacity 0.3s ease';
+                    surveyOverlay.style.opacity = '0';
+
+                    setTimeout(() => {
+                        surveyOverlay.remove();
+                        // Add logo to photo page after survey is removed
+                        addLogoToPhotoPage();
+                        // Clear time div content so CSS can handle the text
+                        clearTimeContent();
+                        // Setup video controls (restart, no loop, pause when ended)
+                        setupVideoControls();
+                        // Track photo page view
+                        surveyTracking.trackPhotoPageView(email);
+                        // Setup social media button tracking
+                        setupSocialMediaTracking(email);
+                    }, 300);
+                }, 1000); // 1 second delay for animation
+            }
         }
     });
 
