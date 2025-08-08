@@ -643,7 +643,6 @@ const surveyTracking = {
          
          /* Logo Div for Photo Page */
          body#i1xr .cadillac-logo {
-             position: fixed !important;
              top: 0 !important;
              left: 0 !important;
              width: 100% !important;
@@ -651,7 +650,16 @@ const surveyTracking = {
              padding: min(10vh, 50px) 0 !important;
              z-index: 101 !important;
          }
+
+         body#i1xr .cadillac-logo-survey {
+             position: fixed !important;
+             top: 0 !important;
+             left: 0 !important;
+             width: 100% !important;
+             background-size: min(80vw, 200px) !important;
+        }
          
+         body#i1xr .cadillac-logo-survey img,
          body#i1xr .cadillac-logo img {
              width: 100px !important;
              object-fit: contain !important;
@@ -872,6 +880,7 @@ const surveyTracking = {
                 padding: 0 !important;
             }
 
+            body#i1xr .cadillac-logo-survey img,
             body#i1xr .cadillac-logo img {
                 padding: 0 !important;
                 margin: 7vh auto 0 auto !important;
@@ -886,9 +895,6 @@ const surveyTracking = {
                 background-size: min(80vw, 200px) !important;
             }
             
-            body#i1xr #container {
-                margin-top: min(25vh, 200px) !important;
-            }
             
             body#i1xr #header-container {
                 background: #000000 !important;
@@ -1021,12 +1027,14 @@ const surveyTracking = {
         }
 
         @media (max-aspect-ratio: 9/16) {
+            body#i1xr .cadillac-logo-survey img,
             body#i1xr .cadillac-logo img {
                 margin: 7vh auto 0 auto !important;
             }
         }
 
         @media (max-width: 400px) and (max-aspect-ratio: 3/4) {
+            body#i1xr .cadillac-logo-survey img,
             body#i1xr .cadillac-logo img {
                 margin: 3vh auto 0 auto !important;
             }
@@ -1230,7 +1238,7 @@ function initializeSurvey() {
      surveyOverlay.id = 'survey-overlay';
      
          surveyOverlay.innerHTML = `
-        <div class="cadillac-logo">
+        <div class="cadillac-logo-survey">
             <img src="https://cdn.jsdelivr.net/gh/zqyoiv/728-cadi-curator@main/asset/Cadillac-Logo_white_small.png" alt="Cadillac Logo">
         </div>
         <div id="survey-container">
