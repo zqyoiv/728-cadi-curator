@@ -145,8 +145,16 @@ function initializeMixpanel() {
         // Track initial page load with comprehensive data - delay to ensure Mixpanel is fully ready
         setTimeout(() => {
           try {
-            surveyTracking.trackPageView('survey');
-            console.log('Initial survey page view tracked');
+            // Check if survey overlay exists to determine which page to track
+            const surveyOverlay = document.getElementById('survey-overlay');
+            if (surveyOverlay && surveyOverlay.style.display !== 'none') {
+              surveyTracking.trackPageView('survey');
+              console.log('Initial survey page view tracked');
+            } else {
+              // If no survey, assume we're on photo page
+              surveyTracking.trackPageView('photo_gallery');
+              console.log('Initial photo gallery page view tracked');
+            }
           } catch (error) {
             console.error('Error tracking initial page view:', error);
           }
@@ -328,6 +336,56 @@ const surveyTracking = {
      */
     trackSurveyPageView() {
         this.trackPageView('survey');
+    },
+
+    /**
+     * Track social media button clicks
+     */
+    trackSocialButtonClick(platform, userEmail = null, buttonId = null) {
+        if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
+            try {
+                const socialClickData = {
+                    platform: this.sanitizeValue(platform),
+                    button_id: this.sanitizeValue(buttonId),
+                    page: 'photo_gallery',
+                    survey_type: 'cadillac_brand_perception',
+                    user_agent: this.sanitizeValue(navigator.userAgent),
+                    screen_width: window.screen.width,
+                    screen_height: window.screen.height,
+                    viewport_width: window.innerWidth,
+                    viewport_height: window.innerHeight,
+                    has_email: userEmail ? 'yes' : 'no',
+                    timestamp: new Date().toISOString()
+                };
+
+                // Add email if available
+                if (userEmail && userEmail.includes('@')) {
+                    socialClickData.email_domain = this.sanitizeValue(userEmail);
+                }
+
+                mixpanel.track('Share Completed', socialClickData);
+
+                // Update user profile if email available
+                if (userEmail && userEmail.includes('@')) {
+                    mixpanel.identify(userEmail);
+                    mixpanel.people.set({
+                        '$email': userEmail,
+                        '$last_seen': new Date()
+                    });
+                    mixpanel.people.increment(`${platform}_clicks`, 1);
+                    mixpanel.people.increment('total_social_clicks', 1);
+                }
+
+                console.log(`${platform} button click tracked in Mixpanel`);
+            } catch (error) {
+                console.error('Error tracking social button click:', error);
+                if (error && error.status === 0) {
+                    console.warn('Network error - check ad blockers, proxy setup, or connectivity');
+                } else if (error && error.status === 1) {
+                    console.warn('Data format error in social tracking - check property names, values, and data types');
+                }
+            }
+        }
     }
 };
 
@@ -1360,6 +1418,8 @@ function initializeSurvey() {
                     setupVideoControls();
                     // Track photo page view
                     surveyTracking.trackPhotoPageView(email);
+                    // Setup social media button tracking
+                    setupSocialMediaTracking(email);
                 }, 300);
             }, 1000); // 1 second delay for animation
         }
@@ -1393,6 +1453,15 @@ if (document.readyState === 'loading') {
         
         // Clear time div content after a delay to ensure DOM is ready
         setTimeout(clearTimeContent, 500);
+        
+        // Setup social media tracking with delay for direct photo page loads
+        setTimeout(() => {
+            const surveyOverlay = document.getElementById('survey-overlay');
+            if (!surveyOverlay || surveyOverlay.style.display === 'none') {
+                // If we're on photo page directly, setup social tracking
+                setupSocialMediaTracking();
+            }
+        }, 2000);
     });
 } else {
     // DOM is already loaded
@@ -1417,6 +1486,86 @@ if (document.readyState === 'loading') {
     
     // Clear time div content after a delay to ensure DOM is ready
     setTimeout(clearTimeContent, 500);
+    
+    // Setup social media tracking with delay for direct photo page loads
+    setTimeout(() => {
+        const surveyOverlay = document.getElementById('survey-overlay');
+        if (!surveyOverlay || surveyOverlay.style.display === 'none') {
+            // If we're on photo page directly, setup social tracking
+            setupSocialMediaTracking();
+        }
+    }, 2000);
+}
+
+// Function to set up social media button tracking
+function setupSocialMediaTracking(userEmailFromSurvey = null) {
+    // Store user email from survey for tracking purposes
+    let userEmail = userEmailFromSurvey;
+    
+    // If no email provided, try to get from survey input
+    if (!userEmail) {
+        try {
+            const emailInput = document.querySelector('#email-input');
+            if (emailInput && emailInput.value) {
+                userEmail = emailInput.value.trim();
+            }
+        } catch (error) {
+            console.log('Could not retrieve user email for social tracking');
+        }
+    }
+    
+    // Add click event listeners for social media buttons
+    setTimeout(() => {
+        // TikTok button (i2cwn)
+        const tiktokButton = document.getElementById('i2cwn');
+        if (tiktokButton && !tiktokButton.dataset.trackingAdded) {
+            tiktokButton.addEventListener('click', function() {
+                surveyTracking.trackSocialButtonClick('tiktok', userEmail, 'i2cwn');
+            });
+            tiktokButton.dataset.trackingAdded = 'true';
+            console.log('TikTok button tracking added');
+        }
+        
+        // Instagram button (iok7r)
+        const instagramButton = document.getElementById('iok7r');
+        if (instagramButton && !instagramButton.dataset.trackingAdded) {
+            instagramButton.addEventListener('click', function() {
+                surveyTracking.trackSocialButtonClick('instagram', userEmail, 'iok7r');
+            });
+            instagramButton.dataset.trackingAdded = 'true';
+            console.log('Instagram button tracking added');
+        }
+        
+        // X (Twitter) button (i5jm2)
+        const xButton = document.getElementById('i5jm2');
+        if (xButton && !xButton.dataset.trackingAdded) {
+            xButton.addEventListener('click', function() {
+                surveyTracking.trackSocialButtonClick('x_twitter', userEmail, 'i5jm2');
+            });
+            xButton.dataset.trackingAdded = 'true';
+            console.log('X/Twitter button tracking added');
+        }
+        
+        // Download button (ip0zp)
+        const downloadButton = document.getElementById('ip0zp');
+        if (downloadButton && !downloadButton.dataset.trackingAdded) {
+            downloadButton.addEventListener('click', function() {
+                surveyTracking.trackSocialButtonClick('download', userEmail, 'ip0zp');
+            });
+            downloadButton.dataset.trackingAdded = 'true';
+            console.log('Download button tracking added');
+        }
+        
+        // Web Share button (clv-click-id="web-share")
+        const webShareButton = document.querySelector('[clv-click-id="web-share"]');
+        if (webShareButton && !webShareButton.dataset.trackingAdded) {
+            webShareButton.addEventListener('click', function() {
+                surveyTracking.trackSocialButtonClick('web_share', userEmail, 'web-share');
+            });
+            webShareButton.dataset.trackingAdded = 'true';
+            console.log('Web Share button tracking added');
+        }
+    }, 1000); // Delay to ensure buttons are rendered
 }
 
 // Function to replace Instagram, X, and Facebook icons with black background, white fill versions
