@@ -696,6 +696,13 @@ const surveyTracking = {
              overflow: hidden !important;
          }
          
+         body#i1xr {
+            display: flex !important;
+            flex-direction: column !important;
+            min-height: 100dvh !important;
+            overflow: hidden !important;
+         }
+
          body#i1xr .event-banner {
              display: none !important;
          }
@@ -765,7 +772,6 @@ const surveyTracking = {
              flex-direction: column !important;
              align-items: center !important;
              justify-content: flex-start !important;
-             height: 75vh !important;
              overflow-y: hidden !important;
              box-sizing: content-box !important;
          }
