@@ -1582,7 +1582,7 @@ function setupSocialMediaTracking(userEmailFromSurvey = null) {
         const webShareButton = document.querySelector('[clv-click-id="web-share"]');
         if (webShareButton && !webShareButton.dataset.trackingAdded) {
             webShareButton.addEventListener('click', function() {
-                surveyTracking.trackSocialButtonClick('web_share', userEmail, 'web-share');
+                surveyTracking.trackSocialButtonClick('tiktok', userEmail, 'web-share');
             });
             webShareButton.dataset.trackingAdded = 'true';
             console.log('Web Share button tracking added');
