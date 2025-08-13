@@ -1533,7 +1533,25 @@ if (document.readyState === 'loading') {
         // Add viewport meta tag first
         addViewportMetaTag();
         injectSurveyStyles();
-        
+        // Check if the URL contains the ?debug=true query parameter
+if (new URLSearchParams(window.location.search).get('debug') === 'true') {
+    // Save the original console.log function
+    const originalConsoleLog = console.log;
+
+    // Override console.log
+    console.log = function (...args) {
+        // Call the original console.log to ensure logs still appear in the console
+        originalConsoleLog.apply(console, args);
+
+        // Find the survey-title element
+        const surveyTitleElement = document.querySelector('.survey-title');
+        if (surveyTitleElement) {
+            // Append the logged message to the survey-title element
+            const logMessage = args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : arg)).join(' ');
+            surveyTitleElement.innerHTML += `<br>${logMessage}`;
+        }
+    };
+}
         // Set up initial video state (paused at frame 1)
         setTimeout(setupInitialVideoState, 100);
         
