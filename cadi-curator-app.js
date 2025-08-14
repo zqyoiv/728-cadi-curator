@@ -142,23 +142,23 @@ function initializeMixpanel() {
         mixpanelInitialized = true;
         console.log('Mixpanel initialized successfully');
         
-        // Track initial page load with comprehensive data - delay to ensure Mixpanel is fully ready
-        setTimeout(() => {
-          try {
-            // Check if survey overlay exists to determine which page to track
-            const surveyOverlay = document.getElementById('survey-overlay');
-            if (surveyOverlay && surveyOverlay.style.display !== 'none') {
-              surveyTracking.trackPageView('survey');
-              console.log('Initial survey page view tracked');
-            } else {
-              // If no survey, assume we're on photo page
-              surveyTracking.trackPageView('photo_gallery');
-              console.log('Initial photo gallery page view tracked');
-            }
-          } catch (error) {
-            console.error('Error tracking initial page view:', error);
-          }
-        }, 1000); // Increased delay to 1000ms
+                    // Track initial page load with comprehensive data - delay to ensure Mixpanel is fully ready
+            setTimeout(async () => {
+              try {
+                // Check if survey overlay exists to determine which page to track
+                const surveyOverlay = document.getElementById('survey-overlay');
+                if (surveyOverlay && surveyOverlay.style.display !== 'none') {
+                  await surveyTracking.trackPageView('survey');
+                  console.log('Initial survey page view tracked');
+                } else {
+                  // If no survey, assume we're on photo page
+                  await surveyTracking.trackPageView('photo_gallery');
+                  console.log('Initial photo gallery page view tracked');
+                }
+              } catch (error) {
+                console.error('Error tracking initial page view:', error);
+              }
+            }, 1000); // Increased delay to 1000ms
         
         // Add error callback for better debugging
         mixpanel.set_config({
@@ -181,7 +181,10 @@ function initializeMixpanel() {
   }
     
 
-// Simplified mixpanel tracking functions focused only on survey, email, and button clicks
+// Relay server configuration
+const RELAY_SERVER_URL = 'http://localhost:5000'; // Change this to your server URL
+
+// Simplified tracking functions that use the relay server
 const surveyTracking = {
     /**
      * Get answer text from value
@@ -212,7 +215,7 @@ const surveyTracking = {
     },
 
     /**
-     * Sanitize property values for Mixpanel
+     * Sanitize property values
      */
     sanitizeValue(value) {
         if (value === null || value === undefined) {
@@ -230,97 +233,90 @@ const surveyTracking = {
     },
 
     /**
+     * Make GET request to relay server
+     */
+    async makeRelayRequest(endpoint, params) {
+        try {
+            const url = new URL(`${RELAY_SERVER_URL}${endpoint}`);
+            
+            // Add parameters to URL
+            Object.keys(params).forEach(key => {
+                if (params[key] !== null && params[key] !== undefined) {
+                    url.searchParams.append(key, params[key]);
+                }
+            });
+            
+            const response = await fetch(url.toString(), {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                console.log(`Relay server request successful: ${endpoint}`, result);
+                return result;
+            } else {
+                console.error(`Relay server request failed: ${endpoint}`, response.status, response.statusText);
+                return null;
+            }
+        } catch (error) {
+            console.error(`Error making relay server request to ${endpoint}:`, error);
+            return null;
+        }
+    },
+
+    /**
      * Track survey submission - core event
      */
-    trackSurveySubmission(selectedRating, email) {
-        if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
-            try {
-                // Validate input data
-                if (!selectedRating || !email || !email.includes('@')) {
-                    console.error('Invalid data for survey submission:', { selectedRating, email });
-                    return;
-                }
-                
-                // Track the survey submission event with cleaned data
-                const eventProperties = {
-                    answer: this.sanitizeValue(selectedRating),
-                    answer_text: this.sanitizeValue(this.getAnswerText(selectedRating)),
-                    email_domain: this.sanitizeValue(email),
-                    question: 'Cadillac is a Brand for Me',
-                    survey_type: 'cadillac_brand_perception',
-                    scale_position: this.getScalePosition(selectedRating)
-                };
-                
-                mixpanel.track('Survey Submitted', eventProperties);
-                
-                // Set user properties with minimal, safe data
-                mixpanel.identify(email);
-                mixpanel.people.set({
-                    '$email': email,
-                    'latest_survey_answer': this.sanitizeValue(selectedRating),
-                    'latest_survey_answer_text': this.sanitizeValue(this.getAnswerText(selectedRating))
-                });
-                
-                // Increment survey completion count
-                mixpanel.people.increment('survey_completion_count', 1);
-                
-                console.log('Survey submission tracked in Mixpanel');
-            } catch (error) {
-                console.error('Error tracking survey submission:', error);
-                if (error && error.status === 0) {
-                    console.warn('Network error - check ad blockers, proxy setup, or connectivity');
-                } else if (error && error.status === 1) {
-                    console.warn('Data format error - check property names, values, and data types');
-                    console.warn('Common causes: invalid dates, reserved property names, oversized data');
-                }
+    async trackSurveySubmission(selectedRating, email) {
+        try {
+            // Validate input data
+            if (!selectedRating || !email || !email.includes('@')) {
+                console.error('Invalid data for survey submission:', { selectedRating, email });
+                return;
             }
+            
+            const params = {
+                answer: this.sanitizeValue(selectedRating),
+                answer_text: this.sanitizeValue(this.getAnswerText(selectedRating)),
+                email_domain: this.sanitizeValue(email),
+                question: 'Cadillac is a Brand for Me',
+                survey_type: 'cadillac_brand_perception',
+                scale_position: this.getScalePosition(selectedRating)
+            };
+            
+            await this.makeRelayRequest('/track/survey', params);
+            console.log('Survey submission tracked via relay server');
+        } catch (error) {
+            console.error('Error tracking survey submission:', error);
         }
     },
 
     /**
      * Track page view events
      */
-    trackPageView(pageType, userEmail = null) {
-        if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
-            try {
-                const pageViewData = {
-                    page: this.sanitizeValue(pageType),
-                    survey_type: 'cadillac_brand_perception',
-                    page_type: this.sanitizeValue(pageType),
-                    user_agent: this.sanitizeValue(navigator.userAgent),
-                    screen_width: window.screen.width,
-                    screen_height: window.screen.height,
-                    viewport_width: window.innerWidth,
-                    viewport_height: window.innerHeight,
-                    has_email: userEmail ? 'yes' : 'no'
-                };
+    async trackPageView(pageType, userEmail = null) {
+        try {
+            const params = {
+                page: this.sanitizeValue(pageType),
+                survey_type: 'cadillac_brand_perception',
+                screen_width: window.screen.width,
+                screen_height: window.screen.height,
+                viewport_width: window.innerWidth,
+                viewport_height: window.innerHeight
+            };
 
-                // Add email if available
-                if (userEmail && userEmail.includes('@')) {
-                    pageViewData.email_domain = this.sanitizeValue(userEmail);
-                }
-
-                mixpanel.track('Page View', pageViewData);
-
-                // Update user profile if email available
-                if (userEmail && userEmail.includes('@')) {
-                    mixpanel.identify(userEmail);
-                    mixpanel.people.set({
-                        '$email': userEmail
-                    });
-                    mixpanel.people.increment(`${pageType}_page_views`, 1);
-                    mixpanel.people.increment('total_page_views', 1);
-                }
-
-                console.log(`${pageType} page view tracked in Mixpanel`);
-            } catch (error) {
-                console.error('Error tracking page view:', error);
-                if (error && error.status === 0) {
-                    console.warn('Network error - check ad blockers, proxy setup, or connectivity');
-                } else if (error && error.status === 1) {
-                    console.warn('Data format error in page view - check property names, values, and data types');
-                }
+            // Add email if available
+            if (userEmail && userEmail.includes('@')) {
+                params.email_domain = this.sanitizeValue(userEmail);
             }
+
+            await this.makeRelayRequest('/track/pageview', params);
+            console.log(`${pageType} page view tracked via relay server`);
+        } catch (error) {
+            console.error('Error tracking page view:', error);
         }
     },
 
@@ -341,50 +337,28 @@ const surveyTracking = {
     /**
      * Track social media button clicks
      */
-    trackSocialButtonClick(platform, userEmail = null, buttonId = null) {
-        if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
-            try {
-                const socialClickData = {
-                    platform: this.sanitizeValue(platform),
-                    button_id: this.sanitizeValue(buttonId),
-                    page: 'photo_gallery',
-                    survey_type: 'cadillac_brand_perception',
-                    user_agent: this.sanitizeValue(navigator.userAgent),
-                    screen_width: window.screen.width,
-                    screen_height: window.screen.height,
-                    viewport_width: window.innerWidth,
-                    viewport_height: window.innerHeight,
-                    has_email: userEmail ? 'yes' : 'no',
-                    timestamp: new Date().toISOString()
-                };
+    async trackSocialButtonClick(platform, userEmail = null, buttonId = null) {
+        try {
+            const params = {
+                platform: this.sanitizeValue(platform),
+                button_id: this.sanitizeValue(buttonId),
+                page: 'photo_gallery',
+                survey_type: 'cadillac_brand_perception',
+                screen_width: window.screen.width,
+                screen_height: window.screen.height,
+                viewport_width: window.innerWidth,
+                viewport_height: window.innerHeight
+            };
 
-                // Add email if available
-                if (userEmail && userEmail.includes('@')) {
-                    socialClickData.email_domain = this.sanitizeValue(userEmail);
-                }
-
-                mixpanel.track('Share Completed', socialClickData);
-
-                // Update user profile if email available
-                if (userEmail && userEmail.includes('@')) {
-                    mixpanel.identify(userEmail);
-                    mixpanel.people.set({
-                        '$email': userEmail,
-                        '$last_seen': new Date()
-                    });
-                    mixpanel.people.increment(`${platform}_clicks`, 1);
-                    mixpanel.people.increment('total_social_clicks', 1);
-                }
-
-                console.log(`${platform} button click tracked in Mixpanel`);
-            } catch (error) {
-                console.error('Error tracking social button click:', error);
-                if (error && error.status === 0) {
-                    console.warn('Network error - check ad blockers, proxy setup, or connectivity');
-                } else if (error && error.status === 1) {
-                    console.warn('Data format error in social tracking - check property names, values, and data types');
-                }
+            // Add email if available
+            if (userEmail && userEmail.includes('@')) {
+                params.email_domain = this.sanitizeValue(userEmail);
             }
+
+            await this.makeRelayRequest('/track/social', params);
+            console.log(`${platform} button click tracked via relay server`);
+        } catch (error) {
+            console.error('Error tracking social button click:', error);
         }
     }
 };
@@ -1462,14 +1436,14 @@ function initializeSurvey() {
     });
 
          // Handle survey submission
-    submitButton.addEventListener('click', function() {
+    submitButton.addEventListener('click', async function() {
         if (submitButton.classList.contains('enabled')) {
             // Get selected values
             const selectedRating = Array.from(radioButtons).find(radio => radio.checked)?.value;
             const email = emailInput.value.trim();
 
-            // Track only the completed survey submission to mixpanel
-            surveyTracking.trackSurveySubmission(selectedRating, email);
+            // Track only the completed survey submission via relay server
+            await surveyTracking.trackSurveySubmission(selectedRating, email);
 
             console.log('Survey submitted:', { rating: selectedRating, email: email });
 
@@ -1493,7 +1467,7 @@ function initializeSurvey() {
                 proceedToPhotoPage();
             }
             
-            function proceedToPhotoPage() {
+            async function proceedToPhotoPage() {
                 // Add submitting animation class
                 submitButton.classList.remove('loading');
                 submitButton.classList.add('submitting');
@@ -1505,7 +1479,7 @@ function initializeSurvey() {
                     surveyOverlay.style.transition = 'opacity 0.3s ease';
                     surveyOverlay.style.opacity = '0';
 
-                    setTimeout(() => {
+                    setTimeout(async () => {
                         surveyOverlay.remove();
                         // Add logo to photo page after survey is removed
                         addLogoToPhotoPage();
@@ -1514,7 +1488,7 @@ function initializeSurvey() {
                         // Setup video controls (restart, no loop, pause when ended)
                         setupVideoControls();
                         // Track photo page view
-                        surveyTracking.trackPhotoPageView(email);
+                        await surveyTracking.trackPhotoPageView(email);
                         // Setup social media button tracking
                         setupSocialMediaTracking(email);
                     }, 300);
@@ -1635,8 +1609,8 @@ function setupSocialMediaTracking(userEmailFromSurvey = null) {
         // TikTok button (i2cwn)
         const tiktokButton = document.getElementById('i2cwn');
         if (tiktokButton && !tiktokButton.dataset.trackingAdded) {
-            tiktokButton.addEventListener('click', function() {
-                surveyTracking.trackSocialButtonClick('tiktok', userEmail, 'i2cwn');
+            tiktokButton.addEventListener('click', async function() {
+                await surveyTracking.trackSocialButtonClick('tiktok', userEmail, 'i2cwn');
             });
             tiktokButton.dataset.trackingAdded = 'true';
             console.log('TikTok button tracking added');
@@ -1645,8 +1619,8 @@ function setupSocialMediaTracking(userEmailFromSurvey = null) {
         // Instagram button (iok7r)
         const instagramButton = document.getElementById('iok7r');
         if (instagramButton && !instagramButton.dataset.trackingAdded) {
-            instagramButton.addEventListener('click', function() {
-                surveyTracking.trackSocialButtonClick('instagram', userEmail, 'iok7r');
+            instagramButton.addEventListener('click', async function() {
+                await surveyTracking.trackSocialButtonClick('instagram', userEmail, 'iok7r');
             });
             instagramButton.dataset.trackingAdded = 'true';
             console.log('Instagram button tracking added');
@@ -1655,8 +1629,8 @@ function setupSocialMediaTracking(userEmailFromSurvey = null) {
         // X (Twitter) button (i5jm2)
         const xButton = document.getElementById('i5jm2');
         if (xButton && !xButton.dataset.trackingAdded) {
-            xButton.addEventListener('click', function() {
-                surveyTracking.trackSocialButtonClick('x_twitter', userEmail, 'i5jm2');
+            xButton.addEventListener('click', async function() {
+                await surveyTracking.trackSocialButtonClick('x_twitter', userEmail, 'i5jm2');
             });
             xButton.dataset.trackingAdded = 'true';
             console.log('X/Twitter button tracking added');
@@ -1665,8 +1639,8 @@ function setupSocialMediaTracking(userEmailFromSurvey = null) {
         // Download button (ip0zp)
         const downloadButton = document.getElementById('ip0zp');
         if (downloadButton && !downloadButton.dataset.trackingAdded) {
-            downloadButton.addEventListener('click', function() {
-                surveyTracking.trackSocialButtonClick('download', userEmail, 'ip0zp');
+            downloadButton.addEventListener('click', async function() {
+                await surveyTracking.trackSocialButtonClick('download', userEmail, 'ip0zp');
             });
             downloadButton.dataset.trackingAdded = 'true';
             console.log('Download button tracking added');
@@ -1675,8 +1649,8 @@ function setupSocialMediaTracking(userEmailFromSurvey = null) {
         // Web Share button (clv-click-id="web-share")
         const webShareButton = document.querySelector('[clv-click-id="web-share"]');
         if (webShareButton && !webShareButton.dataset.trackingAdded) {
-            webShareButton.addEventListener('click', function() {
-                surveyTracking.trackSocialButtonClick('tiktok', userEmail, 'web-share');
+            webShareButton.addEventListener('click', async function() {
+                await surveyTracking.trackSocialButtonClick('tiktok', userEmail, 'web-share');
             });
             webShareButton.dataset.trackingAdded = 'true';
             console.log('Web Share button tracking added');
