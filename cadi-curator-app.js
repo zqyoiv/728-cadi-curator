@@ -3,7 +3,7 @@ let mixpanelInitialized = false;
 // Debug mode detection - check for DEBUG=true URL parameter or hardcoded value
 const DEBUG_MODE = (() => {
     // First check hardcoded value
-    const hardcodedDebug = true;
+    const hardcodedDebug = false;
     
     // Then check URL parameters
     const urlParams = new URLSearchParams(window.location.search);
