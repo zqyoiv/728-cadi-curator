@@ -3,7 +3,7 @@ let mixpanelInitialized = false;
 // Debug mode detection - check for DEBUG=true URL parameter or hardcoded value
 const DEBUG_MODE = (() => {
     // First check hardcoded value
-    const hardcodedDebug = false;
+    const hardcodedDebug = true;
     
     // Then check URL parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -774,6 +774,8 @@ const surveyTracking = {
          
          body#i1xr .event-banner {
              display: none !important;
+             opacity: 0 !important;
+             transition: opacity 0.5s ease !important;
          }
          
          /* Logo Div for Photo Page */
@@ -784,6 +786,8 @@ const surveyTracking = {
              text-align: center !important;
              padding: min(10vh, 50px) 0 !important;
              z-index: 101 !important;
+             opacity: 0 !important;
+             transition: opacity 0.5s ease !important;
          }
 
          body#i1xr .cadillac-logo-survey {
@@ -845,6 +849,8 @@ const surveyTracking = {
              height: 75vh !important;
              overflow-y: hidden !important;
              box-sizing: content-box !important;
+             opacity: 0 !important;
+             transition: opacity 0.5s ease !important;
          }
          
          body#i1xr #photo-container {
@@ -1266,6 +1272,29 @@ const surveyTracking = {
          document.head.appendChild(styleElement);
          }
 
+// Function to show video page elements with fade-in effect
+function showVideoPageElements() {
+    // Show the main logo
+    const logo = document.querySelector('.cadillac-logo');
+    if (logo) {
+        logo.style.setProperty('opacity', '1', 'important');
+    }
+    
+    // Show the event banner
+    const eventBanner = document.querySelector('.event-banner');
+    if (eventBanner) {
+        eventBanner.style.setProperty('opacity', '1', 'important');
+    }
+    
+    // Show the container
+    const container = document.getElementById('container');
+    if (container) {
+        container.style.setProperty('opacity', '1', 'important');
+    }
+    
+    console.log('Video page elements shown');
+}
+
 // Function to add logo to photo page
 function addLogoToPhotoPage() {
     // Check if logo already exists
@@ -1561,6 +1590,8 @@ function initializeSurvey() {
                         surveyOverlay.remove();
                         // Add logo to photo page after survey is removed
                         addLogoToPhotoPage();
+                        // Show video page elements with fade-in effect
+                        showVideoPageElements();
                         // Clear time div content so CSS can handle the text
                         clearTimeContent();
                         // Setup video controls (restart, no loop, pause when ended)
@@ -1626,8 +1657,9 @@ if (new URLSearchParams(window.location.search).get('debug') === 'true') {
         setTimeout(() => {
             const surveyOverlay = document.getElementById('survey-overlay');
             if (!surveyOverlay || surveyOverlay.style.display === 'none') {
-                // If we're on photo page directly, setup social tracking
+                // If we're on photo page directly, setup social tracking and show elements
                 setupSocialMediaTracking();
+                showVideoPageElements();
             }
         }, 2000);
     });
@@ -1659,8 +1691,9 @@ if (new URLSearchParams(window.location.search).get('debug') === 'true') {
     setTimeout(() => {
         const surveyOverlay = document.getElementById('survey-overlay');
         if (!surveyOverlay || surveyOverlay.style.display === 'none') {
-            // If we're on photo page directly, setup social tracking
+            // If we're on photo page directly, setup social tracking and show elements
             setupSocialMediaTracking();
+            showVideoPageElements();
         }
     }, 2000);
 }
