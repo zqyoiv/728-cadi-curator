@@ -1,7 +1,34 @@
 let mixpanelInitialized = false;
 
+// Debug mode detection - check for DEBUG=true URL parameter or hardcoded value
+const DEBUG_MODE = (() => {
+    // First check hardcoded value
+    const hardcodedDebug = false;
+    
+    // Then check URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    const debugParam = urlParams.get('DEBUG') || urlParams.get('debug');
+    const urlDebug = debugParam === 'true' || debugParam === '1';
+    
+    // Return true if either hardcoded OR URL parameter is true
+    return hardcodedDebug || urlDebug;
+})();
+
+// Log debug mode status
+if (DEBUG_MODE) {
+    console.log('🐛 DEBUG MODE ENABLED - Mixpanel tracking is DISABLED');
+} else {
+    console.log('📊 Production mode - Mixpanel tracking is enabled');
+}
+
 // Function to inject Mixpanel script into document head
 function injectMixpanelScript() {
+    // Skip script injection in DEBUG mode
+    if (DEBUG_MODE) {
+        console.log('🐛 DEBUG MODE: Skipping Mixpanel script injection');
+        return Promise.resolve();
+    }
+    
     // Check if script is already loaded
     if (typeof mixpanel !== 'undefined' && mixpanel.__SV) {
         console.log('Mixpanel already properly loaded');
@@ -124,6 +151,12 @@ function injectMixpanelScript() {
 
 // Initialize Mixpanel
 function initializeMixpanel() {
+    // Skip Mixpanel initialization in DEBUG mode
+    if (DEBUG_MODE) {
+        console.log('🐛 DEBUG MODE: Skipping Mixpanel initialization');
+        return;
+    }
+    
     try {
       if (typeof mixpanel !== 'undefined') {
         // Use a demo/test token - replace with your actual Mixpanel project token
@@ -233,6 +266,11 @@ const surveyTracking = {
      * Track survey submission - core event
      */
     trackSurveySubmission(selectedRating, email) {
+        // Skip tracking in DEBUG mode
+        if (DEBUG_MODE) {
+            return;
+        }
+        
         if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
             try {
                 // Validate input data
@@ -281,6 +319,11 @@ const surveyTracking = {
      * Track page view events
      */
     trackPageView(pageType, userEmail = null) {
+        // Skip tracking in DEBUG mode
+        if (DEBUG_MODE) {
+            return;
+        }
+        
         if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
             try {
                 const pageViewData = {
@@ -342,6 +385,11 @@ const surveyTracking = {
      * Track social media button clicks
      */
     trackSocialButtonClick(platform, userEmail = null, buttonId = null) {
+        // Skip tracking in DEBUG mode
+        if (DEBUG_MODE) {
+            return;
+        }
+        
         if (mixpanelInitialized && typeof mixpanel !== 'undefined') {
             try {
                 const socialClickData = {
@@ -435,11 +483,12 @@ const surveyTracking = {
             background-color: #000000;
             z-index: 100;
             overflow: hidden;
-            padding: 2vh 2vw;
+            padding: 0 2vw;
             box-sizing: border-box;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
         }
          
         #survey-container {
@@ -447,10 +496,12 @@ const surveyTracking = {
             width: 100%;
             text-align: center;
             color: white;
-            margin-top: 0;
+            margin-top: auto;
+            margin-bottom: auto;
             max-height: 100vh;
             overflow: hidden;
             box-sizing: border-box;
+            flex-shrink: 1;
         }
         
         /* Logo Div Styles */
@@ -591,7 +642,7 @@ const surveyTracking = {
              box-sizing: border-box !important;
          }
          
-                 #survey-overlay .survey-option:hover label {
+        #survey-overlay .survey-option:hover label {
             background: rgba(255, 255, 255, 0.1) !important;
             opacity: 0.8 !important;
         }
@@ -689,7 +740,6 @@ const surveyTracking = {
         .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
         
         #survey-overlay .survey-disclaimer {
-            position: fixed !important;
             bottom: 0 !important;
             left: 0 !important;
             right: 0 !important;
@@ -737,11 +787,12 @@ const surveyTracking = {
          }
 
          body#i1xr .cadillac-logo-survey {
-             position: fixed !important;
-             top: 0 !important;
-             left: 0 !important;
+             position: relative !important;
+             top: auto !important;
+             left: auto !important;
              width: 100% !important;
-             background-size: min(80vw, 200px) !important;
+             text-align: center !important;
+             flex-shrink: 0 !important;
         }
          
          body#i1xr .cadillac-logo-survey img,
@@ -973,7 +1024,7 @@ const surveyTracking = {
             
             #survey-overlay {
                 background-size: min(95vw, 250px);
-                padding: 1vh 1vw;
+                padding: 0 1vw;
             }
             
             body#i1xr {
@@ -1050,8 +1101,10 @@ const surveyTracking = {
             }
             
             #survey-container {
-                padding-top: 30px !important;
-                max-height: 85vh;
+                padding-top: auto !important;
+                margin-top: auto !important;
+                margin-bottom: auto !important;
+                max-height: 85vh !important;
             }
             
             #survey-overlay .survey-title {
@@ -1370,11 +1423,10 @@ function initializeSurvey() {
              </div>
 
              <button type="button" class="submit-button" id="submit-survey">Submit and View Theme Art</button>
-             
-             <div class="survey-disclaimer">
-                 Your email will not be shared with third parties or used for marketing or promotional purposes. Your US Open theme artwork will not be used for marketing or promotional purposes, and will be available until September 14, 2025.
-             </div>
          </div>
+         <div class="survey-disclaimer">
+            Your email will not be shared with third parties or used for marketing or promotional purposes. Your US Open theme artwork will not be used for marketing or promotional purposes, and will be available until September 14, 2025.
+        </div>
      `;
 
      // Add survey to page
