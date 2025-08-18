@@ -1,9 +1,9 @@
 let mixpanelInitialized = false;
 
-// Debug mode detection - check for DEBUG=true URL parameter or hardcoded value
+// Debug mode detection - check for DEBUG=true URL parameter or flag.js value
 const DEBUG_MODE = (() => {
-    // First check hardcoded value
-    const hardcodedDebug = false;
+    // First check hardcoded value from flag.js (with fallback)
+    const hardcodedDebug = (typeof window.AppFlags !== 'undefined' && window.AppFlags.hardcodedDebug) || false;
     
     // Then check URL parameters
     const urlParams = new URLSearchParams(window.location.search);
