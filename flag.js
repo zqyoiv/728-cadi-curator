@@ -3,7 +3,7 @@
 
 // Set to true to enable debug mode (disables Mixpanel tracking)
 // Set to false for production mode (enables Mixpanel tracking)
-const hardcodedDebug = false;
+const hardcodedDebug = true;
 
 // Export for use in other files
 window.AppFlags = {
