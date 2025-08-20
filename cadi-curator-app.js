@@ -555,6 +555,10 @@ const surveyTracking = {
          
          #survey-overlay .email-section {
              margin: 0 0 30px 0 !important;
+             width: 100% !important;
+             display: flex !important;
+             justify-content: center !important;
+             align-items: center !important;
          }
          
          #survey-overlay .email-section label {
@@ -564,6 +568,8 @@ const surveyTracking = {
          #survey-overlay .email-section input[type="email"] {
              width: 100% !important;
              max-width: min(65vw, 350px) !important;
+             min-width: min(65vw, 350px) !important;
+             flex: 0 0 auto !important;
              font-size: 12px !important;
              padding: 6px !important;
              border: 2px solid white !important;
@@ -1151,6 +1157,8 @@ const surveyTracking = {
                 font-size: 12px !important;
                 padding: 5px !important;
                 max-width: min(70vw, 300px) !important;
+                min-width: min(70vw, 300px) !important;
+                flex: 0 0 auto !important;
                 border: 2px solid #ffffff !important;
             }
             
