@@ -486,10 +486,7 @@ const surveyTracking = {
             overflow-x: hidden;
             padding: 0 2vw;
             box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
+            display: block;
         }
          
         #survey-container {
@@ -497,13 +494,14 @@ const surveyTracking = {
             width: 100%;
             text-align: center;
             color: white;
-            margin-top: auto;
-            margin-bottom: auto;
-            max-height: none;
-            overflow: visible;
+            margin: 0 auto;
+            padding: 4vh 0;
             box-sizing: border-box;
-            flex-shrink: 1;
-            padding: 2vh 0;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
         
         /* Logo Div Styles */
@@ -742,9 +740,7 @@ const surveyTracking = {
         .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
         
         #survey-overlay .survey-disclaimer {
-            bottom: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
+            position: relative !important;
             width: 100% !important;
             font-family: "CadillacGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
             font-size: clamp(8px, 1.5vw, 10px) !important;
@@ -753,11 +749,10 @@ const surveyTracking = {
             padding: min(2vh, 15px) min(3vw, 20px) !important;
             line-height: 1.3 !important;
             text-align: center !important;
-            margin: 0 !important;
+            margin: 2vh auto 0 auto !important;
             z-index: 101 !important;
             box-sizing: border-box !important;
-            max-height: 15vh !important;
-            overflow: hidden !important;
+            max-width: min(90vw, 600px) !important;
         }
         
         #survey-overlay .hidden {
