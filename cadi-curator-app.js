@@ -482,7 +482,8 @@ const surveyTracking = {
             height: 100%;
             background-color: #000000;
             z-index: 100;
-            overflow: hidden;
+            overflow-y: auto;
+            overflow-x: hidden;
             padding: 0 2vw;
             box-sizing: border-box;
             display: flex;
@@ -498,10 +499,11 @@ const surveyTracking = {
             color: white;
             margin-top: auto;
             margin-bottom: auto;
-            max-height: 100vh;
-            overflow: hidden;
+            max-height: none;
+            overflow: visible;
             box-sizing: border-box;
             flex-shrink: 1;
+            padding: 2vh 0;
         }
         
         /* Logo Div Styles */
