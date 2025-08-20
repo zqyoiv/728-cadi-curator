@@ -465,7 +465,9 @@ const surveyTracking = {
             height: 100dvh;          /* dynamic viewport height – tracks bar show/hide */
             /* ↓ graceful fallback for anything that doesn’t understand dvh */
             height: 100vh;           
-            overflow: hidden;        /* prevent the stray scroll */
+            overflow-y: auto;        /* allow vertical scroll when content overflows */
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* if you use vh elsewhere, switch those too */
@@ -844,7 +846,9 @@ const surveyTracking = {
              align-items: center !important;
              justify-content: flex-start !important;
              height: 75vh !important;
-             overflow-y: hidden !important;
+             overflow-y: auto !important;
+             overflow-x: hidden !important;
+             -webkit-overflow-scrolling: touch;
              box-sizing: content-box !important;
              opacity: 0 !important;
              transition: opacity 0.5s ease !important;
